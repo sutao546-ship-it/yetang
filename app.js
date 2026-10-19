@@ -16,7 +16,7 @@ const cases=[
       "号码只能识别人，不能说明他的位置；两次敲击有约定的含义。",
       "来电者无法说话；他平常经过河边的工具房，两次敲击表示被困在那里。"
     ],
-    "truth": "她与失去说话能力的父亲有两种约定：平安回家后打手机，接通后直接挂断；若被困在河边工具房，就敲两下话筒。父亲雨夜去工具房收工具，门锁故障，把他困在里面。手机来电号码和往常相同，但两声敲击改变了含义。女儿知道他无法口头求救，直接带备用钥匙前去开门。",
+    "truth": "她与失去说话能力的父亲有两种约定：平安回家后打手机，接通后直接挂断；若被困在河边工具房，就敲两下话筒。父亲雨夜去工具房收工具，门锁故障，把他困在里面。手机来电号码和往常相同，但两声敲击改变了含义。女儿知道他无法口头求救，直接带备用钥匙前去开门。\n\n把昨夜与平常逐项对照，真正改变的不是号码，也不是有没有人说话，而是接通之后多出的两次敲击。父亲平安到家时，按原先的约定不需要敲击；一旦敲了两下，就在同一条电话线路里发出了另一条消息。女儿不是听见电话便放心，而是在辨认电话里有没有这个附加信号。\n\n这也解释了她为什么没有回拨、没有先去父亲家里，以及为什么偏偏带上钥匙。父亲无法开口，回拨并不能像普通通话一样问清地址；约定本身已经给出了工具房这个位置。被锁在里面需要的是开门，不是确认家中是否有人。手机号码只说明来电者是谁，不证明他身在何处。所谓“无声电话救人”，其实是一套事先准备好的求助办法在真正需要时起了作用。",
     "qs": [
       "两次声音有约定的含义吗？",
       "来电号码能证明他在家吗？"
@@ -66,7 +66,7 @@ const cases=[
       "比较长柄物品、折叠伞和同乘的人能分别提供什么帮助。",
       "他够不到十三层按钮；长柄伞或他人的帮助都可以弥补距离，折叠伞不够长。"
     ],
-    "truth": "他身材矮，只能够到八层按钮，下楼的一楼按钮则够得到。通常雨天带的长柄伞能帮他按到十三层；昨天换成短折叠伞，长度不够，所以仍要爬楼。前天晴天有邻居同乘，邻居替他按了十三层。必须同时解释按钮高度、伞的长度及他人的帮助，天气本身没有改变电梯。",
+    "truth": "他身材矮，只能够到八层按钮，下楼的一楼按钮则够得到。通常雨天带的长柄伞能帮他按到十三层；昨天换成短折叠伞，长度不够，所以仍要爬楼。前天晴天有邻居同乘，邻居替他按了十三层。必须同时解释按钮高度、伞的长度及他人的帮助，天气本身没有改变电梯。\n\n这道题最容易出现的误判，是把“下雨”和“能到十三层”直接当成因果关系。实际上，下雨通常只会让他多带一件工具。把这一层联系拆开以后，昨天的例外便不再奇怪：他虽然带伞，却没有带足够长的伞。工具的用途不是挡雨，而是补足手臂与高处按钮之间的距离。\n\n前天则提供了第二条验证线索。没有长柄伞不等于绝对无法按按钮，只要有邻居代按，同样可以直达十三层。下楼时目标是一楼，按钮在他能够触及的位置，所以无需借助任何人或物。完整的解释必须同时覆盖上下楼的不对称、雨天通常方便、雨天也可能失败和晴天也可能成功。把限制放在“谁能按到按钮”上，而不是放在电梯或天气上，四种现象就统一了。",
     "qs": [
       "是否需要借助物品或他人的帮助？",
       "电梯会按天气限制楼层吗？"
@@ -116,7 +116,7 @@ const cases=[
       "年轻人不是代替老人去旅行；票背面提供的信息比票面更重要。",
       "儿子已经搬回本地，老人却记不住；熟悉的笔迹帮助他接受接送。"
     ],
-    "truth": "老人有记忆障碍，仍以为儿子住在外地，习惯买票去车站等。儿子早已搬回来，日常由照护者陪老人到车站。这天儿子提前下班，在照护者帮助下将接他的留言写在票背面。老人认出了儿子的笔迹，再把票交给本人确认，终于肯离开。车票不是一次未完成的旅行，而是旧记忆与当下接送之间的媒介。",
+    "truth": "老人有记忆障碍，仍以为儿子住在外地，习惯买票去车站等。儿子早已搬回来，日常由照护者陪老人到车站。这天儿子提前下班，在照护者帮助下将接他的留言写在票背面。老人认出了儿子的笔迹，再把票交给本人确认，终于肯离开。车票不是一次未完成的旅行，而是旧记忆与当下接送之间的媒介。\n\n老人反复购买相同目的地的车票，是因为他记得的家庭生活仍停在儿子远居外地的阶段。票面上没有变化，并不表示现实中也没有变化。照护者始终在场，说明他不是无人照看的失踪者；每天没有上车，也说明真正维系这个习惯的不是某一班必须赶上的列车，而是等待家人的心情。\n\n这天让老人改变行动的，是票背面那句他能够认出笔迹的留言。儿子没有争论目的地是否正确，而是借用父亲一直握着的东西，把“继续等待”变成“已经有人来接”。老人把票交给面前的年轻人后，与熟悉的字迹和本人建立了联系，才肯一起离开。两人不需要检票，年轻人也不需要代乘或退票，因为接下来要完成的是回家，而不是车票所代表的那段旧旅程。",
     "qs": [
       "车票背面的信息比目的地更关键吗？",
       "年轻人替老人乘车了吗？"
@@ -158,7 +158,7 @@ function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Erro
 function ask(q){if($('game-screen').hidden)throw Error('请先从主界面开始调查');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('问题需为 1–300 字');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}。${a[2]}`:'这个问题暂未包含在演示问答中。试试下方推荐问题，或用「给我一点提示」继续推理。';addMessage(answer);window.dispatchEvent(new Event('case-progress'));return {question:q,answer,questions:asked}}
 $('ask-form').onsubmit=e=>{e.preventDefault();const q=$('input').value.trim();if(!q)return;ask(q);$('input').value='';$('input').focus()};$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('ask-form').requestSubmit()}};
 $('hint').onclick=()=>{if(hints<3)hints++;$('hint-box').hidden=false;$('hint-box').textContent=`提示 ${hints} / 3 · ${cases[current].hints[hints-1]}`;$('hint-count').textContent=`${hints} / 3`};
-function openModal(label,title,body,action,fn){$('dialog-label').textContent=label;$('dialog-title').textContent=title;$('dialog-body').textContent=body;$('dialog-action').textContent=action;$('dialog-action').onclick=fn||(()=>dialog.close());dialog.showModal()}
+function openModal(label,title,body,action,fn){$('dialog-label').textContent=label;$('dialog-title').textContent=title;$('dialog-body').textContent=body;$('dialog-action').textContent=action;$('dialog-action').onclick=fn||(()=>dialog.close());dialog.showModal();dialog.scrollTop=0}
 $('rules').onclick=()=>openModal('HOW TO PLAY','一碗汤，两面故事。','「汤面」是故事的表象，「汤底」是完整真相。阅读汤面后，向主持人提出可以用是、否或无关回答的问题，一步步还原故事。卡住时可以查看三条渐进提示，也可以揭晓汤底。切换汤题会重新开始本局。本页为预设问答演示，尚未接入实时 AI。','开始推理');
 $('reveal').onclick=()=>{if(revealed){showTruth();return}openModal('REVEAL THE TRUTH','准备好揭晓了吗？','汤底会直接揭示故事的完整真相。你也可以先关闭窗口，继续提问。','揭晓汤底',()=>{dialog.close();revealed=true;showTruth()})};function showTruth(){window.dispatchEvent(new Event('case-progress'));openModal('THE WHOLE STORY',cases[current].title+' · 汤底',cases[current].truth,'返回故事')};dialog.querySelector('.close').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
 

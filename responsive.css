@@ -1,5 +1,6 @@
 /* Shared desktop, tablet and phone layout. Loaded after language styles. */
 html { -webkit-text-size-adjust: 100%; }
+#dialog-body { white-space: pre-line; line-height: 1.9; overflow-wrap: anywhere; }
 body { min-width: 0; }
 header { height: auto; min-height: 80px; flex-wrap: wrap; padding-block: 14px; }
 .brand, .header-actions, .home-intro, .home-archive, .story, .chat-panel,

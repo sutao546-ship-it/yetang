@@ -1,0 +1,104 @@
+/* Shared desktop, tablet and phone layout. Loaded after language styles. */
+html { -webkit-text-size-adjust: 100%; }
+body { min-width: 0; }
+header { height: auto; min-height: 80px; flex-wrap: wrap; padding-block: 14px; }
+.brand, .header-actions, .home-intro, .home-archive, .story, .chat-panel,
+.board-heading > *, .detective-hud > * { min-width: 0; }
+.header-actions { flex-wrap: wrap; }
+.home-case strong, .home-case-description, .story h2, .bubble,
+.evidence-pin, .mission-status, #dialog-body { overflow-wrap: anywhere; }
+#home-screen > .home-intro h1 { white-space: normal; text-wrap: balance; }
+.home-rules, .story-tags { flex-wrap: wrap; }
+.home-archive-heading, .board-heading { flex-wrap: wrap; }
+.title-menu { max-width: 100%; }
+#game-screen .host-drawer .chat-panel {
+  height: min(760px, 80dvh); min-height: 480px;
+}
+.chat-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.composer { flex-shrink: 0; }
+textarea, input, select { max-width: 100%; }
+dialog { width: min(560px, calc(100% - 32px)); max-width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px); overflow-y: auto; }
+dialog .close { min-width: 44px; min-height: 44px; }
+dialog h2 { padding-right: 28px; overflow-wrap: anywhere; }
+
+@media (max-width: 1100px) {
+  header { padding-inline: 20px; gap: 14px; }
+  .header-note { display: none; }
+  #game-screen > main { grid-template-columns: minmax(0, 1fr); }
+  .investigation-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .brand-en { font-size: 10px; letter-spacing: 1px; }
+}
+
+@media (max-width: 760px) {
+  header { padding: 12px 16px; }
+  .brand-en { display: none; }
+  .header-actions { gap: 8px; }
+  .header-actions :is(.nav-key, #rules) { min-height: 44px; }
+  #home-screen.home-screen { padding: 18px 16px 24px; }
+  #home-screen > .home-intro h1 { font-size: clamp(23px, 4.5vw, 32px); line-height: 1.5; }
+  #home-screen > .home-intro p br { display: none; }
+  .home-archive { padding: 22px 16px; }
+  .archive-total { display: inline; font-size: 12px; }
+  .home-archive-heading { gap: 10px; margin-bottom: 12px; }
+  .home-cases.case-drum { height: 340px; margin-inline: 0; }
+  .case-drum .home-case { width: min(320px, 86%); min-height: 260px; padding: 20px 16px; }
+  .case-drum .home-case strong { font-size: 23px; }
+  .home-case-description { font-size: 15px; }
+  .drum-controls { gap: 18px; }
+  .drum-arrow, .send, .suggestions button { min-height: 44px; }
+  .drum-help { font-size: 13px; }
+  #game-screen { padding: 16px 14px 30px; }
+  #game-screen > main { gap: 22px; padding: 0; }
+  .investigation-rail { grid-template-columns: minmax(0, 1fr); }
+  .detective-hud { display: block; padding-bottom: 18px; }
+  .detective-hud h2 { font-size: clamp(24px, 6vw, 30px); }
+  .mission-status { margin-top: 12px; padding: 12px; }
+  .scene-desk { padding: 20px 16px; min-height: 0; }
+  .scene-records { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 20px; }
+  .record-card { transform: none !important; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 6px 10px; padding: 16px; }
+  .record-number { grid-row: span 3; }
+  .record-preview { -webkit-line-clamp: 3; font-size: 14px; }
+  #game-screen .case-workspace .story { min-height: 0; padding: 22px 18px; }
+  #game-screen .story h2 { font-size: 28px; }
+  .story .file-label { max-width: 100%; flex-wrap: wrap; overflow-wrap: anywhere; }
+  .story-foot { margin-inline: -18px; padding-inline: 18px; flex-wrap: wrap; }
+  .tools-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .tools-row button { flex: 1 1 160px; min-height: 48px; }
+  .evidence-board { padding: 22px 16px; }
+  .pinned-evidence { max-height: none; overflow: visible; }
+  #game-screen .host-drawer .chat-panel { height: auto; min-height: 0; }
+  .host-drawer .chat-scroll { flex: none; height: clamp(200px, 40dvh, 420px); }
+  .host-drawer summary { min-height: 48px; padding: 18px 16px; }
+  .chat-heading { flex-wrap: wrap; padding: 18px 14px; }
+  .chat-scroll, .composer { padding-inline: 14px; }
+  .notebook textarea, textarea, input, select, .ai-controls select { font-size: 16px; }
+  .ai-controls { grid-template-columns: minmax(0, 1fr); }
+  .suggestions { flex-wrap: wrap; }
+  .suggestions button { max-width: 100%; white-space: normal; text-align: left; }
+  .input-bottom { flex-wrap: wrap; }
+  .input-bottom .send { margin-left: auto; }
+  footer { flex-wrap: wrap; gap: 8px; padding: 16px; overflow-wrap: anywhere; }
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+@media (max-width: 420px) {
+  header { gap: 12px; }
+  .header-actions { width: 100%; margin-left: 0; justify-content: flex-start; }
+  .header-actions :is(.nav-key, #rules) { flex: 1 1 auto; font-size: 12px; padding-inline: 8px; }
+  .title-content h1 { font-size: 80px; }
+  .title-kicker { letter-spacing: 3px; }
+  .title-premise { font-size: 15px; }
+  .home-rules { gap: 8px; font-size: 12px; }
+  .drum-controls { gap: 12px; }
+  .drum-count { min-width: 70px; letter-spacing: 1px; }
+  .case-drum .home-case strong { font-size: 21px; }
+  .home-case-bottom { font-size: 12px; gap: 6px; }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .title-screen { padding-block: 18px; }
+  .title-content { padding-block: 0; }
+  .title-content h1 { font-size: 68px; }
+  .title-premise { margin-block: 12px; }
+}

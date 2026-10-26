@@ -76,12 +76,12 @@ html[lang="ko"] #home-cases.case-book-pages .home-case::before,html[lang="ko"] .
 .book-left{border-radius:7px 3px 22% 4% / 6px 2px 14px 8px;background:radial-gradient(ellipse at 72% 45%,#fff8e866,transparent 60%),repeating-linear-gradient(0deg,#85643406 0 1px,transparent 1px 3px),linear-gradient(90deg,#d0b991,#eee0c3 9%,#f2e7ce 54%,#e1cfa9 83%,#ad8b5d 97%,#6b4d30);box-shadow:inset -7px 0 10px -5px #3d2819cc,inset 0 1px #fff6df!important}
 #home-cases.case-book-pages{border-radius:3px 7px 4% 22% / 2px 6px 8px 14px;background:radial-gradient(ellipse at 28% 45%,#fff8e866,transparent 60%),repeating-linear-gradient(0deg,#85643406 0 1px,transparent 1px 3px),linear-gradient(90deg,#6b4d30,#ad8b5d 3%,#e1cfa9 17%,#f2e7ce 46%,#eee0c3 91%,#c4a67a);box-shadow:inset 7px 0 10px -5px #3d2819cc,inset 0 1px #fff6df}
 .book-left::before{border:none;border-top:1px solid #92704530;border-bottom:1px solid #92704520;inset:24px 30px 43px}
-.book-left h3{font-family:'Songti SC','STSong','Noto Serif CJK SC',serif;font-weight:600;letter-spacing:.08em}
-html[lang='ko'] .book-left h3{font-family:'Batang','Noto Serif CJK KR',serif}
+.book-left h3{font-family:var(--font-rounded);font-weight:400;letter-spacing:.08em}
+html[lang='ko'] .book-left h3{font-family:var(--font-rounded)}
 .book-leaf-back{position:absolute;left:0;top:0;height:100%;overflow:hidden;transform:rotateY(180deg);transform-origin:center;backface-visibility:hidden;background:#eadbbd}
 .book-leaf-back-content{position:absolute;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:30px 25px;text-align:center;color:#55422e;background:linear-gradient(90deg,#d0b991,#eee0c3 9%,#f2e7ce 54%,#e1cfa9 83%,#ad8b5d 97%,#6b4d30);box-sizing:border-box}
-.book-leaf-back-content h3{font-family:'Songti SC','STSong',serif;font-size:clamp(22px,3.4vw,36px);font-weight:600;line-height:1.65;letter-spacing:.08em;margin:0;overflow-wrap:anywhere}
-html[lang='ko'] .book-leaf-back-content h3{font-family:'Batang',serif}
+.book-leaf-back-content h3{font-family:var(--font-rounded);font-size:clamp(22px,3.4vw,36px);font-weight:400;line-height:1.65;letter-spacing:.08em;margin:0;overflow-wrap:anywhere}
+html[lang='ko'] .book-leaf-back-content h3{font-family:var(--font-rounded)}
 .book-leaf-back-content .book-meta{font-size:12px;line-height:1.9;padding-top:22px;border-top:1px solid #9a7b4b55;margin:0}
 .book-turning-leaf{top:12px;bottom:12px}
 @media(max-width:760px){.case-book{--book-depth:28px;padding-top:8px;padding-bottom:8px}.book-turning-leaf{top:8px;bottom:8px}.book-page-stack{width:calc(50% - 4px)}.book-stack-left{left:2px}.book-stack-right{right:2px}.book-left::before{inset:14px 14px 32px}.book-leaf-back-content{padding:18px 14px 32px;gap:18px}.book-leaf-back-content h3{font-size:clamp(17px,4vw,28px)}.book-leaf-back-content .book-meta{font-size:11px;padding-top:14px}}

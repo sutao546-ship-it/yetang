@@ -21,3 +21,19 @@ html[lang="ko"] #home-cases.case-book-pages .home-case::before,html[lang="ko"] .
 @media(max-width:760px){.case-book{padding:6px;margin-block:18px 24px}.book-left{padding:18px 14px;gap:18px}.book-left h3{font-size:clamp(17px,4vw,28px);letter-spacing:1px}.book-kicker{font-size:10px;letter-spacing:1px}.book-left .book-meta{font-size:11px;padding-top:14px}#home-cases.case-book-pages .home-case,.book-leaf-content{padding:20px 16px;gap:16px}#home-cases.case-book-pages .home-case-description,.book-leaf-content .home-case-description{font-size:clamp(13px,2.8vw,18px);line-height:1.9}.book-turning-leaf{left:50%;top:6px;bottom:6px;right:6px}}
 @media(max-width:420px){.book-left{gap:12px;padding:14px 10px}.book-left h3{font-size:clamp(16px,4.6vw,20px)}.book-left .book-meta{font-size:10px;padding-top:10px}#home-cases.case-book-pages .home-case,.book-leaf-content{padding:14px 12px;gap:12px}#home-cases.case-book-pages .home-case::before,.book-leaf-content::before{font-size:10px;letter-spacing:1px;padding-bottom:10px}.book-kicker{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.case-book *{transition:none!important}.book-turning-leaf{display:none}}
+/* Quiet paper grain, inset rules, page edges and unobtrusive page navigation. */
+.case-book{border-color:#9a7952;background:linear-gradient(110deg,#644235,#39251e);box-shadow:0 24px 42px #0006,0 8px 0 #24180f,0 9px 1px #b5955e44;border-radius:9px 13px 13px 9px}
+.book-left{background:radial-gradient(ellipse at 22% 28%,#fff8df44,transparent 65%),repeating-linear-gradient(0deg,#8a683508 0 1px,transparent 1px 4px),linear-gradient(90deg,#cbb084,#efe1c2 12%,#e6d3ab 85%,#b29161 98%,#80613d);cursor:pointer;box-shadow:inset 2px 0 3px #fff4cf88!important;translate:none!important;filter:none!important;transition:background .2s ease;user-select:none;touch-action:manipulation}
+.book-left::before{content:'';position:absolute;inset:17px 15px 42px;border:1px solid #93703c26;pointer-events:none}
+.book-left h3{max-width:13em;text-shadow:0 1px #fff8de77;color:#493325}
+.book-left .book-meta{color:#826747;border-top:1px solid #9a7b4b55}
+.book-kicker{color:#95774e;font-size:10px;letter-spacing:3px}
+#home-cases.case-book-pages{background:radial-gradient(ellipse at 75% 30%,#fff9e744,transparent 70%),repeating-linear-gradient(0deg,#8a683508 0 1px,transparent 1px 4px),linear-gradient(90deg,#98764b,#deca9f 5%,#f1e3c5 15%,#ecdbb6 92%,#c6a97a);box-shadow:inset -2px 0 4px #8c693333}
+#home-cases.case-book-pages .home-case::before{font-size:10px;color:#96774d;letter-spacing:3px;border-bottom-color:#9a7b4b44}
+#home-cases.case-book-pages .home-case-description{color:#5a4430;letter-spacing:.04em;text-wrap:pretty}
+.book-left::after,#home-cases.case-book-pages .home-case::after{content:attr(data-folio) '  /  ' attr(data-turn-label);position:absolute;bottom:20px;font-size:10px;line-height:1.5;letter-spacing:1px;color:#94744b;pointer-events:none}
+.book-left::after{left:25px}#home-cases.case-book-pages .home-case::after{right:25px}
+.book-left[aria-disabled='true'],#home-cases.case-book-pages .home-case[aria-disabled='true']{cursor:default;box-shadow:none!important}
+.book-left:focus-visible{outline:2px solid #7d3836;outline-offset:-8px}
+@media(hover:hover){.book-left:not([aria-disabled='true']):hover::after,#home-cases.case-book-pages .home-case:not([aria-disabled='true']):hover::after{color:#7d3836;text-decoration:underline;text-underline-offset:4px}}
+@media(max-width:760px){.book-left::before{inset:10px 8px 30px}.book-left::after,#home-cases.case-book-pages .home-case::after{bottom:12px;font-size:9px;letter-spacing:0}.book-left::after{left:14px}#home-cases.case-book-pages .home-case::after{right:14px}.book-kicker{font-size:9px;letter-spacing:1px}.book-left{padding-bottom:32px}#home-cases.case-book-pages .home-case,.book-leaf-content{padding-bottom:34px}}

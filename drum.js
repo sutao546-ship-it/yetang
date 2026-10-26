@@ -4,7 +4,7 @@
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const t=(zh,kr)=>ko?kr:zh;
  const shell=document.createElement('section');shell.className='case-book';
- const left=document.createElement('div');left.className='book-left';
+ const left=document.createElement('div');left.className='book-left';left.tabIndex=0;left.setAttribute('role','button');
  const kicker=document.createElement('span');kicker.className='book-kicker';kicker.textContent='MIDNIGHT / CASE FILES';
  const heading=document.createElement('h3');heading.textContent=t('夜汤档案集','야탕 사건집');
  const meta=document.createElement('p');meta.className='book-meta';
@@ -17,7 +17,7 @@
  const next=document.createElement('button');next.type='button';next.className='drum-arrow';next.textContent=t('下一页','다음 쪽');
  const count=document.createElement('span');count.className='drum-count';count.setAttribute('aria-live','polite');
  controls.append(prev,count,next);shell.after(controls);
- const help=document.createElement('p');help.className='drum-help';help.textContent=t('轻扫书页或点击翻页，挑选今晚的故事。','책장을 쓸어 넘기거나 버튼으로 오늘의 이야기를 골라 보세요.');controls.after(help);
+ const help=document.createElement('p');help.className='drum-help';help.textContent=t('点击左页返回上一案，点击右页翻到下一案；也可以轻扫翻页。','왼쪽 페이지는 이전 사건, 오른쪽 페이지는 다음 사건입니다. 쓸어 넘기기도 가능합니다.');controls.after(help);
  const random=document.createElement('button');random.type='button';random.className='drum-random';random.textContent=t('随机翻书选案卷','무작위로 책장 넘기기');help.after(random);
  const start=document.getElementById('start-game');random.after(start);
  const result=document.createElement('p');result.className='drum-result';result.setAttribute('role','status');start.after(result);
@@ -26,9 +26,16 @@
  function paint(){
   heading.textContent=cases[chosenCase].title;
   kicker.textContent='CASE / '+String(chosenCase+1).padStart(3,'0');
+  left.setAttribute('aria-label',cases[chosenCase].title+' · '+t('点击返回上一个事件','클릭하여 이전 사건 보기'));
+  left.setAttribute('aria-disabled',String(busy||chosenCase===0));
+  left.setAttribute('data-folio',String(chosenCase*2+1).padStart(2,'0'));
+  left.setAttribute('data-turn-label',chosenCase===0?t('卷首','첫 장'):t('上一案','이전 사건'));
   [...viewport.children].forEach((card,i)=>{
    const visible=i===chosenCase;card.hidden=!visible;card.tabIndex=visible?0:-1;
-   card.setAttribute('aria-label',`${t('案卷','사건')} ${i+1}: ${cases[i].title}`);
+   card.setAttribute('aria-label',`${t('案卷','사건')} ${i+1}: ${cases[i].title} · ${t('点击翻到下一个事件','클릭하여 다음 사건 보기')}`);
+   card.setAttribute('aria-disabled',String(busy||i===cases.length-1));
+   card.setAttribute('data-folio',String(i*2+2).padStart(2,'0'));
+   card.setAttribute('data-turn-label',i===cases.length-1?t('卷末','마지막 장'):t('下一案','다음 사건'));
   });
   count.textContent=`${String(chosenCase+1).padStart(2,'0')} / ${cases.length}`;
   meta.textContent=cases[chosenCase].level+' · '+cases[chosenCase].time;
@@ -98,6 +105,8 @@
  }
  async function choose(index){if(busy)return;result.textContent='';lock(true);try{await turn(index);}finally{lock(false);}}
  prev.onclick=()=>choose(chosenCase-1);next.onclick=()=>choose(chosenCase+1);
+ left.addEventListener('click',()=>{if(Date.now()>=suppressUntil)return choose(chosenCase-1);});
+ left.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();return choose(chosenCase-1);}});
  viewport.addEventListener('keydown',e=>{
   const actions={ArrowLeft:chosenCase-1,ArrowRight:chosenCase+1,Home:0,End:cases.length-1};
   if(Object.hasOwn(actions,e.key)){e.preventDefault();choose(actions[e.key]);}
@@ -111,7 +120,7 @@
  viewport.addEventListener('pointercancel',()=>gesture=null);
  viewport.addEventListener('pointerleave',()=>gesture=null);
  viewport.addEventListener('dragstart',e=>e.preventDefault());
- viewport.addEventListener('click',e=>{if(busy||Date.now()<suppressUntil){e.preventDefault();e.stopImmediatePropagation();}},true);
+ viewport.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();if(!busy&&Date.now()>=suppressUntil)return choose(chosenCase+1);},true);
  random.onclick=async()=>{
   if(busy)return;
   const target=Math.floor(Math.random()*cases.length),token=cancelled;

@@ -7,10 +7,8 @@
  const left=document.createElement('div');left.className='book-left';
  const kicker=document.createElement('span');kicker.className='book-kicker';kicker.textContent='MIDNIGHT / CASE FILES';
  const heading=document.createElement('h3');heading.textContent=t('夜汤档案集','야탕 사건집');
- const emblem=document.createElement('div');emblem.className='book-emblem';emblem.textContent='夜';emblem.setAttribute('aria-hidden','true');
- const subtitle=document.createElement('p');subtitle.textContent=t('每翻一页，\n都有一个等待揭开的秘密。','장을 넘길 때마다\n새로운 비밀이 기다립니다.');
  const meta=document.createElement('p');meta.className='book-meta';
- left.append(kicker,heading,emblem,subtitle,meta);
+ left.append(kicker,heading,meta);
  viewport.before(shell);shell.append(left,viewport);
  viewport.classList.add('case-book-pages');viewport.tabIndex=0;
  viewport.setAttribute('role','region');viewport.setAttribute('aria-label',t('案卷书，使用左右方向键翻页','사건 책, 좌우 방향키로 넘기기'));
@@ -26,12 +24,14 @@
  let busy=false,cancelled=0,gesture=null,suppressUntil=0,animation=null;
  const clamp=n=>Math.max(0,Math.min(cases.length-1,n));
  function paint(){
+  heading.textContent=cases[chosenCase].title;
+  kicker.textContent='CASE / '+String(chosenCase+1).padStart(3,'0');
   [...viewport.children].forEach((card,i)=>{
    const visible=i===chosenCase;card.hidden=!visible;card.tabIndex=visible?0:-1;
    card.setAttribute('aria-label',`${t('案卷','사건')} ${i+1}: ${cases[i].title}`);
   });
   count.textContent=`${String(chosenCase+1).padStart(2,'0')} / ${cases.length}`;
-  meta.textContent=`${t('案卷','사건')} ${String(chosenCase+1).padStart(3,'0')}\n${cases[chosenCase].level} · ${cases[chosenCase].time}`;
+  meta.textContent=cases[chosenCase].level+' · '+cases[chosenCase].time;
   prev.disabled=busy||chosenCase===0;next.disabled=busy||chosenCase===cases.length-1;
  }
  window.updateCaseDrum=paint;

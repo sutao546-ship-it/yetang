@@ -86,3 +86,6 @@ html[lang='ko'] .book-leaf-back-content h3{font-family:'Batang',serif}
 .book-turning-leaf{top:12px;bottom:12px}
 @media(max-width:760px){.case-book{--book-depth:28px;padding-top:8px;padding-bottom:8px}.book-turning-leaf{top:8px;bottom:8px}.book-page-stack{width:calc(50% - 4px)}.book-stack-left{left:2px}.book-stack-right{right:2px}.book-left::before{inset:14px 14px 32px}.book-leaf-back-content{padding:18px 14px 32px;gap:18px}.book-leaf-back-content h3{font-size:clamp(17px,4vw,28px)}.book-leaf-back-content .book-meta{font-size:11px;padding-top:14px}}
 @media(max-width:420px){.case-book{--book-depth:23px}.book-leaf-back-content{gap:12px;padding:14px 10px 32px}.book-leaf-back-content h3{font-size:clamp(16px,4.6vw,20px)}.book-leaf-back-content .book-meta{font-size:10px;padding-top:10px}}
+/* Mirror the back in 2D: nested 3D backfaces can expose clipped strip seams. */
+.book-paper-strip{filter:none;box-shadow:none;border:0}
+.book-leaf-back{transform:scaleX(-1);backface-visibility:visible;background:#eadbbd}

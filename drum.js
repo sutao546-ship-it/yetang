@@ -51,16 +51,16 @@
  function lock(value){busy=value;random.disabled=value;start.disabled=value;viewport.setAttribute('aria-busy',String(value));paint();}
  function curlPage(leaf,markup,backMarkup,forward,duration){
   const width=viewport.clientWidth||400,height=viewport.clientHeight||370;
-  const segments=28,step=width/segments,strips=[];
+  const segments=48,step=width/segments,overlap=1.2,strips=[];
   // Each narrow strip follows the paper's changing tangent, forming a curved surface.
   for(let i=0;i<segments;i++){
    const strip=document.createElement('div');strip.className='book-paper-strip';
-   strip.style.width=(step+.8)+'px';strip.style.height=height+'px';
+   strip.style.width=(step+overlap)+'px';strip.style.height=height+'px';
    const face=document.createElement('div');face.className='book-leaf-content';
    face.style.width=width+'px';face.style.height=height+'px';face.style.left=(-i*step)+'px';face.innerHTML=markup;
-   const back=document.createElement('div');back.className='book-leaf-back';back.style.width=(step+.8)+'px';
+   const back=document.createElement('div');back.className='book-leaf-back';back.style.width=(step+overlap)+'px';
    const reverse=document.createElement('div');reverse.className='book-leaf-back-content';
-   reverse.style.width=width+'px';reverse.style.height=height+'px';reverse.style.left=(-(segments-1-i)*step)+'px';reverse.innerHTML=backMarkup;
+   reverse.style.width=width+'px';reverse.style.height=height+'px';reverse.style.left=(-(segments-1-i)*step+overlap)+'px';reverse.innerHTML=backMarkup;
    back.append(reverse);strip.append(face,back);leaf.append(strip);strips.push({strip,face,back});
   }
   let frame=0,began=null,resolveDone;
@@ -76,9 +76,8 @@
     strip.style.transform='translate3d('+x+'px,'+(-lift)+'px,'+z+'px) rotateY('+angle+'rad)';
     face.style.visibility=Math.cos(angle)>0?'visible':'hidden';
     back.style.visibility=Math.cos(angle)<=0?'visible':'hidden';
-    strip.style.filter='brightness('+(1-.17*Math.abs(Math.sin(angle)))+')';
-    const shade=Math.round(12+28*Math.abs(Math.sin(angle)));
-    strip.style.background='linear-gradient(90deg,rgba(91,61,25,'+(shade/240)+'),rgba(255,247,219,.12)),#ead9b5';
+    // Shading belongs to the full paper image, never to individual strips.
+    strip.style.background='#eadbbd';
     x+=Math.cos(angle)*step;z-=Math.sin(angle)*step;
    });
    leaf.style.setProperty('--curl-shadow',String(.18*flex));

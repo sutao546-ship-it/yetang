@@ -103,7 +103,14 @@
    if(token===cancelled)animation=null;
   }
  }
- async function choose(index){if(busy)return;result.textContent='';lock(true);try{await turn(index);}finally{lock(false);}}
+ async function choose(index){
+  if(busy)return;index=clamp(index);const token=cancelled;
+  result.textContent='';lock(true);
+  try{while(chosenCase!==index&&token===cancelled){
+   const distance=Math.abs(index-chosenCase);
+   await turn(chosenCase+Math.sign(index-chosenCase),distance>2?260:720);
+  }}finally{if(token===cancelled)lock(false);}
+ }
  prev.onclick=()=>choose(chosenCase-1);next.onclick=()=>choose(chosenCase+1);
  left.addEventListener('click',()=>{if(Date.now()>=suppressUntil)return choose(chosenCase-1);});
  left.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();return choose(chosenCase-1);}});
@@ -126,11 +133,18 @@
   const target=Math.floor(Math.random()*cases.length),token=cancelled;
   lock(true);random.textContent=t('正在翻阅…','책장을 넘기는 중…');result.textContent=t('书页将为你停在一个故事。','책장이 하나의 이야기에서 멈춥니다.');
   try{
-   if(!reduced.matches){
-    for(let i=0;i<9&&token===cancelled;i++)await turn((chosenCase+1)%cases.length,150+i*20);
+   if(reduced.matches){await turn(target);}
+   else {
+    // Every animated turn visits the adjacent page, including the final reveal.
+    if(target===chosenCase&&cases.length>1){
+     await turn(chosenCase===cases.length-1?chosenCase-1:chosenCase+1,500);
+    }
+    while(chosenCase!==target&&token===cancelled){
+     const remaining=Math.abs(target-chosenCase);
+     await turn(chosenCase+Math.sign(target-chosenCase),remaining>3?260:450+(4-remaining)*110);
+    }
    }
    if(token!==cancelled)return;
-   await turn(target,780);
    if(token===cancelled)result.textContent=t('本次翻到：','이번에 펼친 사건: ')+cases[target].title;
   }finally{if(token===cancelled){random.textContent=t('再随机翻一次','다시 무작위로 넘기기');lock(false);}}
  };

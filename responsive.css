@@ -1,3 +1,5 @@
+/* Route focus is for screen readers; the heading is not an interactive control. */
+#game-screen #title[tabindex="-1"]:focus { outline: none; }
 /* Shared desktop, tablet and phone layout. Loaded after language styles. */
 html { -webkit-text-size-adjust: 100%; }
 #dialog-body { white-space: pre-line; line-height: 1.9; overflow-wrap: anywhere; }

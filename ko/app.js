@@ -164,17 +164,27 @@ $('reveal').onclick=()=>{if(revealed){showTruth();return}openModal('REVEAL THE T
 
 if(document.modelContext?.registerTool){const lifecycle=new AbortController();for(const tool of [{name:'get_current_mystery',description:'Read the current visible mystery and question count without revealing its solution.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>($('game-screen').hidden?{screen:'home',cases:cases.map((c,i)=>({id:i,title:c.title}))}:{screen:'game',title:cases[current].title,story:cases[current].body,questions:asked})},{name:'ask_mystery_question',description:'Submit a question to the clearly labeled preset demo host and display its response.',inputSchema:{type:'object',properties:{question:{type:'string',minLength:1,maxLength:300}},required:['question'],additionalProperties:false},annotations:{readOnlyHint:false},execute:input=>ask(input?.question)}]){try{Promise.resolve(document.modelContext.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{})}catch{}}window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true})}
 
-let chosenCase=0,activeCase=null;
+const requestedCase=new URLSearchParams(location.search).get('case');
+let chosenCase=requestedCase!==null&&/^\d+$/.test(requestedCase)&&Number(requestedCase)<cases.length?Number(requestedCase):0,activeCase=null;
+function updateLanguageLink(){
+ const link=document.querySelector('.language-switch');
+ const destination=new URL(link.getAttribute('href'),location.href);
+ destination.hash=location.hash||'#home';
+ destination.searchParams.set('case',String(chosenCase));
+ link.href=destination.href;
+}
 function renderHome(){
  const existingCards=[...$('home-cases').children];
  cases.forEach((c,i)=>{const b=existingCards[i]||document.createElement('button');b.className='home-case'+(i===chosenCase?' selected':'');b.setAttribute('aria-pressed',String(i===chosenCase));b.innerHTML=`<span class="home-case-top"><span>CASE / ${String(i+1).padStart(3,'0')}</span><span>${c.level}</span></span><strong>${c.title}</strong><span class="home-case-description">${c.short}</span><span class="home-case-bottom"><span>${c.genre} · ${c.time}</span><span class="selection-mark">${i===chosenCase?'선택됨':'사건 선택'}</span></span>`;b.onclick=()=>{chosenCase=i;renderHome()};$('home-cases').append(b)});
  $('selected-case-label').textContent='선택한 사건: '+cases[chosenCase].title;
  $('start-game').innerHTML=(activeCase===chosenCase?'조사 이어하기':'조사 시작')+'';
+ updateLanguageLink();
  window.updateCaseDrum?.();
 }
 function renderRoute(){const match=location.hash.match(/^#game\/(\d+)$/);const playing=!!match&&Number(match[1])<cases.length;const choosing=location.hash==='#cases';const titleScreen=!playing&&!choosing;
  $('title-screen').hidden=!titleScreen;$('home-screen').hidden=!choosing;$('game-screen').hidden=!playing;const back=document.querySelector('.back-home');back.hidden=titleScreen;back.href=playing?'#cases':'#home';back.textContent=playing?'사건 목록으로':'메인으로';document.body.classList.toggle('home-view',!playing);document.body.classList.toggle('title-view',titleScreen);$('resume-game').hidden=activeCase===null;if(activeCase!==null)$('resume-game').href='#game/'+activeCase;
  if(playing){const index=Number(match[1]);if(activeCase!==index){selectCase(index);activeCase=index;}chosenCase=index;document.title=cases[index].title+' · 야탕조사실';$('title').setAttribute('tabindex','-1');$('title').focus({preventScroll:true})}else{renderHome();document.title='야탕 · 탐정 사무소';}
+ updateLanguageLink();
  window.scrollTo(0,0);
 }
 $('start-game').onclick=()=>{location.hash='game/'+chosenCase};

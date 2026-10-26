@@ -10,6 +10,9 @@
  const meta=document.createElement('p');meta.className='book-meta';
  left.append(kicker,heading,meta);
  viewport.before(shell);shell.append(left,viewport);
+ const leftStack=document.createElement('div'),rightStack=document.createElement('div');
+ leftStack.className='book-page-stack book-stack-left';rightStack.className='book-page-stack book-stack-right';
+ for(const stack of [leftStack,rightStack]){stack.setAttribute('aria-hidden','true');shell.append(stack);}
  viewport.classList.add('case-book-pages');viewport.tabIndex=0;
  viewport.setAttribute('role','region');viewport.setAttribute('aria-label',t('案卷书，使用左右方向键翻页','사건 책, 좌우 방향키로 넘기기'));
  const controls=document.createElement('div');controls.className='drum-controls';
@@ -24,6 +27,9 @@
  let busy=false,cancelled=0,gesture=null,suppressUntil=0,animation=null;
  const clamp=n=>Math.max(0,Math.min(cases.length-1,n));
  function paint(){
+  const read=chosenCase/Math.max(1,cases.length-1);
+  shell.style.setProperty('--left-stack',String(.25+.75*read));
+  shell.style.setProperty('--right-stack',String(1-.75*read));
   heading.textContent=cases[chosenCase].title;
   kicker.textContent='CASE / '+String(chosenCase+1).padStart(3,'0');
   left.setAttribute('aria-label',cases[chosenCase].title+' · '+t('点击返回上一个事件','클릭하여 이전 사건 보기'));
@@ -43,7 +49,7 @@
  }
  window.updateCaseDrum=paint;
  function lock(value){busy=value;random.disabled=value;start.disabled=value;viewport.setAttribute('aria-busy',String(value));paint();}
- function curlPage(leaf,markup,forward,duration){
+ function curlPage(leaf,markup,backMarkup,forward,duration){
   const width=viewport.clientWidth||400,height=viewport.clientHeight||370;
   const segments=28,step=width/segments,strips=[];
   // Each narrow strip follows the paper's changing tangent, forming a curved surface.
@@ -52,7 +58,10 @@
    strip.style.width=(step+.8)+'px';strip.style.height=height+'px';
    const face=document.createElement('div');face.className='book-leaf-content';
    face.style.width=width+'px';face.style.height=height+'px';face.style.left=(-i*step)+'px';face.innerHTML=markup;
-   strip.append(face);leaf.append(strip);strips.push({strip,face});
+   const back=document.createElement('div');back.className='book-leaf-back';back.style.width=(step+.8)+'px';
+   const reverse=document.createElement('div');reverse.className='book-leaf-back-content';
+   reverse.style.width=width+'px';reverse.style.height=height+'px';reverse.style.left=(-(segments-1-i)*step)+'px';reverse.innerHTML=backMarkup;
+   back.append(reverse);strip.append(face,back);leaf.append(strip);strips.push({strip,face,back});
   }
   let frame=0,began=null,resolveDone;
   const finished=new Promise(resolve=>resolveDone=resolve);
@@ -60,12 +69,13 @@
    const p=forward?progress:1-progress;
    const flex=Math.sin(Math.PI*p);
    let x=0,z=0;
-   strips.forEach(({strip,face},i)=>{
+   strips.forEach(({strip,face,back},i)=>{
     const across=(i+.5)/segments;
     const angle=-Math.PI*p + 1.15*flex*(1-2*across);
     const lift=9*flex*Math.sin(Math.PI*across);
     strip.style.transform='translate3d('+x+'px,'+(-lift)+'px,'+z+'px) rotateY('+angle+'rad)';
     face.style.visibility=Math.cos(angle)>0?'visible':'hidden';
+    back.style.visibility=Math.cos(angle)<=0?'visible':'hidden';
     strip.style.filter='brightness('+(1-.17*Math.abs(Math.sin(angle)))+')';
     const shade=Math.round(12+28*Math.abs(Math.sin(angle)));
     strip.style.background='linear-gradient(90deg,rgba(91,61,25,'+(shade/240)+'),rgba(255,247,219,.12)),#ead9b5';
@@ -85,6 +95,7 @@
  async function turn(index,duration=720){
   index=clamp(index);if(index===chosenCase)return;
   const old=chosenCase,token=cancelled;
+  const oldBack=left.innerHTML,oldTitle=heading.textContent,oldMeta=meta.textContent,oldKicker=kicker.textContent;
   const outgoing=viewport.children[old];
   const oldMarkup=outgoing?outgoing.innerHTML:'';
   chosenCase=index;renderHome();
@@ -93,14 +104,16 @@
   shell.append(leaf);
   const forward=index>old;
   const markup=forward?oldMarkup:viewport.children[index].innerHTML;
+  const backMarkup=forward?left.innerHTML:oldBack;
+  if(forward){heading.textContent=oldTitle;meta.textContent=oldMeta;kicker.textContent=oldKicker;}
   // Backward turns unveil the incoming page as its curved edge settles down.
   if(!forward)viewport.children[index].style.opacity='0';
   try {
-   animation=curlPage(leaf,markup,forward,duration);
+   animation=curlPage(leaf,markup,backMarkup,forward,duration);
    await animation.finished;
   }finally{
    viewport.children[index].style.opacity='';leaf.remove();
-   if(token===cancelled)animation=null;
+   if(token===cancelled){animation=null;paint();}
   }
  }
  async function choose(index){

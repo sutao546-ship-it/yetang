@@ -89,3 +89,25 @@ html[lang='ko'] .book-leaf-back-content h3{font-family:'Batang',serif}
 /* Mirror the back in 2D: nested 3D backfaces can expose clipped strip seams. */
 .book-paper-strip{filter:none;box-shadow:none;border:0}
 .book-leaf-back{transform:scaleX(-1);backface-visibility:visible;background:#eadbbd}
+/* Shared alignment tokens keep the resting pages and animated copies registered. */
+.case-book{--page-inline:30px;--page-top:32px;--page-bottom:48px;--page-gap:22px;--folio-inset:24px;--folio-bottom:18px;grid-template-rows:minmax(0,1fr);align-items:stretch}
+.book-left,.book-leaf-back-content{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;align-items:center;justify-items:center;padding:var(--page-top) var(--page-inline) var(--page-bottom);gap:var(--page-gap);min-height:0}
+.book-left h3,.book-leaf-back-content h3{width:100%;max-width:100%;text-align:center;text-wrap:balance}
+.book-left .book-meta,.book-leaf-back-content .book-meta{width:100%;font-size:12px;line-height:1.9;padding-top:16px;margin:0;text-align:center}
+#home-cases.case-book-pages{align-self:stretch;height:auto;min-height:0}
+#home-cases.case-book-pages .home-case,.book-leaf-content{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;align-items:center;align-content:stretch;justify-items:stretch;padding:var(--page-top) var(--page-inline) var(--page-bottom);gap:var(--page-gap)}
+#home-cases.case-book-pages .home-case::before,.book-leaf-content::before{align-self:start;margin:0;font-size:10px;line-height:1.8;letter-spacing:3px;padding-bottom:0;border:0;color:#95774e}
+#home-cases.case-book-pages .home-case-description,.book-leaf-content .home-case-description{align-self:center;font-size:clamp(16px,1.9vw,20px);line-height:2.1;letter-spacing:.04em;text-wrap:pretty;margin:0;color:#5a4430}
+.book-left::after{left:var(--folio-inset);bottom:var(--folio-bottom)}
+#home-cases.case-book-pages .home-case::after{right:var(--folio-inset);bottom:var(--folio-bottom)}
+.book-left::before{inset:18px var(--page-inline) 36px}
+.home-archive .drum-controls,.home-archive .drum-help,.home-archive .drum-result,.home-archive .home-start-row{width:100%;max-width:760px;margin-left:auto;margin-right:auto;box-sizing:border-box}
+.home-archive .drum-controls{display:grid;grid-template-columns:100px 100px 100px;align-items:center;justify-content:center;gap:18px;margin-top:0}
+.home-archive .drum-controls button{width:100%;min-height:44px}
+.home-archive .drum-count{text-align:center;min-width:0;font-variant-numeric:tabular-nums}
+.home-archive .drum-help{margin-top:12px;margin-bottom:0;text-align:center;line-height:1.8}
+#home-screen .home-archive>.drum-random,#home-screen .home-archive>.start-game{width:min(260px,100%);min-height:48px}
+#home-screen .home-archive>.drum-random{margin-top:20px}
+#home-screen .home-archive>.start-game{margin-top:14px}
+@media(max-width:760px){.case-book{--page-inline:16px;--page-top:22px;--page-bottom:38px;--page-gap:16px;--folio-inset:14px;--folio-bottom:12px}.book-left .book-meta,.book-leaf-back-content .book-meta{font-size:11px;padding-top:12px}#home-cases.case-book-pages .home-case-description,.book-leaf-content .home-case-description{font-size:clamp(13px,2.8vw,18px);line-height:1.9}.home-archive .drum-controls{grid-template-columns:minmax(0,90px) 74px minmax(0,90px);gap:10px}.book-left::before{inset:12px var(--page-inline) 28px}}
+@media(max-width:420px){.case-book{--page-inline:12px;--page-top:16px;--page-bottom:32px;--page-gap:10px;--folio-inset:12px;--folio-bottom:10px}.book-left .book-meta,.book-leaf-back-content .book-meta{font-size:10px;padding-top:8px}.book-kicker,#home-cases.case-book-pages .home-case::before,.book-leaf-content::before{font-size:9px;letter-spacing:1px}}

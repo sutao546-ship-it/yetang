@@ -50,7 +50,11 @@
  window.updateCaseDrum=paint;
  function lock(value){busy=value;random.disabled=value;start.disabled=value;viewport.setAttribute('aria-busy',String(value));paint();}
  function curlPage(leaf,markup,backMarkup,forward,duration){
-  const width=viewport.clientWidth||400,height=viewport.clientHeight||370;
+  const bounds=viewport.getBoundingClientRect();
+  const width=bounds.width||viewport.clientWidth||400,height=bounds.height||viewport.clientHeight||370;
+  // Position the animated surface against the real page, including fractional pixels.
+  leaf.style.left=viewport.offsetLeft+'px';leaf.style.top=viewport.offsetTop+'px';
+  leaf.style.width=width+'px';leaf.style.height=height+'px';leaf.style.right='auto';leaf.style.bottom='auto';
   const segments=48,step=width/segments,overlap=1.2,strips=[];
   // Each narrow strip follows the paper's changing tangent, forming a curved surface.
   for(let i=0;i<segments;i++){

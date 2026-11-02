@@ -11,8 +11,14 @@
     {
       "name": "HOST_LIMITER",
       "namespace_id": "2026110201",
-      "simple": { "limit": 12, "period": 60 }
+      "simple": {
+        "limit": 12,
+        "period": 60
+      }
     }
   ],
-  "observability": { "enabled": false }
+  "observability": {
+    "enabled": false
+  },
+  "keep_vars": true
 }

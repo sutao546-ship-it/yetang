@@ -28,7 +28,7 @@ export default {
   if(allowed.includes(origin))headers['Access-Control-Allow-Origin']=origin;
   const reply=(status,data)=>new Response(JSON.stringify(data),{status,headers});
   const pathname=new URL(request.url).pathname;
-  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER),revision:'diagnostics-1'});
+  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER),revision:'diagnostics-2',checks:{api_key:!!env.ARK_API_KEY,rate_limiter:!!env.HOST_LIMITER}});
   if(pathname!=='/api/host')return reply(404,{error:'not_found'});
   if(!allowed.includes(origin))return reply(403,{error:'origin_denied'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});

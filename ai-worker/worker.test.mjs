@@ -36,7 +36,7 @@ test('only a closed verdict is exposed; provider secrets and prose stay server-s
   assert.equal((await worker.fetch(request(),env)).status,502);
   globalThis.fetch=async()=>new Response('sensitive provider diagnostic',{status:401});
   const failure=await worker.fetch(request(),env);
-  assert.equal(failure.status,502);assert.equal(await failure.text(),'{"error":"provider_error"}');
+  assert.equal(failure.status,502);assert.deepEqual(await failure.json(),{error:'provider_error',provider_status:401,category:'unknown'});
  }finally{globalThis.fetch=original;}
 });
 test('oversized and malformed bodies are rejected',async()=>{

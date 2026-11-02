@@ -28,7 +28,7 @@ export default {
   if(allowed.includes(origin))headers['Access-Control-Allow-Origin']=origin;
   const reply=(status,data)=>new Response(JSON.stringify(data),{status,headers});
   const pathname=new URL(request.url).pathname;
-  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER)});
+  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER),revision:'diagnostics-1'});
   if(pathname!=='/api/host')return reply(404,{error:'not_found'});
   if(!allowed.includes(origin))return reply(403,{error:'origin_denied'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});
@@ -45,7 +45,15 @@ export default {
     body:JSON.stringify({model:env.ARK_MODEL||'doubao-seed-2-1-lite-260915',messages:buildMessages(input),thinking:{type:'disabled'},temperature:0,max_tokens:80,response_format:{type:'json_object'}}),
     signal:AbortSignal.timeout(25000)
    });
-   if(!upstream.ok)return reply(upstream.status===429?429:502,{error:upstream.status===429?'rate_limited':'provider_error'});
+   if(!upstream.ok){
+    let code='';try{const detail=await upstream.json();code=typeof detail.error?.code==='string'?detail.error.code:'';}catch{}
+    const category=/InvalidApiKey|Authentication|Unauthorized/i.test(code)?'authentication':
+      /ModelNotOpen|EndpointNotFound|ModelNotFound|InvalidEndpoint/i.test(code)?'model_access':
+      /Overdue|InsufficientBalance|Arrearage/i.test(code)?'billing':
+      /InvalidParameter|MissingParameter/i.test(code)?'parameters':
+      /AccessDenied|Forbidden|Permission/i.test(code)?'permission':'unknown';
+    return reply(upstream.status===429?429:502,{error:upstream.status===429?'rate_limited':'provider_error',provider_status:upstream.status,category});
+   }
    const data=await upstream.json();let parsed;
    try{parsed=JSON.parse(data.choices?.[0]?.message?.content);}catch{return reply(502,{error:'invalid_model_reply'});}
    if(!VERDICTS.has(parsed?.verdict))return reply(502,{error:'invalid_model_reply'});

@@ -1373,4 +1373,53 @@ requestAnimationFrame(tick);
  };
 })();
 
+</script><script>
+(async()=>{
+ if(location.protocol!=='https:'&&location.protocol!=='http:')return;
+ const ko=document.documentElement.lang==='ko',t=(zh,kr)=>ko?kr:zh;
+ let config;
+ try{const r=await fetch(new URL(ko?'../ai-host.json':'ai-host.json',location.href),{cache:'no-store'});if(!r.ok)return;config=await r.json();}catch{return;}
+ if(!config?.endpoint)return;
+ let endpoint;try{endpoint=new URL(config.endpoint);if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password)return;}catch{return;}
+ const status=document.createElement('p');status.className='demo-note';status.setAttribute('role','status');status.textContent=t('AI 主持人已配置 · 回答仅依据当前案件','AI 진행자 설정 완료 · 현재 사건을 바탕으로 답변해요');
+ document.querySelector('.composer').prepend(status);
+ const verdictText={yes:t('是。','예.'),no:t('否。','아니요.'),irrelevant:t('无关。','관련 없어요.'),unknown:t('现有案情不足以判断，请换一个更明确的问题。','주어진 내용만으로는 판단하기 어려워요. 질문을 조금 더 구체적으로 해 주세요.')};
+ let history=[],pending=null,revision=0;
+ function busy(value){document.querySelector('#ask-form .send').disabled=value;document.querySelectorAll('#suggestions button').forEach(b=>b.disabled=value);document.getElementById('ask-form').setAttribute('aria-busy',String(value));}
+ function labels(){
+  document.querySelectorAll('.demo-badge').forEach(e=>e.textContent=t('在线 AI','온라인 AI'));
+  document.querySelectorAll('.home-demo,.composer > .demo-note').forEach(e=>e.textContent=t('在线 AI 主持人 · 根据案情回答，不主动揭晓汤底','온라인 AI 진행자 · 사건을 바탕으로 답하며 정답을 먼저 공개하지 않아요'));
+  document.querySelector('.title-mode').textContent=t('AI 海龟汤 · 单人推理 · 在线模式','AI 바다거북 수프 · 1인 추리 · 온라인 모드');
+  const note=document.querySelector('#case-studio .studio-note');
+  if(note)note.textContent=t('案件保存在当前浏览器，不会公开发布。向 AI 提问时，当前案件的汤面、汤底和最近问答将发送到方舟模型，用于判断答案。','사건은 현재 브라우저에 저장되며 공개되지 않아요. AI에게 질문하면 답변을 판단하기 위해 현재 사건의 문제, 정답, 최근 문답이 모델로 전송돼요.');
+  if(!document.getElementById('game-screen').hidden&&asked===0){const bubble=document.querySelector('#chat .message:last-child .bubble');if(bubble)bubble.textContent=t('可以自由提问，我会依据当前案件回答「是 / 否 / 无关 / 信息不足」。','자유롭게 질문해 주세요. 현재 사건을 바탕으로 ‘예 / 아니요 / 관련 없음 / 판단 불가’로 답할게요.');}
+ }
+ window.addEventListener('case-update',()=>{revision++;pending?.abort();pending=null;history=[];busy(false);labels();});
+ window.addEventListener('hashchange',()=>{if(!/^#game\//.test(location.hash)){revision++;pending?.abort();pending=null;busy(false);}});
+ const originalSelectCase=selectCase;
+ selectCase=function(index){const result=originalSelectCase(index);labels();return result;};
+ ask=async function(q){
+  if(pending)return {error:'busy'};
+  if(document.getElementById('game-screen').hidden||typeof q!=='string'||!q.trim()||q.trim().length>300)return {error:'invalid_question'};
+  q=q.trim();const c=cases[current],version=revision;
+  addMessage(q,true);asked++;document.getElementById('count').textContent=String(asked).padStart(2,'0');window.dispatchEvent(new Event('case-progress'));
+  const bubble=addMessage(t('主持人正在思考…','진행자가 생각하고 있어요…'));
+  const controller=new AbortController();pending=controller;busy(true);
+  const timer=setTimeout(()=>controller.abort(),30000);
+  try{
+   const r=await fetch(endpoint.href,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({language:ko?'ko':'zh-CN',case:{title:c.title,body:c.body,truth:c.truth},question:q,history:history.slice(-12)}),signal:controller.signal});
+   if(!r.ok)throw new Error(r.status===429?'rate':r.status===503?'config':'network');
+   const data=await r.json();if(!Object.hasOwn(verdictText,data.verdict))throw new Error('invalid');
+   if(version!==revision)return {error:'cancelled'};
+   bubble.textContent=verdictText[data.verdict];history.push({question:q,verdict:data.verdict});
+   return {question:q,answer:bubble.textContent,questions:asked};
+  }catch(e){
+   if(version!==revision)return {error:'cancelled'};
+   bubble.textContent=e.message==='rate'?t('提问太频繁，请稍等一分钟再试。','질문이 너무 많아요. 1분 뒤 다시 시도해 주세요.'):e.message==='config'?t('AI 服务尚未配置完成，请暂时使用提示继续推理。','AI 서비스 설정이 아직 완료되지 않았어요. 우선 힌트를 이용해 주세요.'):t('AI 暂时未能回答，请稍后重试。你也可以查看提示继续推理。','지금은 AI의 답변을 받을 수 없어요. 잠시 후 다시 시도하거나 힌트를 확인해 주세요.');
+   return {error:'unavailable'};
+  }finally{clearTimeout(timer);if(pending===controller){pending=null;busy(false);}}
+ };
+ labels();
+})();
+
 </script></body></html>

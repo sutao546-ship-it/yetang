@@ -6,7 +6,7 @@
 
 1. 登录 https://dash.cloudflare.com/，进入 Workers & Pages，创建应用并导入 GitHub 仓库 sutao546-ship-it/yetang。
 2. 应用名称使用 yetang-ai-host。
-3. 根目录设为 ai-worker，构建命令留空，部署命令使用 npx --yes wrangler@4 deploy。
+3. 根目录使用仓库根目录 /，构建命令留空，部署命令使用 npx --yes wrangler@4 deploy --config wrangler.jsonc。仓库根目录现已提供明确的后端入口，避免误发布 HTML 静态资源。
 4. 发布后记录 https://yetang-ai-host.<你的子域>.workers.dev 地址。
 
 配置文件会创建 HOST_LIMITER 绑定，每个来源 IP 每分钟约 12 次请求。此限制按 Cloudflare 节点计数，不是严格的全站费用上限。接口面向公开游戏，CORS 不是用户身份认证，请同时在方舟控制台管理调用预算和额度。
@@ -46,3 +46,7 @@ ARK_MODEL 已设为 doubao-seed-2-1-lite-260915。请先在方舟账户中开通
 - https://developers.cloudflare.com/workers/configuration/secrets/
 - https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
 - https://docs.volcengine.com/docs/ark/model-list?lang=en
+
+## 如果域名打开的是游戏网页，而 /health 返回 404
+
+说明目前部署的是静态页面，后端尚未运行。到 Cloudflare 应用的构建设置，把根目录设为 /，部署命令设为 npx --yes wrangler@4 deploy --config wrangler.jsonc，然后重新部署最新提交。不要使用仅上传静态资源的命令。若使用手动上传创建的应用，可连接此 GitHub 仓库并按上述配置部署；保留现有 ARK_API_KEY Secret。

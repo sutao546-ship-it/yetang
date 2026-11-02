@@ -1,0 +1,23 @@
+{
+  "name": "yetang-ai-host",
+  "main": "ai-worker/worker.mjs",
+  "compatibility_date": "2026-11-02",
+  "workers_dev": true,
+  "vars": {
+    "ARK_MODEL": "doubao-seed-2-1-lite-260915",
+    "ALLOWED_ORIGINS": "https://sutao546-ship-it.github.io"
+  },
+  "ratelimits": [
+    {
+      "name": "HOST_LIMITER",
+      "namespace_id": "2026110201",
+      "simple": {
+        "limit": 12,
+        "period": 60
+      }
+    }
+  ],
+  "observability": {
+    "enabled": false
+  }
+}

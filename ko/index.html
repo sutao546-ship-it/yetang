@@ -382,7 +382,35 @@ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 
 -->
-</head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
+<style>
+
+/* Custom case studio */
+.case-studio-entry{display:flex;justify-content:flex-start;gap:12px;align-items:center;flex-wrap:wrap;margin:24px 0 0;padding-top:18px;border-top:1px solid #ad8c5544}
+.case-studio-entry button{min-height:46px;padding:12px 20px;border:1px solid #c6a57588;border-radius:14px;background:#302319;color:#f1dbb6}
+.case-studio-entry span{font-size:12px;color:#bdab90}
+#case-studio{width:min(900px,calc(100vw - 28px));max-width:900px;max-height:90dvh;padding:0;border:1px solid #b6956355;border-radius:22px;background:#211910;color:#ead8b8}
+#case-studio::backdrop{background:#080604cc;backdrop-filter:blur(5px)}
+#case-studio .studio-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;border-bottom:1px solid #b6956333}
+#case-studio h2{font:inherit;font-size:25px;margin:6px 0}
+#case-studio .studio-close{position:static;min-width:44px;min-height:44px;border-radius:12px}
+#case-studio .studio-body{padding:24px 28px}
+#case-studio .studio-note{font-size:13px;color:#c9b595;line-height:1.8;margin:0 0 20px}
+#case-studio .studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#case-studio label{display:grid;gap:8px;font-size:14px;min-width:0}
+#case-studio .studio-wide{grid-column:1/-1}
+#case-studio input,#case-studio textarea,#case-studio select{width:100%;min-width:0;box-sizing:border-box;font:inherit;font-size:16px;line-height:1.65;color:#f0dfc0;background:#130f0b;border:1px solid #8e704c88;border-radius:12px;padding:11px 13px}
+#case-studio textarea{resize:vertical}
+#case-studio input:focus-visible,#case-studio textarea:focus-visible,#case-studio select:focus-visible{outline:2px solid #dfbc7d;outline-offset:2px}
+#case-studio .studio-library{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;max-height:140px;overflow:auto}
+#case-studio .studio-library button{font:inherit;font-size:13px;border:1px solid #a27b4655;border-radius:10px;padding:8px 12px;overflow-wrap:anywhere}
+#case-studio .studio-library button[aria-pressed=true]{background:#68412c;border-color:#d5b078}
+#case-studio .studio-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:12px;padding-top:22px;margin-top:22px;border-top:1px solid #b6956333}
+#case-studio .studio-actions button{min-height:46px;padding:12px 20px;border-radius:12px}
+#case-studio .studio-save{background:#7c3535;border:1px solid #c69869}
+#case-studio .studio-status{color:#f2c58c;font-size:14px;line-height:1.6}
+@media(max-width:600px){#case-studio .studio-grid{grid-template-columns:1fr}#case-studio .studio-header,#case-studio .studio-body{padding:18px}#case-studio .studio-actions button{flex:1}#case-studio h2{font-size:21px}.case-studio-entry{margin-top:18px}}
+
+</style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>야탕</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">야탕 탐정 사무소 · 사건 열람실</span><div class="header-actions"><a class="quiet language-switch nav-key" href="../index.html" lang="zh-CN" aria-label="중국어 버전으로 전환">中文</a><a class="back-home quiet nav-key" href="#home" hidden>메인으로</a><button class="quiet" id="rules">게임 방법</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>야탕</h1><div class="title-subtitle">탐 정 사 무 소</div><p class="title-premise">평범해 보이는 이야기에도<br>뜻밖의 진실이 숨겨져 있습니다.</p><nav class="title-menu" aria-label="게임 메인 메뉴"><a class="enter-game" href="#cases">게임 시작</a><button id="title-rules">게임 방법</button><a id="resume-game" href="#game/0" hidden>조사 이어하기</a></nav><p class="title-mode">AI 바다거북 수프 · 1인 추리 · 데모 모드</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>밤이 깊었습니다.<br>아직 풀리지 않은 사건이 있습니다.</h1><p>기묘한 이야기 하나, 질문으로 풀어 가는 미스터리.<br>사건을 살펴보고 일상에 숨겨진 진실을 밝혀 보세요.</p><div class="home-rules"><span>이야기 읽기</span><i>—</i><span>질문하기</span><i>—</i><span>진실 밝히기</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">오늘 밤, 어떤 사건을 조사할까요?</h2></div><span class="archive-total">사건 20건 · 범죄 미스터리</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">조사 시작</button></div><p class="home-demo">데모 모드 · 미리 준비된 질문과 답변으로 진행돼요. 실시간 AI는 연결되어 있지 않아요.</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 조사실</span><span>사건을 읽고 진행자에게 질문하세요.</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 사건 목록</div><div class="section-heading"><h1>미해결 사건</h1><span>20</span></div><p class="muted intro">사건을 선택하고 조사를 시작하세요.</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>눈앞의 이야기를 그대로 믿지 마세요.<br><span class="muted">좋은 질문이 진실을 밝혀 줍니다.</span></p></div></aside>
 <section class="case-workspace"><div class="case-top"><span class="eyebrow">조사 중 / <span id="case-num">001</span></span><span class="tag" id="level">입문</span></div><article class="story"><div class="case-watermark" aria-hidden="true" id="watermark">01</div><span class="confidential-stamp" aria-hidden="true">미해결<br><small>OPEN CASE</small></span><div class="file-label">CONFIDENTIAL / 조사 기록 <span id="file-number">NO. 001</span></div><h2 id="title"></h2><div class="story-tags"><span id="genre"></span><span>·</span><span id="duration"></span><span>·</span><span>추리 사건</span></div><div class="divider"><span>사건 개요</span></div><div id="story-text"></div><p class="question" id="question"></p><div class="story-foot"><span>모순처럼 보이는 부분이 바로 단서입니다.</span><span>✳</span></div></article><div class="tools-row"><button id="hint"><span>✧</span> 힌트 보기 <small id="hint-count">0 / 3</small></button><button id="reveal" class="quiet">정답 보기</button></div><div class="hint-box" id="hint-box" hidden></div><div class="investigation"><div><span class="eyebrow">INVESTIGATION LOG</span><h3>단서를 따라 진실을 밝혀 보세요.</h3></div><div class="stats"><strong id="count">00</strong><span>질문 횟수</span></div></div><div class="rule-line"><span>01 이야기 읽기</span><i></i><span class="active">02 질문하기</span><i></i><span>03 진실 밝히기</span></div></section>
@@ -1093,10 +1121,24 @@ const cases=[
   }
 ];
 cases.push(...window.additionalCases);
+
+const customCaseKey='yetang.custom-cases.v1';
+const customKo=document.documentElement.lang==='ko';
+const customText=(zh,ko)=>customKo?ko:zh;
+function escapeCaseText(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function validCustomCase(c){return c&&typeof c.id==='string'&&c.id.length<100&&['title','story','truth'].every(k=>typeof c[k]==='string'&&c[k].trim())&&c.title.length<=60&&c.story.length<=9000&&c.truth.length<=12000&&typeof c.short==='string'&&c.short.length<=140&&['easy','hard','expert'].includes(c.level)&&Array.isArray(c.hints)&&c.hints.length===3&&c.hints.every(h=>typeof h==='string'&&h.length<=400);}
+function readCustomCases(){try{const data=JSON.parse(localStorage.getItem(customCaseKey)||'[]');return Array.isArray(data)?data.filter(validCustomCase).slice(0,100):[];}catch{return [];}}
+function customCaseToGame(c){
+ const sentences=c.story.match(/[^。！？.!?\n]+[。！？.!?]?/g)||[c.story];
+ const body=['','',''];sentences.forEach((s,i)=>{body[Math.min(2,Math.floor(i*3/sentences.length))]+=s.trim()+' ';});
+ return {customId:c.id,title:c.title,short:c.short||c.story.slice(0,90),genre:customText('自制案件','직접 만든 사건'),level:({easy:customText('入门','쉬움'),hard:customText('困难','어려움'),expert:customText('专家','매우 어려움')})[c.level],time:customText('自由推理','자유롭게 추리'),body:body.map(s=>s.trim()||customText('暂无补充记录，请结合汤面继续推理。','추가 기록은 없어요. 앞의 내용을 바탕으로 추리해 보세요.')),question:customText('根据作者留下的线索，还原故事的真相。','작성자가 남긴 단서를 바탕으로 사건의 진실을 밝혀 보세요.'),hints:c.hints.map(h=>h.trim()||customText('作者尚未提供这条提示。','작성자가 아직 이 힌트를 추가하지 않았어요.')),truth:c.truth,qs:[],answers:[]};
+}
+cases.push(...readCustomCases().map(customCaseToGame));
+
 for(const c of cases)c.answers=c.answers.map(([p,a,t])=>[new RegExp(p),a,t]);
 const $=id=>document.getElementById(id);let current=0,asked=0,hints=0,revealed=false;const dialog=$('dialog');
 function addMessage(text,user=false){const el=document.createElement('div');el.className='message'+(user?' user':'');const label=document.createElement('div');label.className='message-label';label.textContent=user?'나 · 탐정':'✳ 야탕 진행자';const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;el.append(label,bubble);$('chat').append(el);$('chat').scrollTop=$('chat').scrollHeight;return bubble}
-function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${v.level}</span></div><strong>${v.title}</strong><p>${v.short}</p><span class="category">${v.genre} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage('현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';window.dispatchEvent(new Event('case-update'));return {case: c.title}}
+function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage(c.customId?'직접 만든 사건이에요. 힌트와 정답 보기를 이용해 주세요. 자동 문답은 지원하지 않아요.':'현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';window.dispatchEvent(new Event('case-update'));return {case: c.title}}
 function ask(q){if($('game-screen').hidden)throw Error('먼저 메인 화면에서 조사를 시작하세요.');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('질문은 1~300자로 입력하세요.');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}. ${a[2]}`:'아직 이 질문에 대한 답변은 준비되어 있지 않아요. 아래 추천 질문을 선택하거나 힌트를 확인해 보세요.';addMessage(answer);window.dispatchEvent(new Event('case-progress'));return {question:q,answer,questions:asked}}
 $('ask-form').onsubmit=e=>{e.preventDefault();const q=$('input').value.trim();if(!q)return;ask(q);$('input').value='';$('input').focus()};$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('ask-form').requestSubmit()}};
 $('hint').onclick=()=>{if(hints<3)hints++;$('hint-box').hidden=false;$('hint-box').textContent=`힌트 ${hints} / 3 · ${cases[current].hints[hints-1]}`;$('hint-count').textContent=`${hints} / 3`};
@@ -1117,7 +1159,7 @@ function updateLanguageLink(){
 }
 function renderHome(){
  const existingCards=[...$('home-cases').children];
- cases.forEach((c,i)=>{const b=existingCards[i]||document.createElement('button');b.className='home-case'+(i===chosenCase?' selected':'');b.setAttribute('aria-pressed',String(i===chosenCase));b.innerHTML=`<span class="home-case-top"><span>CASE / ${String(i+1).padStart(3,'0')}</span><span>${c.level}</span></span><strong>${c.title}</strong><span class="home-case-description">${c.short}</span><span class="home-case-bottom"><span>${c.genre} · ${c.time}</span><span class="selection-mark">${i===chosenCase?'선택됨':'사건 선택'}</span></span>`;b.onclick=()=>{chosenCase=i;renderHome()};$('home-cases').append(b)});
+ cases.forEach((c,i)=>{const b=existingCards[i]||document.createElement('button');b.className='home-case'+(i===chosenCase?' selected':'');b.setAttribute('aria-pressed',String(i===chosenCase));b.innerHTML=`<span class="home-case-top"><span>CASE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(c.level)}</span></span><strong>${escapeCaseText(c.title)}</strong><span class="home-case-description">${escapeCaseText(c.short)}</span><span class="home-case-bottom"><span>${escapeCaseText(c.genre)} · ${escapeCaseText(c.time)}</span><span class="selection-mark">${i===chosenCase?'선택됨':'사건 선택'}</span></span>`;b.onclick=()=>{chosenCase=i;renderHome()};$('home-cases').append(b)});
  $('selected-case-label').textContent='선택한 사건: '+cases[chosenCase].title;
  $('start-game').innerHTML=(activeCase===chosenCase?'조사 이어하기':'조사 시작')+'';
  updateLanguageLink();
@@ -1277,6 +1319,60 @@ c.globalCompositeOperation='source-over';for(const light of s.lights)glow(light,
 c.globalCompositeOperation='screen';for(const light of s.lights)glow(light,pulse*.23);glow(s.bounce,pulse*.085);c.globalCompositeOperation='source-over';
 }}
 requestAnimationFrame(tick);
+})();
+
+</script><script>
+
+(()=>{
+ const t=customText;
+ const entry=document.createElement('div');entry.className='case-studio-entry';
+ const launch=document.createElement('button');launch.type='button';launch.textContent=t('自制案件','나만의 사건 만들기');
+ const caption=document.createElement('span');caption.textContent=t('写下你的谜题，让故事由你开始。','당신만의 미스터리를 만들어 보세요.');
+ entry.append(launch,caption);document.querySelector('.home-archive').append(entry);
+ const dialog=document.createElement('dialog');dialog.id='case-studio';dialog.setAttribute('aria-labelledby','studio-heading');
+ dialog.innerHTML='<form id="studio-form"><div class="studio-header"><div><span class="eyebrow">CASE STUDIO</span><h2 id="studio-heading"></h2></div><button type="button" class="studio-close quiet"></button></div><div class="studio-body"><p class="studio-note"></p><div class="studio-library" aria-label="'+t('我的案件','내가 만든 사건')+'"></div><div class="studio-grid"></div><p class="studio-status" role="status" aria-live="polite"></p><div class="studio-actions"><button type="button" class="studio-cancel"></button><button type="submit" class="studio-save"></button></div></div></form>';
+ document.body.append(dialog);
+ dialog.querySelector('h2').textContent=t('创作一份新案卷','나만의 사건 만들기');
+ dialog.querySelector('.studio-close').textContent=t('关闭','닫기');
+ dialog.querySelector('.studio-cancel').textContent=t('取消','취소');
+ dialog.querySelector('.studio-save').textContent=t('保存并选择案件','저장하고 사건 선택');
+ dialog.querySelector('.studio-note').textContent=t('案件仅保存在当前浏览器，不会上传或公开。清除浏览器数据会删除案件；离线文件与在线网站的存档不互通。自制案件支持提示和揭晓汤底，暂不提供自动问答。','사건은 현재 브라우저에만 저장되며 공개되지 않아요. 브라우저 데이터를 지우면 삭제돼요. 오프라인 파일과 웹사이트의 저장 내용은 서로 공유되지 않아요. 힌트와 정답 보기를 이용할 수 있지만 자동 문답은 지원하지 않아요.');
+ const form=dialog.querySelector('form'),grid=dialog.querySelector('.studio-grid'),status=dialog.querySelector('.studio-status'),library=dialog.querySelector('.studio-library'),fields={};
+ function field(name,label,type,max,required,wide,placeholder){
+  const wrap=document.createElement('label');if(wide)wrap.className='studio-wide';wrap.textContent=label;
+  const input=document.createElement(type==='textarea'?'textarea':type==='select'?'select':'input');input.id='studio-'+name;input.name=name;input.required=!!required;if(max)input.maxLength=max;if(type==='textarea')input.rows=name==='story'||name==='truth'?5:2;if(placeholder)input.placeholder=placeholder;
+  if(type==='select')for(const [value,text]of [['easy',t('入门','쉬움')],['hard',t('困难','어려움')],['expert',t('专家','매우 어려움')]]){const option=document.createElement('option');option.value=value;option.textContent=text;input.append(option);}
+  wrap.append(input);grid.append(wrap);fields[name]=input;
+ }
+ field('title',t('案件名称 *','사건 제목 *'),'input',60,true,false,t('给案件起一个名字','사건 제목을 입력하세요'));
+ field('level',t('难度','난이도'),'select',0,false,false);
+ field('short',t('一句话简介（选填）','한 줄 소개 (선택)'),'input',140,false,true,t('展示在案件转盘上，避免泄露真相','사건 목록에 표시돼요. 정답이 드러나지 않게 적어 주세요'));
+ field('story',t('汤面 · 玩家看到的故事 *','문제 · 플레이어에게 보여 줄 이야기 *'),'textarea',9000,true,true,t('描述不寻常的现象，把真相留在汤底。','수상한 상황을 설명해 주세요. 숨겨진 진실은 아래 해설에 적어 주세요.'));
+ field('truth',t('汤底 · 完整真相 *','정답 · 사건의 진실 *'),'textarea',12000,true,true,t('解释人物行为、关键线索与事情的完整经过。','등장인물의 행동과 단서가 어떻게 이어지는지 설명해 주세요.'));
+ for(let i=0;i<3;i++)field('hint'+i,t('提示 '+(i+1)+'（选填）','힌트 '+(i+1)+' (선택)'),'textarea',400,false,true,t('由浅入深，帮助玩家逐步接近答案。','정답에 조금씩 다가갈 수 있도록 힌트를 적어 주세요.'));
+ let editing=null,dirty=false;
+ form.addEventListener('input',()=>{dirty=true;status.textContent='';});
+ const discard=()=>!dirty||confirm(t('放弃尚未保存的修改？','저장하지 않은 내용을 버릴까요?'));
+ function fill(raw){editing=raw?.id||null;for(const key of ['title','short','story','truth'])fields[key].value=raw?.[key]||'';fields.level.value=raw?.level||'hard';for(let i=0;i<3;i++)fields['hint'+i].value=raw?.hints[i]||'';dirty=false;status.textContent='';dialog.querySelector('h2').textContent=raw?t('编辑自制案件','내 사건 수정'):t('创作一份新案卷','나만의 사건 만들기');renderLibrary();}
+ function renderLibrary(){library.replaceChildren();const fresh=document.createElement('button');fresh.type='button';fresh.textContent=t('新建案件','새 사건');fresh.setAttribute('aria-pressed',String(!editing));fresh.onclick=()=>{if(discard())fill(null);};library.append(fresh);for(const c of readCustomCases()){const b=document.createElement('button');b.type='button';b.textContent=c.title;b.setAttribute('aria-pressed',String(c.id===editing));b.onclick=()=>{if(discard())fill(c);};library.append(b);}}
+ const close=()=>{if(discard())dialog.close();};
+ dialog.querySelector('.studio-close').onclick=close;dialog.querySelector('.studio-cancel').onclick=close;
+ dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
+ launch.onclick=()=>{fill(null);dialog.showModal();fields.title.focus();};
+ function updateTotals(){document.querySelector('.archive-total').textContent=t(cases.length+' 份案卷 · 自制 '+cases.filter(c=>c.customId).length+' 份','사건 '+cases.length+'건 · 직접 만든 사건 '+cases.filter(c=>c.customId).length+'건');document.querySelector('.library .section-heading span').textContent=String(cases.length);}
+ if(cases.some(c=>c.customId))updateTotals();
+ form.onsubmit=e=>{
+  e.preventDefault();if(!form.reportValidity())return;
+  const raw={id:editing||('custom-'+Date.now()+'-'+Math.random().toString(36).slice(2)),title:fields.title.value.trim(),short:fields.short.value.trim(),level:fields.level.value,story:fields.story.value.trim(),truth:fields.truth.value.trim(),hints:[0,1,2].map(i=>fields['hint'+i].value.trim())};
+  if(!validCustomCase(raw)){status.textContent=t('请填写案件名称、汤面和汤底，内容不能只有空格。','제목, 문제, 정답을 모두 입력해 주세요. 공백만 입력할 수는 없어요.');return;}
+  const saved=readCustomCases(),pos=saved.findIndex(c=>c.id===raw.id);
+  if(pos<0&&saved.length>=100){status.textContent=t('最多保存 100 个自制案件，请编辑已有案件。','사건은 최대 100개까지 저장할 수 있어요. 기존 사건을 수정해 주세요.');return;}
+  if(pos<0)saved.push(raw);else saved[pos]=raw;
+  try{localStorage.setItem(customCaseKey,JSON.stringify(saved));}catch{status.textContent=t('保存失败：浏览器无法存储数据。请检查隐私设置或剩余存储空间；填写内容已保留。','저장하지 못했어요. 브라우저의 개인정보 설정이나 저장 공간을 확인해 주세요. 입력한 내용은 그대로 남아 있어요.');return;}
+  const game=customCaseToGame(raw),index=cases.findIndex(c=>c.customId===raw.id);
+  if(index<0){cases.push(game);chosenCase=cases.length-1;}else{cases[index]=game;chosenCase=index;if(activeCase===index)activeCase=null;}
+  dirty=false;updateTotals();renderHome();dialog.close();
+ };
 })();
 
 </script></body></html>

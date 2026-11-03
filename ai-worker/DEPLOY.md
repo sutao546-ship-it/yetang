@@ -30,7 +30,7 @@ ARK_MODEL 已设为 doubao-seed-2-1-pro-260915。请先在方舟账户中开通�
 {"endpoint":"https://yetang-ai-host.<你的子域>.workers.dev/api/host"}
 
 更新 GitHub Pages 后，用新建会话打开游戏并提问。真实调用成功后才能确认整个接入完成。
-目前 endpoint 留空，在线游戏仍使用预设问答。离线 HTML 始终保留预设问答。
+目前 endpoint 已连接 https://yetang-ai-host.sutao546.workers.dev/api/host，在线游戏使用 AI 主持人。离线 HTML 始终保留预设问答。
 
 ## 行为与限制
 

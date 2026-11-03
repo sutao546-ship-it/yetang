@@ -40,6 +40,6 @@ ZIP 파일을 먼저 모두 압축 해제한 후 `ko/index.html`을 여세요. �
 
 ## 在线 AI 主持人（待部署）
 
-Cloudflare Workers 后端及中韩文网页接入代码已准备，模型为 doubao-seed-2-1-lite-260915。当前 ai-host.json 的 endpoint 为空，游戏继续使用预设问答；只有部署后端、设置服务端 ARK_API_KEY 并填写公开接口地址后，才启用在线 AI。
+Cloudflare Workers 后端及中韩文网页接入代码已准备，模型为 doubao-seed-2-1-pro-260915。当前 ai-host.json 的 endpoint 为空，游戏继续使用预设问答；只有部署后端、设置服务端 ARK_API_KEY 并填写公开接口地址后，才启用在线 AI。
 
 部署步骤见 [ai-worker/DEPLOY.md](ai-worker/DEPLOY.md)。不把密钥放进 HTML 或 GitHub。离线 HTML 保持原来的预设问答功能。

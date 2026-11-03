@@ -1,6 +1,6 @@
 # 夜汤 AI 主持人：Cloudflare 部署
 
-模型已配置为 doubao-seed-2-1-lite-260915，使用常规方舟 API（按量计费），不使用 Coding/Agent Plan 套餐接口。
+模型已配置为 doubao-seed-2-1-pro-260915，使用常规方舟 API（按量计费），不使用 Coding/Agent Plan 套餐接口。
 
 ## 1. 部署后端
 
@@ -20,7 +20,7 @@
 
 保存并部署。不要把密钥放进 GitHub、网页、聊天或 wrangler.jsonc。
 
-ARK_MODEL 已设为 doubao-seed-2-1-lite-260915。请先在方舟账户中开通该模型。
+ARK_MODEL 已设为 doubao-seed-2-1-pro-260915。请先在方舟账户中开通该模型。
 打开 Worker 地址后的 /health，configured 为 true 只表示密钥和限流绑定已配置，不代表已经验证模型权限。
 
 ## 3. 连接游戏

@@ -28,7 +28,7 @@ export default {
   if(allowed.includes(origin))headers['Access-Control-Allow-Origin']=origin;
   const reply=(status,data)=>new Response(JSON.stringify(data),{status,headers});
   const pathname=new URL(request.url).pathname;
-  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER),revision:'diagnostics-2',checks:{api_key:!!env.ARK_API_KEY,rate_limiter:!!env.HOST_LIMITER}});
+  if(pathname==='/health'&&request.method==='GET')return reply(200,{configured:!!(env.ARK_API_KEY&&env.HOST_LIMITER),revision:'model-pro-1',checks:{api_key:!!env.ARK_API_KEY,rate_limiter:!!env.HOST_LIMITER}});
   if(pathname!=='/api/host')return reply(404,{error:'not_found'});
   if(!allowed.includes(origin))return reply(403,{error:'origin_denied'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});
@@ -42,7 +42,7 @@ export default {
   try{
    const upstream=await fetch('https://ark.cn-beijing.volces.com/api/v3/chat/completions',{
     method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+env.ARK_API_KEY},
-    body:JSON.stringify({model:env.ARK_MODEL||'doubao-seed-2-1-lite-260915',messages:buildMessages(input),thinking:{type:'disabled'},temperature:0,max_tokens:80,response_format:{type:'json_object'}}),
+    body:JSON.stringify({model:env.ARK_MODEL||'doubao-seed-2-1-pro-260915',messages:buildMessages(input),thinking:{type:'disabled'},temperature:0,max_tokens:80,response_format:{type:'json_object'}}),
     signal:AbortSignal.timeout(25000)
    });
    if(!upstream.ok){

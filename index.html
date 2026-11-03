@@ -1470,7 +1470,7 @@ requestAnimationFrame(tick);
   const theory=note.value.trim();if(!theory){feedback.textContent=t('先写下你的推理，再提交核对。','먼저 추리 내용을 적어 주세요.');note.focus();return;}
   if(theory.length>2000){feedback.textContent=t('推理请控制在 2000 字以内。','추리는 2,000자 이내로 적어 주세요.');return;}
   const index=current,c=cases[index],version=revision,controller=new AbortController();pending=controller;busy(true);feedback.textContent=t('正在对照案卷真相核对你的解释…','사건의 진실과 추리 내용을 비교하고 있어요…');
-  const timeout=setTimeout(()=>controller.abort(),30000);
+  const timeout=setTimeout(()=>controller.abort(),65000);
   try{
    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'reconstruct',language:ko?'ko':'zh-CN',case:{title:c.title,body:c.body,truth:c.truth},theory}),signal:controller.signal});
    if(!r.ok)throw new Error(r.status===429?'rate':'network');

@@ -51,7 +51,7 @@ export default {
    const upstream=await fetch('https://ark.cn-beijing.volces.com/api/v3/chat/completions',{
     method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+env.ARK_API_KEY},
     body:JSON.stringify({model:env.ARK_MODEL||'doubao-seed-2-1-pro-260915',messages:buildMessages(input),thinking:{type:'disabled'},temperature:0,max_tokens:80,response_format:{type:'json_object'}}),
-    signal:AbortSignal.timeout(25000)
+    signal:AbortSignal.timeout(input.mode==='reconstruct'?55000:25000)
    });
    if(!upstream.ok){
     let code='';try{const detail=await upstream.json();code=typeof detail.error?.code==='string'?detail.error.code:'';}catch{}

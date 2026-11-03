@@ -408,6 +408,24 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </style><style>
 #case-studio .studio-close,#case-studio .studio-cancel{color:#f1dbb6;background:#302319;border:1px solid #c6a57588}
 #case-studio .studio-close:hover,#case-studio .studio-close:focus-visible,#case-studio .studio-cancel:hover,#case-studio .studio-cancel:focus-visible{color:#fff0d4;background:#4b3525;border-color:#dfbc7d}
+</style><style id="reconstruction-ui">
+.submit-theory{display:block;width:100%;margin-top:14px;padding:12px 16px;min-height:46px;background:#c6a373;color:#2b2016;border:1px solid #e1c398;border-radius:10px;font:inherit;font-size:14px}
+.submit-theory:hover{background:#dfbd8b;color:#24190f}.submit-theory:disabled{opacity:.55;cursor:wait}
+.theory-feedback{font-size:13px;line-height:1.8;color:#d8c19a;margin:12px 0 0;overflow-wrap:anywhere}.theory-feedback:empty{display:none}
+.notebook textarea[readonly]{opacity:.8}
+.case-solved-dialog{width:min(460px,calc(100% - 36px));padding:42px 28px 28px;border:1px solid #c9a76c;border-radius:5px;text-align:center;color:#ead8b5;background:radial-gradient(ellipse at top,#58412b,#211a13 72%);box-shadow:0 24px 100px #0009;overflow:auto}
+.case-solved-dialog::backdrop{background:#0d0a08cc;backdrop-filter:blur(5px)}
+.case-solved-dialog[open]{animation:solved-open .35s ease-out both}
+.case-solved-dialog .case-solved-seal{display:inline-block;padding:14px 22px;border:5px double #c99a68;color:#e3b07b;font-size:30px;letter-spacing:5px;transform:rotate(-9deg);margin:12px auto 24px}
+.case-solved-dialog[open] .case-solved-seal{animation:solved-stamp .65s .15s cubic-bezier(.2,.7,.3,1) both}
+.case-solved-dialog h2{font-size:25px;font-weight:500;padding:0;margin:10px 0 16px}
+.case-solved-dialog p{font-size:14px;line-height:1.8;color:#c7b392;overflow-wrap:anywhere}
+.case-solved-dialog .case-solved-title{color:#ead8b5;font-size:18px}
+.case-solved-dialog button{padding:12px 24px;min-height:44px;margin-top:14px;background:#c6a373;border:1px solid #dec197;color:#302218}
+@keyframes solved-open{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes solved-stamp{from{opacity:0;transform:scale(1.7) rotate(-16deg)}70%{opacity:1;transform:scale(.95) rotate(-9deg)}to{opacity:1;transform:scale(1) rotate(-9deg)}}
+@media(prefers-reduced-motion:reduce){.case-solved-dialog[open],.case-solved-dialog[open] .case-solved-seal{animation:none}}
+
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>夜汤</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">夜汤侦探事务所 · 案卷阅览室</span><div class="header-actions"><a class="quiet language-switch nav-key" href="ko/index.html" lang="ko" aria-label="切换到韩文版">한국어</a><a class="back-home quiet nav-key" href="#home" hidden>返回主界面</a><button class="quiet" id="rules">怎么玩</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>夜汤</h1><div class="title-subtitle">侦 探 事 务 所</div><p class="title-premise">每一个看似平常的故事，<br>都藏着一个意想不到的真相。</p><nav class="title-menu" aria-label="游戏主菜单"><a class="enter-game" href="#cases">开始游戏</a><button id="title-rules">游戏说明</button><a id="resume-game" href="#game/0" hidden>继续调查</a></nav><p class="title-mode">AI 海龟汤 · 单人推理 · 演示模式</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>夜深了。<br>还有一桩悬案。</h1><p>一段不寻常的故事，一场只凭提问的调查。<br>翻开案卷，找出藏在日常背后的真相。</p><div class="home-rules"><span>阅读汤面</span><i>—</i><span>提问推理</span><i>—</i><span>还原真相</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">今晚，调查哪一桩？</h2></div><span class="archive-total">20 份案卷 · 悬疑故事</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">开始调查</button></div><p class="home-demo">演示模式 · 预设问答，尚未接入实时 AI</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 调查室</span><span>阅读案卷后，向主持人提问。</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 档案索引</div><div class="section-heading"><h1>待解密案卷</h1><span>20</span></div><p class="muted intro">选择一份案卷，开始调查。</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>别急着相信眼前的故事。<br><span class="muted">好的问题，比答案更重要。</span></p></div></aside>
@@ -1420,6 +1438,56 @@ requestAnimationFrame(tick);
   }finally{clearTimeout(timer);if(pending===controller){pending=null;busy(false);}}
  };
  labels();
+})();
+
+</script><script>
+/* Submit a complete reconstruction; only a validated AI result closes the case. */
+(()=>{
+ const ko=document.documentElement.lang==='ko',t=(zh,kr)=>ko?kr:zh;
+ const note=document.getElementById('deduction-note'),notebook=note.closest('.notebook');
+ const submit=document.createElement('button');submit.type='button';submit.className='submit-theory';submit.textContent=t('提交推理 · 还原事件','추리 제출 · 사건 재구성');
+ const feedback=document.createElement('p');feedback.className='theory-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');
+ notebook.append(submit,feedback);
+ const description=notebook.querySelector('small');description.textContent=t('写出关键真相与事件经过，再提交给 AI 核对。手记在本页内保留。','핵심 진실과 사건의 경위를 적고 AI에게 확인받으세요. 메모는 현재 페이지에서 유지돼요.');
+ note.placeholder=t('你认为发生了什么？请说明关键人物、原因，以及反常现象背后的真相…','무슨 일이 있었을까요? 핵심 인물과 원인, 이상한 상황에 숨겨진 진실을 설명해 주세요…');
+ const overlay=document.createElement('dialog');overlay.className='case-solved-dialog';overlay.setAttribute('aria-labelledby','case-solved-heading');
+ const seal=document.createElement('div');seal.className='case-solved-seal';seal.setAttribute('aria-hidden','true');seal.textContent=t('已破案','해결');
+ const heading=document.createElement('h2');heading.id='case-solved-heading';heading.textContent=t('成功还原事件','사건의 진실을 밝혔어요');
+ const title=document.createElement('p');title.className='case-solved-title';
+ const message=document.createElement('p');message.textContent=t('线索已串联，真相已归档。即将返回案件选择…','단서가 하나로 이어졌어요. 곧 사건 선택 화면으로 돌아갑니다…');
+ const back=document.createElement('button');back.type='button';back.textContent=t('返回案件选择','사건 선택으로');overlay.append(seal,heading,title,message,back);document.body.append(overlay);
+ let endpoint='',pending=null,revision=0,returnTimer=0;const solved=new Set(),responses=new Map();
+ function busy(value){submit.disabled=value||!endpoint;note.readOnly=value;notebook.setAttribute('aria-busy',String(value));submit.textContent=value?t('正在核对推理…','추리를 확인하고 있어요…'):t('提交推理 · 还原事件','추리 제출 · 사건 재구성');}
+ function reset(){revision++;pending?.abort();pending=null;clearTimeout(returnTimer);if(overlay.open)overlay.close();busy(false);feedback.textContent=responses.get(current)||'';}
+ function returnToCases(){clearTimeout(returnTimer);if(overlay.open)overlay.close();if(!document.getElementById('game-screen').hidden){location.hash='cases';}}
+ back.addEventListener('click',returnToCases);overlay.addEventListener('cancel',e=>{e.preventDefault();returnToCases();});
+ window.addEventListener('case-update',reset);
+ window.addEventListener('hashchange',()=>{if(document.getElementById('game-screen').hidden)reset();});
+ window.addEventListener('pagehide',reset);
+ note.addEventListener('input',()=>{if(!pending&&!solved.has(current)){responses.delete(current);feedback.textContent='';}});
+ submit.addEventListener('click',async()=>{
+  if(pending||!endpoint||document.getElementById('game-screen').hidden)return;
+  const theory=note.value.trim();if(!theory){feedback.textContent=t('先写下你的推理，再提交核对。','먼저 추리 내용을 적어 주세요.');note.focus();return;}
+  if(theory.length>2000){feedback.textContent=t('推理请控制在 2000 字以内。','추리는 2,000자 이내로 적어 주세요.');return;}
+  const index=current,c=cases[index],version=revision,controller=new AbortController();pending=controller;busy(true);feedback.textContent=t('正在对照案卷真相核对你的解释…','사건의 진실과 추리 내용을 비교하고 있어요…');
+  const timeout=setTimeout(()=>controller.abort(),30000);
+  try{
+   const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'reconstruct',language:ko?'ko':'zh-CN',case:{title:c.title,body:c.body,truth:c.truth},theory}),signal:controller.signal});
+   if(!r.ok)throw new Error(r.status===429?'rate':'network');
+   const data=await r.json();if(!['solved','partial','incorrect'].includes(data.result))throw new Error('invalid');
+   if(version!==revision||current!==index||document.getElementById('game-screen').hidden)return;
+   const text=data.result==='solved'?t('事件已成功还原。','사건의 진실을 밝혔어요.'):data.result==='partial'?t('已经接近真相，但关键原因或事件经过还不完整。补充后再试试。','진실에 가까워졌지만 핵심 원인이나 사건의 경위가 아직 부족해요. 내용을 보완해 주세요.'):t('这份解释还未还原事件。请重新检查关键线索与因果关系，再提交。','아직 사건의 진실과 맞지 않아요. 핵심 단서와 인과관계를 다시 확인해 주세요.');
+   feedback.textContent=text;responses.set(index,text);
+   if(data.result==='solved'){
+    solved.add(index);title.textContent=c.title;overlay.showModal();back.focus();
+    returnTimer=setTimeout(()=>{if(version===revision&&current===index)returnToCases();},3200);
+   }
+  }catch(e){if(version===revision){feedback.textContent=e.message==='rate'?t('提交过于频繁，请一分钟后重试。手记已保留。','요청이 너무 많아요. 1분 뒤 다시 시도해 주세요. 메모는 그대로 남아 있어요.'):t('暂时无法核对，请稍后重试。你的手记不会被清空。','지금은 확인할 수 없어요. 잠시 후 다시 시도해 주세요. 메모는 지워지지 않아요.');}}
+  finally{clearTimeout(timeout);if(pending===controller){pending=null;busy(false);}}
+ });
+ busy(false);
+ if(!['https:','http:'].includes(location.protocol)){feedback.textContent=t('在线打开游戏后可提交推理；离线仍可记录手记。','온라인에서 추리를 제출할 수 있어요. 오프라인에서도 메모는 작성할 수 있어요.');return;}
+ (async()=>{try{const r=await fetch(new URL(ko?'../ai-host.json':'ai-host.json',location.href),{cache:'no-store'});if(!r.ok)throw Error();const config=await r.json();const url=new URL(config.endpoint);if(url.protocol!=='https:'||url.username||url.password)throw Error();endpoint=url.href;busy(false);}catch{feedback.textContent=t('推理核对暂不可用，可先记录手记，稍后刷新重试。','추리 확인을 이용할 수 없어요. 메모를 작성한 뒤 잠시 후 새로고침해 주세요.');}})();
 })();
 
 </script></body></html>

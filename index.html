@@ -408,6 +408,48 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </style><style>
 #case-studio .studio-close,#case-studio .studio-cancel{color:#f1dbb6;background:#302319;border:1px solid #c6a57588}
 #case-studio .studio-close:hover,#case-studio .studio-close:focus-visible,#case-studio .studio-cancel:hover,#case-studio .studio-cancel:focus-visible{color:#fff0d4;background:#4b3525;border-color:#dfbc7d}
+</style><style id="aged-case-ui">
+/* Investigation folios: warm paper, ink, worn edges and restrained rules. */
+body:not(.home-view){--text:#392a1e;--muted:#715b42;--line:#ad936c;--accent:#773f30;--paper:#ead9b7;--ink:#392a1e;color:#392a1e}
+#game-screen{--folio:radial-gradient(ellipse at 0 0,#aa783c26,transparent 45%),radial-gradient(ellipse at 100% 100%,#a5753829,transparent 55%),linear-gradient(94deg,#d4bb90,#efe1c3 5%,#e9d7b4 95%,#cbb087);color:#392a1e}
+#game-screen :is(.scene-desk,.story,.evidence-board,.host-drawer){background:var(--folio);border:1px solid #b59a70;border-radius:2px;box-shadow:2px 3px 0 #c6ad82,3px 4px 0 #6b5136,0 12px 28px #0004;color:#392a1e}
+#game-screen .scene-desk{min-height:0}
+#game-screen .scene-caption{text-shadow:none}
+#game-screen :is(.scene-caption strong,.board-heading h2,.chat-heading h2,.notebook label,.story h2){color:#392a1e}
+#game-screen :is(.eyebrow,.scene-caption>span,.scene-caption p,.scene-counter,.evidence-total,.notebook small,.muted,.suggest-label,.demo-note,.message-label,.date,.input-bottom>span,.story-tags){color:#715b42;text-shadow:none}
+#game-screen .detective-hud{border-bottom:1px solid #b89a6d;margin-bottom:24px}
+#game-screen .detective-hud :is(h2,.eyebrow){color:#efddba}
+#game-screen .mission-status{background:#e4d0aa;color:#513b28;border:1px solid #b59a70;border-radius:2px}
+#game-screen :is(.record-card,.evidence-pin,.bubble,.hint-box){background:linear-gradient(105deg,#d8c29b,#f1e4c9 14%,#e6d2ad);border:1px solid #bba17b;border-radius:1px;color:#392a1e;box-shadow:1px 3px 7px #51391e24}
+#game-screen .record-card{transform:none;line-height:1.75}
+#game-screen .record-card:hover{background:#f5e8ca;border-color:#795532}
+#game-screen .record-card.collected{outline-color:#8c593c}
+#game-screen :is(.evidence-empty,.notebook textarea,#input){color:#392a1e;background:#f2e6cb;border:1px solid #b69a70;border-radius:1px}
+#game-screen .evidence-empty{background:#decca944}
+#game-screen textarea::placeholder{color:#806a50;opacity:1}
+#game-screen .notebook textarea{background:repeating-linear-gradient(transparent 0 26px,#a68a5e30 26px 27px),#f2e6cb;line-height:27px}
+#game-screen :is(.host-drawer summary,.chat-heading,.composer,.chat-panel){background:#e8d6b3;color:#392a1e;border-color:#b69a70;border-radius:0;box-shadow:none}
+#game-screen .chat-scroll{background:#f0e2c5}
+#game-screen .host-drawer summary{border-bottom:1px solid #b69a70}
+#game-screen .host-drawer summary:hover{background:#f1e3c6}
+#game-screen :is(button,.tag,.demo-badge,.answer-types span,.host-symbol){color:#503524;background:#e7d4af;border:1px solid #a9875b;border-radius:2px;box-shadow:none}
+#game-screen button:hover{color:#322217;background:#f5e8cb;border-color:#795532}
+#game-screen button:disabled{opacity:.55;cursor:wait}
+#game-screen :is(.send,.record-card.collected small){color:#713c2c}
+#game-screen :is(button,textarea,summary):focus-visible{outline:2px solid #83472f;outline-offset:3px}
+#game-screen .user .bubble{background:#ddc49b;color:#392a1e}
+#game-screen .story-foot{background:#d6bd9366;color:#715b42;border-color:#ac9068}
+#game-screen :is(.notebook,.chat-heading,.divider){border-color:#b69a70}
+body:not(.home-view) header,body:not(.home-view) footer{color:#e9d9b9;--muted:#c7b392;--text:#efddba}
+body:not(.home-view) #dialog{background:linear-gradient(100deg,#dcc49d,#f0e2c4 12%,#e7d2ad);color:#392a1e;border:1px solid #af8f61;border-radius:2px;box-shadow:0 22px 90px #0008}
+body:not(.home-view) #dialog :is(button,.eyebrow){color:#68482f;border-color:#a9875b}
+body:not(.home-view) #dialog button:hover{background:#d5bc92}
+#game-screen .type-controls{display:flex;justify-content:flex-end;margin-top:12px}
+#game-screen .type-skip{font-size:12px;min-height:36px;padding:6px 12px}
+#game-screen .type-controls[hidden]{display:none}
+.type-glyph{visibility:hidden}.type-glyph.typed{visibility:visible}
+@media(max-width:760px){#game-screen .detective-hud{margin-bottom:18px}#game-screen .type-skip{min-height:44px}}
+
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>夜汤</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">夜汤侦探事务所 · 案卷阅览室</span><div class="header-actions"><a class="quiet language-switch nav-key" href="ko/index.html" lang="ko" aria-label="切换到韩文版">한국어</a><a class="back-home quiet nav-key" href="#home" hidden>返回主界面</a><button class="quiet" id="rules">怎么玩</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>夜汤</h1><div class="title-subtitle">侦 探 事 务 所</div><p class="title-premise">每一个看似平常的故事，<br>都藏着一个意想不到的真相。</p><nav class="title-menu" aria-label="游戏主菜单"><a class="enter-game" href="#cases">开始游戏</a><button id="title-rules">游戏说明</button><a id="resume-game" href="#game/0" hidden>继续调查</a></nav><p class="title-mode">AI 海龟汤 · 单人推理 · 演示模式</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>夜深了。<br>还有一桩悬案。</h1><p>一段不寻常的故事，一场只凭提问的调查。<br>翻开案卷，找出藏在日常背后的真相。</p><div class="home-rules"><span>阅读汤面</span><i>—</i><span>提问推理</span><i>—</i><span>还原真相</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">今晚，调查哪一桩？</h2></div><span class="archive-total">20 份案卷 · 悬疑故事</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">开始调查</button></div><p class="home-demo">演示模式 · 预设问答，尚未接入实时 AI</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 调查室</span><span>阅读案卷后，向主持人提问。</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 档案索引</div><div class="section-heading"><h1>待解密案卷</h1><span>20</span></div><p class="muted intro">选择一份案卷，开始调查。</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>别急着相信眼前的故事。<br><span class="muted">好的问题，比答案更重要。</span></p></div></aside>
@@ -1420,6 +1462,40 @@ requestAnimationFrame(tick);
   }finally{clearTimeout(timer);if(pending===controller){pending=null;busy(false);}}
  };
  labels();
+})();
+
+</script><script>
+/* Reveal full graphemes without changing line wrapping or screen-reader text. */
+(()=>{
+ const game=document.getElementById('game-screen'),story=document.querySelector('#game-screen .story');
+ const ko=document.documentElement.lang.startsWith('ko');
+ const motion=matchMedia('(prefers-reduced-motion: reduce)');
+ const controls=document.createElement('div');controls.className='type-controls';controls.hidden=true;
+ const skip=document.createElement('button');skip.type='button';skip.className='type-skip';skip.textContent=ko?'전체 내용 보기':'立即显示全文';controls.append(skip);story.append(controls);
+ let frame=0,queue=[],originals=[],started=0,shown=0,pending=0;
+ function finish(){cancelAnimationFrame(frame);frame=0;for(const [node,text,visual] of originals){if(node.firstChild===visual){node.textContent=text;}node.removeAttribute('aria-label');}originals=[];queue=[];controls.hidden=true;}
+ function begin(){
+  finish();if(game.hidden||motion.matches)return;
+  const segmenter=typeof Intl.Segmenter==='function'?new Intl.Segmenter(ko?'ko':'zh',{granularity:'grapheme'}):null;
+  for(const node of document.querySelectorAll('#title,#story-text p,#question')){
+   const text=node.textContent;node.setAttribute('aria-label',text);
+   const visual=document.createElement('span');visual.setAttribute('aria-hidden','true');
+   const parts=segmenter?Array.from(segmenter.segment(text),s=>s.segment):Array.from(text);
+   for(const part of parts){const span=document.createElement('span');span.className='type-glyph';span.textContent=part;visual.append(span);queue.push(span);}
+   node.replaceChildren(visual);originals.push([node,text,visual]);
+  }
+  if(!queue.length){finish();return;}controls.hidden=false;shown=0;started=0;
+  const step=Math.min(24,7000/queue.length);
+  function tick(now){if(game.hidden){finish();return;}if(!started)started=now;const target=Math.min(queue.length,1+Math.floor((now-started)/step));while(shown<target)queue[shown++].classList.add('typed');if(shown===queue.length){finish();return;}frame=requestAnimationFrame(tick);}
+  frame=requestAnimationFrame(tick);
+ }
+ function schedule(){cancelAnimationFrame(pending);finish();pending=requestAnimationFrame(()=>{pending=0;begin();});}
+ skip.addEventListener('click',()=>{finish();document.getElementById('title').focus({preventScroll:true});});
+ window.addEventListener('case-update',schedule);
+ window.addEventListener('hashchange',schedule);
+ window.addEventListener('pagehide',()=>{cancelAnimationFrame(pending);finish();});
+ motion.addEventListener('change',()=>{if(motion.matches)finish();});
+ schedule();
 })();
 
 </script></body></html>

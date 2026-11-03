@@ -455,6 +455,63 @@ body:not(.home-view) #dialog button:hover{background:#d5bc92}
 .type-glyph{visibility:hidden}.type-glyph.typed{visibility:visible}
 @media(max-width:760px){#game-screen .detective-hud{margin-bottom:18px}#game-screen .type-skip{min-height:44px}}
 
+</style><style id="detective-desk-ui">
+/* A working detective's desk: loose folios, collected slips and a cork board. */
+#game-screen{padding:28px 42px 70px;max-width:1480px}
+#game-screen>main{grid-template-columns:minmax(0,1.2fr) minmax(340px,1fr);gap:52px;align-items:start}
+#game-screen .detective-hud{border:0;margin-bottom:28px;align-items:flex-start}
+#game-screen .mission-status{transform:rotate(2deg);box-shadow:2px 5px 12px #0005;padding:12px 20px;border:0;border-left:3px solid #874534}
+#game-screen .case-workspace{display:flex;flex-direction:column;position:relative;padding:0 8px}
+#game-screen .case-workspace .story{order:-2;overflow:visible;margin:12px 10px 26px 0;padding:34px 32px 22px;transform:rotate(-.8deg);border:0;border-top:1px solid #f6e8ce;box-shadow:5px 7px 0 -2px #d5bf98,9px 11px 0 -3px #bda17b,0 16px 28px #0006}
+#game-screen .story:before{content:'';position:absolute;width:64px;height:21px;top:-10px;left:42%;background:#d3b882b0;border-inline:1px dashed #f5e0ae66;transform:rotate(-8deg);box-shadow:0 1px 2px #503b2222;pointer-events:none}
+#game-screen .story:after{content:'';position:absolute;right:24px;top:-13px;width:14px;height:46px;border:2px solid #877d69;border-radius:9px;box-shadow:inset 2px 0 #fff8,2px 2px 2px #0003;transform:rotate(13deg);pointer-events:none}
+#game-screen .story .file-label{border-bottom:1px solid #96784b55;padding-bottom:10px;font-size:10px;letter-spacing:2px}
+#game-screen .story h2{font-size:clamp(26px,2.5vw,36px);line-height:1.45;margin-top:24px}
+#game-screen .story #story-text{font-size:16px;line-height:2.1}
+#game-screen .story #question{border-left:3px solid #884836;padding-left:14px;color:#703b2b}
+#game-screen .story-foot{background:none;border-top:1px dashed #977b54;margin:24px 0 0;padding:14px 0 0;font-size:12px}
+#game-screen .tools-row{order:-1;justify-content:flex-start;margin:0 0 34px;gap:16px}
+#game-screen .tools-row button{transform:rotate(-1deg);border:0;border-bottom:2px solid #a98c60;background:#dfc69b;box-shadow:2px 4px 7px #0003;padding:11px 20px}
+#game-screen .tools-row button:nth-child(2){transform:rotate(2deg);background:#cbb08a}
+#game-screen .scene-desk{overflow:visible;background:none;border:0;box-shadow:none;padding:16px 0;min-height:0}
+#game-screen .scene-caption>span{color:#d3b58b;letter-spacing:2px}
+#game-screen .scene-caption strong{color:#e8d3ad;font-size:20px;margin-top:10px}
+#game-screen .scene-caption p,#game-screen .scene-counter{color:#cbb18e}
+#game-screen .scene-records{gap:12px;margin:30px 3px 24px;align-items:start}
+#game-screen .record-card{position:relative;padding:26px 15px 17px;transform:rotate(-4deg);border:0;border-top:9px solid #f0e1c1;box-shadow:3px 8px 14px #0005;transition:transform .2s,box-shadow .2s}
+#game-screen .record-card:nth-child(2){transform:translateY(15px) rotate(3deg);background:#d4c8a6}
+#game-screen .record-card:nth-child(3){transform:translateY(-6px) rotate(-2deg);background:#e1ceae}
+#game-screen .record-card:before{content:'';position:absolute;top:-18px;left:35%;width:45px;height:20px;background:#c5a779b3;transform:rotate(8deg);pointer-events:none}
+#game-screen .record-card:hover,#game-screen .record-card:focus-visible{transform:translateY(-7px) rotate(0);box-shadow:4px 14px 20px #0006;z-index:2}
+#game-screen .record-card.collected{outline:1px dashed #b17857;outline-offset:5px}
+#game-screen .record-number{font-size:30px;color:#8b4c38;font-style:italic}
+#game-screen .investigation-rail{gap:38px;padding-top:38px}
+#game-screen .evidence-board{position:relative;padding:24px 22px 26px;background:radial-gradient(#3f2e2055 .7px,transparent 1px) 0 0/4px 5px,radial-gradient(#dcc38b40 .8px,transparent 1.4px) 2px 1px/7px 6px,#806346;border:9px solid #493326;border-radius:1px;box-shadow:inset 0 2px 12px #24170b88,2px 3px 0 #9c7750,0 16px 30px #0006;transform:rotate(.6deg)}
+#game-screen .board-heading{align-items:flex-start;gap:16px;position:relative;z-index:1}
+#game-screen .board-heading>div{background:#e7d4ae;padding:12px 16px;transform:rotate(-3deg);box-shadow:2px 3px 6px #0003}
+#game-screen .board-heading h2{font-size:22px;margin:7px 0 0}
+#game-screen .evidence-total{color:#f0ddba;font-size:12px;padding-top:12px;max-width:110px}
+#game-screen .pinned-evidence{position:relative;overflow:visible;max-height:none;padding:24px 6px 15px;gap:24px}
+#game-screen .evidence-empty{margin:8px 12px 15px;background:#dccb9d;border:0;padding:30px 22px;box-shadow:3px 6px 9px #0004;transform:rotate(3deg);color:#614b32}
+#game-screen .evidence-pin{position:relative;z-index:1;margin-right:16px;padding:25px 18px 16px;border:0;transform:rotate(-2deg);box-shadow:3px 6px 10px #0004;animation:none}
+#game-screen .evidence-pin:nth-child(even){margin:0 0 0 24px;transform:rotate(2deg);background:#e3d9b9}
+#game-screen .evidence-pin:before{top:7px;left:47%;width:10px;height:10px;background:radial-gradient(circle at 32% 28%,#d3927d,#7c3028 65%);box-shadow:1px 3px 3px #0007;z-index:2}
+#game-screen .evidence-pin+.evidence-pin:after{content:'';position:absolute;bottom:calc(100% - 9px);left:48%;height:44px;width:2px;background:#87382f;transform:rotate(22deg);transform-origin:bottom;box-shadow:1px 0 #c5786266;pointer-events:none;z-index:-1}
+#game-screen .hint-pin{background:#dcc08a;border-left:3px solid #8e4939}
+#game-screen .notebook{position:relative;margin:22px 4px 4px;padding:24px 18px 16px 28px;border:0;border-left:8px dotted #806346;background:repeating-linear-gradient(transparent 0 26px,#a58b6833 26px 27px),#eee0bf;box-shadow:3px 6px 12px #0004;transform:rotate(-1deg)}
+#game-screen .notebook label{font-style:italic;color:#724831}
+#game-screen .notebook textarea{background:transparent;border:0;border-bottom:1px solid #a58b6855;padding:4px 0;min-height:110px;resize:vertical}
+#game-screen .notebook small{font-size:10px;color:#7b6549}
+#game-screen .host-drawer{position:relative;margin:0 12px 0 0;transform:rotate(-.5deg);border:0;border-top:6px solid #a68962;box-shadow:4px 6px 0 #b99d75,0 12px 25px #0006;overflow:visible}
+#game-screen .host-drawer summary{font-size:16px;padding:19px 23px;background:#ddc49b;border-bottom:1px dashed #a58960}
+#game-screen .host-drawer .chat-panel{overflow:hidden}
+#game-screen .chat-scroll{background:repeating-linear-gradient(transparent 0 29px,#ad92711a 29px 30px),#eee0c4}
+#game-screen .bubble{border:0;border-left:2px solid #a6875d;background:#e3d1ae66;box-shadow:none}
+#game-screen .user .bubble{background:#d5bd9255;border-left-color:#8a4b36}
+@media(max-width:1100px){#game-screen>main{grid-template-columns:minmax(0,1fr);gap:26px}#game-screen .investigation-rail{grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding-top:0;align-items:start;gap:24px}#game-screen .scene-records{margin-bottom:32px}}
+@media(max-width:760px){#game-screen{padding:22px 18px 44px}#game-screen .case-workspace{padding:0 3px}#game-screen .case-workspace .story{margin:12px 3px 22px;padding:28px 22px 20px;transform:rotate(-.35deg)}#game-screen .investigation-rail{grid-template-columns:minmax(0,1fr);gap:32px}#game-screen .evidence-board{padding:22px 13px;border-width:6px;transform:none}#game-screen .scene-records{gap:20px;margin-inline:8px}#game-screen .record-card{transform:rotate(-1.5deg)!important}#game-screen .record-card:nth-child(even){transform:rotate(1.5deg)!important;margin-left:12px}#game-screen .scene-caption strong{font-size:19px}#game-screen .tools-row{gap:12px}#game-screen .mission-status{transform:rotate(1deg);display:inline-block}#game-screen .host-drawer{margin-inline:4px;transform:none}#game-screen .record-card{min-height:112px}#game-screen .story #story-text{font-size:16px}#game-screen .notebook{margin-inline:0}}
+@media(prefers-reduced-motion:reduce){#game-screen .record-card{transition:none}}
+
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>야탕</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">야탕 탐정 사무소 · 사건 열람실</span><div class="header-actions"><a class="quiet language-switch nav-key" href="../index.html" lang="zh-CN" aria-label="중국어 버전으로 전환">中文</a><a class="back-home quiet nav-key" href="#home" hidden>메인으로</a><button class="quiet" id="rules">게임 방법</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>야탕</h1><div class="title-subtitle">탐 정 사 무 소</div><p class="title-premise">평범해 보이는 이야기에도<br>뜻밖의 진실이 숨겨져 있습니다.</p><nav class="title-menu" aria-label="게임 메인 메뉴"><a class="enter-game" href="#cases">게임 시작</a><button id="title-rules">게임 방법</button><a id="resume-game" href="#game/0" hidden>조사 이어하기</a></nav><p class="title-mode">AI 바다거북 수프 · 1인 추리 · 데모 모드</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>밤이 깊었습니다.<br>아직 풀리지 않은 사건이 있습니다.</h1><p>기묘한 이야기 하나, 질문으로 풀어 가는 미스터리.<br>사건을 살펴보고 일상에 숨겨진 진실을 밝혀 보세요.</p><div class="home-rules"><span>이야기 읽기</span><i>—</i><span>질문하기</span><i>—</i><span>진실 밝히기</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">오늘 밤, 어떤 사건을 조사할까요?</h2></div><span class="archive-total">사건 20건 · 범죄 미스터리</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">조사 시작</button></div><p class="home-demo">데모 모드 · 미리 준비된 질문과 답변으로 진행돼요. 실시간 AI는 연결되어 있지 않아요.</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 조사실</span><span>사건을 읽고 진행자에게 질문하세요.</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 사건 목록</div><div class="section-heading"><h1>미해결 사건</h1><span>20</span></div><p class="muted intro">사건을 선택하고 조사를 시작하세요.</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>눈앞의 이야기를 그대로 믿지 마세요.<br><span class="muted">좋은 질문이 진실을 밝혀 줍니다.</span></p></div></aside>

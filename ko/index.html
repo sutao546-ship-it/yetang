@@ -507,12 +507,46 @@ html[lang="ko"] .case-solved-dialog h2{font-size:24px;line-height:1.5;padding:0}
 html[lang="ko"] .case-solved-dialog .case-solved-seal{letter-spacing:.08em}
 @media(max-width:1100px){html[lang="ko"] .investigation-rail{grid-template-columns:minmax(0,1fr)}html[lang="ko"] .mission-status{max-width:45%}}
 @media(max-width:760px){html[lang="ko"] header{gap:10px;padding:12px 16px}html[lang="ko"] .header-actions{width:100%;justify-content:space-between;gap:8px}html[lang="ko"] .header-actions :is(a,button){flex:1 1 auto;font-size:13px;padding:8px 10px}html[lang="ko"] .detective-hud{display:block}html[lang="ko"] .mission-status{max-width:none;margin-top:12px}html[lang="ko"] .scene-records{grid-template-columns:minmax(0,1fr)}html[lang="ko"] .record-card{grid-template-columns:30px minmax(0,1fr);gap:8px 12px;padding:16px}html[lang="ko"] .record-card strong{min-height:0}html[lang="ko"] .record-card small{justify-self:start;margin-top:4px}html[lang="ko"] #game-screen .story h2{font-size:25px}html[lang="ko"] .home-archive-heading h2{font-size:22px}html[lang="ko"] .case-drum .home-case strong{font-size:23px}html[lang="ko"] .scene-caption strong{font-size:20px}html[lang="ko"] #dialog{padding:30px 22px 24px}}
+</style><style id="archive-ui">.clue-annotations{border-top:1px solid #9d805955;padding-top:12px;margin-top:12px;display:grid;gap:10px}
+.clue-annotations label{display:grid;gap:6px;color:#4b3523;font-size:13px;line-height:1.6}
+.clue-annotations :is(select,textarea){width:100%;font:inherit;font-size:16px;color:#352619;background:#f3e5c8;border:1px solid #9f8055;border-radius:6px;padding:8px;min-height:42px;box-sizing:border-box}
+.clue-annotations textarea{resize:vertical;max-height:240px}
+.evidence-pin[data-mark="suspect"]{border-left:4px solid #94611f}.evidence-pin[data-mark="confirmed"]{border-left:4px solid #426444}.evidence-pin[data-mark="contradiction"]{border-left:4px solid #963d38}
+.archive-save-status{font-size:12px;line-height:1.8;color:#cdb890;margin:12px 0}
+.archive-report-button{padding:10px 14px;min-height:44px;color:#f1dfbc;border-color:#b3905a;font:inherit}
+.archive-case-state{display:block;margin-top:9px;font-size:12px;color:#684832;line-height:1.6}
+.archive-report{width:min(680px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;background:#e7d4b0;color:#35271b;padding:28px}
+.archive-report h2{color:#733b32;padding:0;font-size:26px}.archive-report h3{font-size:17px;color:#64432b;margin:22px 0 8px}
+.archive-report-content p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px;line-height:1.9;margin:0}
+.archive-report-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.archive-report-actions button{padding:10px 14px;min-height:44px;color:#fff0d1;background:#713b32;border:1px solid #65332a;font:inherit}.archive-report-actions button:hover{background:#51281f}
+@media(max-width:760px){.archive-report{padding:22px 18px}.archive-report-actions button{flex:1 1 130px}}
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>야탕</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">야탕 탐정 사무소 · 사건 열람실</span><div class="header-actions"><a class="quiet language-switch nav-key" href="../index.html" lang="zh-CN" aria-label="중국어 버전으로 전환">中文</a><a class="back-home quiet nav-key" href="#home" hidden>메인으로</a><button class="quiet" id="rules">게임 방법</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>야탕</h1><div class="title-subtitle">탐정 사무소</div><p class="title-premise">평범해 보이는 이야기에도<br>뜻밖의 진실이 숨겨져 있습니다.</p><nav class="title-menu" aria-label="게임 메인 메뉴"><a class="enter-game" href="#cases">게임 시작</a><button id="title-rules">게임 방법</button><a id="resume-game" href="#game/0" hidden>조사 이어하기</a></nav><p class="title-mode">AI 바다거북 수프 · 1인 추리 · 데모 모드</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>밤이 깊었습니다.<br>아직 풀리지 않은 사건이 있습니다.</h1><p>기묘한 이야기 하나, 질문으로 풀어 가는 미스터리.<br>사건을 살펴보고 일상에 숨겨진 진실을 밝혀 보세요.</p><div class="home-rules"><span>이야기 읽기</span><i>—</i><span>질문하기</span><i>—</i><span>진실 밝히기</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">오늘 밤, 어떤 사건을 조사할까요?</h2></div><span class="archive-total">사건 20건 · 범죄 미스터리</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">조사 시작</button></div><p class="home-demo">데모 모드 · 미리 준비된 질문과 답변으로 진행돼요. 실시간 AI는 연결되어 있지 않아요.</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 조사실</span><span>사건을 읽고 진행자에게 질문하세요.</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 사건 목록</div><div class="section-heading"><h1>미해결 사건</h1><span>20</span></div><p class="muted intro">사건을 선택하고 조사를 시작하세요.</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>눈앞의 이야기를 그대로 믿지 마세요.<br><span class="muted">좋은 질문이 진실을 밝혀 줍니다.</span></p></div></aside>
 <section class="case-workspace"><div class="case-top"><span class="eyebrow">조사 중 / <span id="case-num">001</span></span><span class="tag" id="level">입문</span></div><article class="story"><div class="case-watermark" aria-hidden="true" id="watermark">01</div><span class="confidential-stamp" aria-hidden="true">미해결<br><small>OPEN CASE</small></span><div class="file-label">CONFIDENTIAL / 조사 기록 <span id="file-number">NO. 001</span></div><h2 id="title"></h2><div class="story-tags"><span id="genre"></span><span>·</span><span id="duration"></span><span>·</span><span>추리 사건</span></div><div class="divider"><span>사건 개요</span></div><div id="story-text"></div><p class="question" id="question"></p><div class="story-foot"><span>모순처럼 보이는 부분이 바로 단서입니다.</span><span>✳</span></div></article><div class="tools-row"><button id="hint"><span>✧</span> 힌트 보기 <small id="hint-count">0 / 3</small></button><button id="reveal" class="quiet">정답 보기</button></div><div class="hint-box" id="hint-box" hidden></div><div class="investigation"><div><span class="eyebrow">INVESTIGATION LOG</span><h3>단서를 따라 진실을 밝혀 보세요.</h3></div><div class="stats"><strong id="count">00</strong><span>질문 횟수</span></div></div><div class="rule-line"><span>01 이야기 읽기</span><i></i><span class="active">02 질문하기</span><i></i><span>03 진실 밝히기</span></div></section>
 <section class="chat-panel"><div class="chat-heading"><div class="host-symbol">✳</div><div><h2>AI 조사 도우미</h2><span class="muted">질문과 답변 기록</span></div><span class="demo-badge">데모 모드</span></div><div class="chat-scroll" id="chat" aria-live="polite"></div><div class="composer"><p class="suggest-label">이런 질문으로 시작해 보세요</p><div class="suggestions" id="suggestions"></div><form id="ask-form"><label class="sr-only" for="input">진행자에게 질문하기</label><textarea id="input" rows="2" maxlength="300" placeholder="‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 입력하세요…"></textarea><div class="input-bottom"><span>Enter 전송 · Shift + Enter 줄바꿈</span><button class="send" aria-label="질문 전송" type="submit">전송</button></div></form><p class="demo-note">미리 준비된 답변을 제공하는 데모예요. 실시간 AI는 연결되어 있지 않아요.</p></div></section></main></div><footer><span>야탕 탐정 사무소 / 모든 사건은 진실을 기다립니다.</span><span>OBSERVE · QUESTION · RECONSTRUCT</span></footer>
 <dialog id="dialog"><button class="close quiet" aria-label="닫기">×</button><span class="eyebrow" id="dialog-label"></span><h2 id="dialog-title"></h2><div id="dialog-body"></div><button class="primary" id="dialog-action">확인</button></dialog><script>
+/* Versioned, per-case local saves. Never insert stored player text as HTML. */
+(()=>{
+ const prefix='yetang.investigation.v1.',memory=new Map();
+ const str=(v,n)=>typeof v==='string'?v.slice(0,n):'';
+ const num=(v,n)=>Number.isInteger(v)&&v>=0?Math.min(v,n):0;
+ const tags=['none','suspect','confirmed','contradiction'];
+ function clean(v={}){
+  if(!v||typeof v!=='object')v={};
+  return {started:!!v.started,note:str(v.note,2000),collected:Array.isArray(v.collected)?[...new Set(v.collected.filter(x=>Number.isInteger(x)&&x>=0&&x<3))]:[],asked:num(v.asked,100000),hints:num(v.hints,3),revealed:!!v.revealed,
+   annotations:Array.from({length:3},(_,i)=>({tag:tags.includes(v.annotations?.[i]?.tag)?v.annotations[i].tag:'none',text:str(v.annotations?.[i]?.text,500)})),
+   chat:Array.isArray(v.chat)?v.chat.slice(-200).filter(x=>x&&typeof x.text==='string').map(x=>({user:!!x.user,text:str(x.text,14000)})):[],
+   history:Array.isArray(v.history)?v.history.slice(-12).filter(x=>x&&typeof x.question==='string'&&['yes','no','irrelevant','unknown'].includes(x.verdict)).map(x=>({question:str(x.question,300),verdict:x.verdict})):[],
+   report:v.report&&typeof v.report.theory==='string'&&Number.isFinite(v.report.at)?{theory:str(v.report.theory,2000),at:v.report.at,asked:num(v.report.asked,100000),hints:num(v.report.hints,3),revealed:!!v.report.revealed}:null};
+ }
+ function key(c,i){if(!c.customId)return prefix+'builtin-v1-'+i;let hash=2166136261;for(const ch of JSON.stringify([c.title,c.body,c.truth]))hash=Math.imul(hash^ch.charCodeAt(0),16777619);return prefix+'custom-'+c.customId+'-'+(hash>>>0);}
+ function get(c,i){const k=key(c,i);if(memory.has(k))return memory.get(k);let v;try{v=JSON.parse(localStorage.getItem(k)||'{}');}catch{}v=clean(v);memory.set(k,v);return v;}
+ function patch(c,i,changes){const k=key(c,i),v=clean({...get(c,i),...changes});memory.set(k,v);try{localStorage.setItem(k,JSON.stringify(v));if(changes.started)localStorage.setItem(prefix+'last',JSON.stringify({index:i,customId:c.customId||null}));api.available=true;}catch{api.available=false;}window.dispatchEvent(new Event('archive-saved'));return v;}
+ const api=window.YetangArchive={get,patch,clean,key,available:true,lastIndex(list){try{const v=JSON.parse(localStorage.getItem(prefix+'last'));if(v?.customId)return list.findIndex(c=>c.customId===v.customId);return Number.isInteger(v?.index)&&v.index>=0&&v.index<20&&list[v.index]?v.index:-1;}catch{return -1;}}};
+})();
+
+</script><script>
 window.additionalCases=[];
 </script><script>
 const cases=[
@@ -1235,8 +1269,8 @@ cases.push(...readCustomCases().map(customCaseToGame));
 for(const c of cases)c.answers=c.answers.map(([p,a,t])=>[new RegExp(p),a,t]);
 const $=id=>document.getElementById(id);let current=0,asked=0,hints=0,revealed=false;const dialog=$('dialog');
 function addMessage(text,user=false){const el=document.createElement('div');el.className='message'+(user?' user':'');const label=document.createElement('div');label.className='message-label';label.textContent=user?'나 · 탐정':'✳ 야탕 진행자';const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;el.append(label,bubble);$('chat').append(el);$('chat').scrollTop=$('chat').scrollHeight;return bubble}
-function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage(c.customId?'직접 만든 사건이에요. 힌트와 정답 보기를 이용해 주세요. 자동 문답은 지원하지 않아요.':'현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';window.dispatchEvent(new Event('case-update'));return {case: c.title}}
-function ask(q){if($('game-screen').hidden)throw Error('먼저 메인 화면에서 조사를 시작하세요.');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('질문은 1~300자로 입력하세요.');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}. ${a[2]}`:'아직 이 질문에 대한 답변은 준비되어 있지 않아요. 아래 추천 질문을 선택하거나 힌트를 확인해 보세요.';addMessage(answer);window.dispatchEvent(new Event('case-progress'));return {question:q,answer,questions:asked}}
+function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage(c.customId?'직접 만든 사건이에요. 힌트와 정답 보기를 이용해 주세요. 자동 문답은 지원하지 않아요.':'현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';const saved=window.YetangArchive.get(c,index);asked=saved.asked;hints=saved.hints;revealed=saved.revealed;$('count').textContent=String(asked).padStart(2,'0');$('hint-count').textContent=hints+' / 3';if(hints){$('hint-box').hidden=false;$('hint-box').textContent=(true?'힌트 ':'提示 ')+hints+' / 3 · '+c.hints[hints-1];}if(saved.chat.length){$('chat').replaceChildren();saved.chat.forEach(m=>addMessage(m.text,m.user));}window.YetangArchive.patch(c,index,{started:saved.started||!$('game-screen').hidden});window.dispatchEvent(new Event('case-update'));return {case: c.title}}
+function ask(q){if($('game-screen').hidden)throw Error('먼저 메인 화면에서 조사를 시작하세요.');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('질문은 1~300자로 입력하세요.');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}. ${a[2]}`:'아직 이 질문에 대한 답변은 준비되어 있지 않아요. 아래 추천 질문을 선택하거나 힌트를 확인해 보세요.';addMessage(answer);window.dispatchEvent(new Event('case-progress'));window.YetangArchive.saveChat?.();return {question:q,answer,questions:asked}}
 $('ask-form').onsubmit=e=>{e.preventDefault();const q=$('input').value.trim();if(!q)return;ask(q);$('input').value='';$('input').focus()};$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('ask-form').requestSubmit()}};
 $('hint').onclick=()=>{if(hints<3)hints++;$('hint-box').hidden=false;$('hint-box').textContent=`힌트 ${hints} / 3 · ${cases[current].hints[hints-1]}`;$('hint-count').textContent=`${hints} / 3`};
 function openModal(label,title,body,action,fn){$('dialog-label').textContent=label;$('dialog-title').textContent=title;$('dialog-body').textContent=body;$('dialog-action').textContent=action;$('dialog-action').onclick=fn||(()=>dialog.close());dialog.showModal();dialog.scrollTop=0}
@@ -1374,22 +1408,22 @@ const board=document.createElement('section');board.className='evidence-board';b
 const right=document.createElement('div');right.className='investigation-rail';chat.before(right);right.append(board);
 const drawer=document.createElement('details');drawer.className='host-drawer';drawer.open=false;const summary=document.createElement('summary');summary.textContent=t('03 / 询问主持人　＋','03 / 진행자에게 질문　＋');drawer.append(summary,chat);right.append(drawer);
 const notes=new Map(),collected=new Map();let shown=-1;
-const note=board.querySelector('textarea');note.addEventListener('input',()=>notes.set(current,note.value));
+const note=board.querySelector('textarea');note.addEventListener('input',()=>{notes.set(current,note.value);window.YetangArchive.patch(cases[current],current,{note:note.value});});
 function update(){
  const set=collected.get(current)||new Set();collected.set(current,set);
- hud.querySelector('.mission-status').textContent=t(`记录 ${set.size}/3 · 提问 ${asked} · ${revealed?'已查看真相':'未结案'}`,`기록 ${set.size}/3 · 질문 ${asked} · ${revealed?'진실 확인':'미해결'}`);
+ hud.querySelector('.mission-status').textContent=t(`记录 ${set.size}/3 · 提问 ${asked} · ${window.YetangArchive.get(cases[current],current).report?'已还原':revealed?'已查看真相':'未结案'}`,`기록 ${set.size}/3 · 질문 ${asked} · ${window.YetangArchive.get(cases[current],current).report?'해결 완료':revealed?'진실 확인':'미해결'}`);
  hud.querySelector('h2').textContent=cases[current].title;
  board.querySelector('.evidence-total').textContent=t(`${set.size} 条记录 · ${hints} 条提示`,`기록 ${set.size}개 · 힌트 ${hints}개`);
  scene.querySelector('.scene-counter').textContent=t(`现场记录 ${set.size} / 3 已归档`,`현장 기록 ${set.size} / 3 수집`);
  scene.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('collected',set.has(i));b.setAttribute('aria-pressed',String(set.has(i)));b.querySelector('small').textContent=set.has(i)?t('✓ 已归档 · 点击查看','✓ 수집 완료 · 다시 보기'):t('＋ 检查记录','＋ 기록 확인');});
  const pins=board.querySelector('.pinned-evidence');pins.replaceChildren();
  if(!set.size&&!hints){const empty=document.createElement('p');empty.className='evidence-empty';empty.textContent=t('证据板还空着。先检查左侧的三份现场记录。','아직 모은 단서가 없어요. 먼저 현장 기록 세 개를 확인해 보세요.');pins.append(empty);}
- [...set].forEach(i=>{const p=document.createElement('div');p.className='evidence-pin';const label=document.createElement('small');label.textContent=`RECORD / 0${i+1}`;const text=document.createElement('p');text.textContent=cases[current].body[i];p.append(label,text);pins.append(p);});
+ [...set].forEach(i=>{const p=document.createElement('div');p.className='evidence-pin';p.dataset.record=String(i);const label=document.createElement('small');label.textContent=`RECORD / 0${i+1}`;const text=document.createElement('p');text.textContent=cases[current].body[i];p.append(label,text);pins.append(p);});
  for(let i=0;i<hints;i++){const p=document.createElement('div');p.className='evidence-pin hint-pin';p.textContent=t('提示 ','힌트 ')+(i+1)+' · '+cases[current].hints[i];pins.append(p);}
- game.classList.toggle('case-revealed',revealed);
+ game.classList.toggle('case-revealed',revealed);window.YetangArchive.patch(cases[current],current,{collected:[...set],asked,hints,revealed});window.dispatchEvent(new Event('archive-board-render'));
 }
 function rebuild(){
- if(shown!==current){shown=current;note.value=notes.get(current)||'';drawer.open=false;}
+ if(shown!==current){shown=current;const saved=window.YetangArchive.get(cases[current],current);note.value=saved.note;collected.set(current,new Set(saved.collected));drawer.open=false;}
  const records=scene.querySelector('.scene-records');records.replaceChildren();
  const themes=[];
  const themesKo=[];
@@ -1483,7 +1517,7 @@ requestAnimationFrame(tick);
  const status=document.createElement('p');status.className='demo-note';status.setAttribute('role','status');status.textContent=t('AI 主持人已配置 · 回答仅依据当前案件','AI 진행자 설정 완료 · 현재 사건을 바탕으로 답변해요');
  document.querySelector('.composer').prepend(status);
  const verdictText={yes:t('是。','예.'),no:t('否。','아니요.'),irrelevant:t('无关。','관련 없어요.'),unknown:t('现有案情不足以判断，请换一个更明确的问题。','주어진 내용만으로는 판단하기 어려워요. 질문을 조금 더 구체적으로 해 주세요.')};
- let history=[],pending=null,revision=0;
+ let history=window.YetangArchive.get(cases[current],current).history.slice(),pending=null,revision=0;
  function busy(value){document.querySelector('#ask-form .send').disabled=value;document.querySelectorAll('#suggestions button').forEach(b=>b.disabled=value);document.getElementById('ask-form').setAttribute('aria-busy',String(value));}
  function labels(){
   document.querySelectorAll('.demo-badge').forEach(e=>e.textContent=t('在线 AI','온라인 AI'));
@@ -1491,9 +1525,9 @@ requestAnimationFrame(tick);
   document.querySelector('.title-mode').textContent=t('AI 海龟汤 · 单人推理 · 在线模式','AI 바다거북 수프 · 1인 추리 · 온라인 모드');
   const note=document.querySelector('#case-studio .studio-note');
   if(note)note.textContent=t('案件保存在当前浏览器，不会公开发布。向 AI 提问时，当前案件的汤面、汤底和最近问答将发送到方舟模型，用于判断答案。','사건은 현재 브라우저에 저장되며 공개되지 않아요. AI에게 질문하면 답변을 판단하기 위해 현재 사건의 문제, 정답, 최근 문답이 모델로 전송돼요.');
-  if(!document.getElementById('game-screen').hidden&&asked===0){const bubble=document.querySelector('#chat .message:last-child .bubble');if(bubble)bubble.textContent=t('可以自由提问，我会依据当前案件回答「是 / 否 / 无关 / 信息不足」。','자유롭게 질문해 주세요. 현재 사건을 바탕으로 ‘예 / 아니요 / 관련 없음 / 판단 불가’로 답할게요.');}
+  if(!document.getElementById('game-screen').hidden&&asked===0&&!window.YetangArchive.get(cases[current],current).chat.length){const bubble=document.querySelector('#chat .message:last-child .bubble');if(bubble)bubble.textContent=t('可以自由提问，我会依据当前案件回答「是 / 否 / 无关 / 信息不足」。','자유롭게 질문해 주세요. 현재 사건을 바탕으로 ‘예 / 아니요 / 관련 없음 / 판단 불가’로 답할게요.');}
  }
- window.addEventListener('case-update',()=>{revision++;pending?.abort();pending=null;history=[];busy(false);labels();});
+ window.addEventListener('case-update',()=>{revision++;pending?.abort();pending=null;history=window.YetangArchive.get(cases[current],current).history.slice();busy(false);labels();});
  window.addEventListener('hashchange',()=>{if(!/^#game\//.test(location.hash)){revision++;pending?.abort();pending=null;busy(false);}});
  const originalSelectCase=selectCase;
  selectCase=function(index){const result=originalSelectCase(index);labels();return result;};
@@ -1501,7 +1535,7 @@ requestAnimationFrame(tick);
   if(pending)return {error:'busy'};
   if(document.getElementById('game-screen').hidden||typeof q!=='string'||!q.trim()||q.trim().length>300)return {error:'invalid_question'};
   q=q.trim();const c=cases[current],version=revision;
-  addMessage(q,true);asked++;document.getElementById('count').textContent=String(asked).padStart(2,'0');window.dispatchEvent(new Event('case-progress'));
+  addMessage(q,true);asked++;document.getElementById('count').textContent=String(asked).padStart(2,'0');window.dispatchEvent(new Event('case-progress'));window.YetangArchive.saveChat?.();
   const bubble=addMessage(t('主持人正在思考…','진행자가 생각하고 있어요…'));
   const controller=new AbortController();pending=controller;busy(true);
   const timer=setTimeout(()=>controller.abort(),30000);
@@ -1510,12 +1544,12 @@ requestAnimationFrame(tick);
    if(!r.ok)throw new Error(r.status===429?'rate':r.status===503?'config':'network');
    const data=await r.json();if(!Object.hasOwn(verdictText,data.verdict))throw new Error('invalid');
    if(version!==revision)return {error:'cancelled'};
-   bubble.textContent=verdictText[data.verdict];history.push({question:q,verdict:data.verdict});
+   bubble.textContent=verdictText[data.verdict];history.push({question:q,verdict:data.verdict});window.YetangArchive.patch(cases[current],current,{history});window.YetangArchive.saveChat?.();
    return {question:q,answer:bubble.textContent,questions:asked};
   }catch(e){
    if(version!==revision)return {error:'cancelled'};
    bubble.textContent=e.message==='rate'?t('提问太频繁，请稍等一分钟再试。','질문이 너무 많아요. 1분 뒤 다시 시도해 주세요.'):e.message==='config'?t('AI 服务尚未配置完成，请暂时使用提示继续推理。','AI 서비스 설정이 아직 완료되지 않았어요. 우선 힌트를 이용해 주세요.'):t('AI 暂时未能回答，请稍后重试。你也可以查看提示继续推理。','지금은 AI의 답변을 받을 수 없어요. 잠시 후 다시 시도하거나 힌트를 확인해 주세요.');
-   return {error:'unavailable'};
+   window.YetangArchive.saveChat?.();return {error:'unavailable'};
   }finally{clearTimeout(timer);if(pending===controller){pending=null;busy(false);}}
  };
  labels();
@@ -1535,12 +1569,12 @@ requestAnimationFrame(tick);
  const seal=document.createElement('div');seal.className='case-solved-seal';seal.setAttribute('aria-hidden','true');seal.textContent=t('已破案','해결');
  const heading=document.createElement('h2');heading.id='case-solved-heading';heading.textContent=t('成功还原事件','사건의 진실을 밝혔어요');
  const title=document.createElement('p');title.className='case-solved-title';
- const message=document.createElement('p');message.textContent=t('线索已串联，真相已归档。即将返回案件选择…','단서가 하나로 이어졌어요. 곧 사건 선택 화면으로 돌아갑니다…');
- const back=document.createElement('button');back.type='button';back.textContent=t('返回案件选择','사건 선택으로');overlay.append(seal,heading,title,message,back);document.body.append(overlay);
+ const message=document.createElement('p');message.textContent=t('线索已串联，真相已归档。正在生成结案报告…','단서가 하나로 이어졌어요. 해결 보고서를 준비하고 있어요…');
+ const back=document.createElement('button');back.type='button';back.textContent=t('查看结案报告','해결 보고서 보기');overlay.append(seal,heading,title,message,back);document.body.append(overlay);
  let endpoint='',pending=null,revision=0,returnTimer=0;const solved=new Set(),responses=new Map();
  function busy(value){submit.disabled=value||!endpoint;note.readOnly=value;notebook.setAttribute('aria-busy',String(value));submit.textContent=value?t('正在核对推理…','추리를 확인하고 있어요…'):t('提交推理 · 还原事件','추리 제출 · 사건 재구성');}
  function reset(){revision++;pending?.abort();pending=null;clearTimeout(returnTimer);if(overlay.open)overlay.close();busy(false);feedback.textContent=responses.get(current)||'';}
- function returnToCases(){clearTimeout(returnTimer);if(overlay.open)overlay.close();if(!document.getElementById('game-screen').hidden){location.hash='cases';}}
+ function returnToCases(){clearTimeout(returnTimer);if(overlay.open)overlay.close();if(!document.getElementById('game-screen').hidden){if(window.YetangArchive.openReport)window.YetangArchive.openReport();else location.hash='cases';}}
  back.addEventListener('click',returnToCases);overlay.addEventListener('cancel',e=>{e.preventDefault();returnToCases();});
  window.addEventListener('case-update',reset);
  window.addEventListener('hashchange',()=>{if(document.getElementById('game-screen').hidden)reset();});
@@ -1560,7 +1594,7 @@ requestAnimationFrame(tick);
    const text=data.result==='solved'?t('事件已成功还原。','사건의 진실을 밝혔어요.'):data.result==='partial'?t('已经接近真相，但关键原因或事件经过还不完整。补充后再试试。','진실에 가까워졌지만 핵심 원인이나 사건의 경위가 아직 부족해요. 내용을 보완해 주세요.'):t('这份解释还未还原事件。请重新检查关键线索与因果关系，再提交。','아직 사건의 진실과 맞지 않아요. 핵심 단서와 인과관계를 다시 확인해 주세요.');
    feedback.textContent=text;responses.set(index,text);
    if(data.result==='solved'){
-    solved.add(index);title.textContent=c.title;overlay.showModal();back.focus();
+    window.YetangArchive.patch(c,index,{report:{theory,at:Date.now(),asked,hints,revealed}});solved.add(index);title.textContent=c.title;overlay.showModal();back.focus();
     returnTimer=setTimeout(()=>{if(version===revision&&current===index)returnToCases();},3200);
    }
   }catch(e){if(version===revision){feedback.textContent=e.message==='rate'?t('提交过于频繁，请一分钟后重试。手记已保留。','요청이 너무 많아요. 1분 뒤 다시 시도해 주세요. 메모는 그대로 남아 있어요.'):t('暂时无法核对，请稍后重试。你的手记不会被清空。','지금은 확인할 수 없어요. 잠시 후 다시 시도해 주세요. 메모는 지워지지 않아요.');}}
@@ -1569,6 +1603,54 @@ requestAnimationFrame(tick);
  busy(false);
  if(!['https:','http:'].includes(location.protocol)){feedback.textContent=t('在线打开游戏后可提交推理；离线仍可记录手记。','온라인에서 추리를 제출할 수 있어요. 오프라인에서도 메모는 작성할 수 있어요.');return;}
  (async()=>{try{const r=await fetch(new URL(ko?'../ai-host.json':'ai-host.json',location.href),{cache:'no-store'});if(!r.ok)throw Error();const config=await r.json();const url=new URL(config.endpoint);if(url.protocol!=='https:'||url.username||url.password)throw Error();endpoint=url.href;busy(false);}catch{feedback.textContent=t('推理核对暂不可用，可先记录手记，稍后刷新重试。','추리 확인을 이용할 수 없어요. 메모를 작성한 뒤 잠시 후 새로고침해 주세요.');}})();
+})();
+
+</script><script>
+(()=>{
+ const A=window.YetangArchive,ko=document.documentElement.lang==='ko',t=(a,b)=>ko?b:a;
+ const get=()=>A.get(cases[current],current),save=changes=>A.patch(cases[current],current,changes);
+ const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e;};
+ const notebook=document.querySelector('.notebook'),status=el('p','','archive-save-status');status.setAttribute('role','status');notebook.append(status);
+ const reportButton=el('button',t('查看结案报告','사건 해결 보고서'),'archive-report-button');reportButton.type='button';notebook.append(reportButton);
+ function statusUpdate(){status.textContent=A.available?t('调查自动保存在此浏览器 · 中韩文共享进度','이 브라우저에 자동 저장 · 중국어·한국어 진행 상황 공유'):t('浏览器未能保存，当前进度仅在本页内保留。','브라우저에 저장하지 못했어요. 현재 페이지에서만 유지됩니다.');}
+ function cards(){const last=A.lastIndex(cases),resume=document.getElementById('resume-game');if(last>=0&&document.getElementById('game-screen').hidden){resume.hidden=false;resume.href='#game/'+last;}document.querySelectorAll('#home-cases .home-case').forEach((card,i)=>{let badge=card.querySelector('.archive-case-state');if(!badge){badge=el('span','','archive-case-state');card.append(badge);}const s=A.get(cases[i],i);badge.textContent=s.report?t('已还原','해결 완료'):s.started?t('调查中 · 已存档','조사 중 · 저장됨'):t('未开始','시작 전');});}
+ function renderMarks(){
+  document.querySelectorAll('.evidence-pin[data-record]').forEach(pin=>{
+   if(pin.querySelector('.clue-annotations'))return;
+   const i=Number(pin.dataset.record),a=get().annotations[i],wrap=el('div','','clue-annotations');
+   const label=el('label',t('线索标注（你的判断）','단서 표시 (나의 판단)')),select=el('select');
+   for(const [value,zh,kr] of [['none','未标注','표시 없음'],['suspect','可疑','의심'],['confirmed','已确认','확인됨'],['contradiction','存在矛盾','모순 있음']]){const o=el('option',t(zh,kr));o.value=value;select.append(o);}select.value=a.tag;label.append(select);
+   const noteLabel=el('label',t('我的批注','나의 메모')),input=el('textarea');input.rows=2;input.maxLength=500;input.value=a.text;input.placeholder=t('这条线索说明了什么？','이 단서로 무엇을 알 수 있나요?');noteLabel.append(input);
+   function persist(){const annotations=get().annotations.map(x=>({...x}));annotations[i]={tag:select.value,text:input.value};save({annotations});pin.dataset.mark=select.value;}
+   select.addEventListener('change',persist);input.addEventListener('input',persist);pin.dataset.mark=a.tag;wrap.append(label,noteLabel);pin.append(wrap);
+  });reportButton.hidden=!get().report;statusUpdate();
+ }
+ const report=el('dialog','','archive-report');report.setAttribute('aria-labelledby','archive-report-heading');
+ const heading=el('h2',t('结案报告','사건 해결 보고서'));heading.id='archive-report-heading';const content=el('div','','archive-report-content');
+ const actions=el('div','','archive-report-actions'),download=el('button',t('保存报告文本','보고서 저장')),close=el('button',t('关闭报告','보고서 닫기')),back=el('button',t('返回案件选择','사건 선택으로'));
+ for(const b of [download,close,back])b.type='button';actions.append(download,close,back);report.append(heading,content,actions);document.body.append(report);let reportText='';
+ function openReport(){
+  const s=get(),r=s.report;if(!r)return;content.replaceChildren();const c=cases[current],parts=[];
+  function section(title,text){content.append(el('h3',title),el('p',text));parts.push(title+'\n'+text);}
+  section(c.title,new Date(r.at).toLocaleString(ko?'ko-KR':'zh-CN'));
+  section(t('调查摘要','조사 요약'),t(`提问 ${r.asked} 次 · 使用提示 ${r.hints} 条 · ${r.revealed?'提交前已查看汤底':'提交前未查看汤底'}`,`질문 ${r.asked}회 · 힌트 ${r.hints}개 · ${r.revealed?'제출 전 정답 확인':'제출 전 정답 미확인'}`));
+  section(t('你的还原','나의 추리'),r.theory);
+  section(t('完整事件经过与关键转折','사건의 전말과 핵심 반전'),c.truth);
+  s.collected.forEach(i=>{const a=s.annotations[i],names={none:t('未标注','표시 없음'),suspect:t('可疑','의심'),confirmed:t('已确认','확인됨'),contradiction:t('存在矛盾','모순 있음')};section(t('线索 ','단서 ')+(i+1)+' · '+names[a.tag],c.body[i]+(a.text?'\n'+t('批注：','메모: ')+a.text:''));});
+  reportText=heading.textContent+'\n\n'+parts.join('\n\n');if(!report.open)report.showModal();close.focus();
+ }
+ A.openReport=openReport;
+ reportButton.onclick=openReport;close.onclick=()=>report.close();back.onclick=()=>{report.close();location.hash='cases';};
+ download.onclick=()=>{const url=URL.createObjectURL(new Blob([reportText],{type:'text/plain;charset=utf-8'}));const link=el('a');link.href=url;link.download='Yetang-Case-'+(current+1)+'-Report.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ function progress(){save({asked,hints,revealed});}
+ A.saveChat=()=>{if(document.getElementById('game-screen').hidden)return;save({chat:[...document.querySelectorAll('#chat .message')].map(e=>({user:e.classList.contains('user'),text:e.querySelector('.bubble')?.textContent||''})),asked,hints,revealed});};
+ window.addEventListener('case-progress',progress);window.addEventListener('archive-board-render',renderMarks);
+ window.addEventListener('case-update',()=>{if(report.open)report.close();renderMarks();});
+ window.addEventListener('archive-saved',()=>{statusUpdate();cards();reportButton.hidden=!get().report;});
+ window.addEventListener('hashchange',()=>{if(report.open)report.close();cards();});
+ const originalHome=renderHome;renderHome=function(){originalHome();cards();};
+ const small=notebook.querySelector('small');small.textContent=t('提交推理后由 AI 核对。手记、线索和问答自动保存在当前浏览器。','제출한 추리는 AI가 확인해요. 메모, 단서, 문답은 현재 브라우저에 자동 저장됩니다.');
+ renderMarks();cards();
 })();
 
 </script></body></html>

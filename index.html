@@ -495,6 +495,17 @@ html[lang="ko"] :is(.story #story-text,.bubble,#dialog-body){line-height:1.95;wo
 </style><style id="simple-ai-studio">
 #case-studio .studio-editor .studio-grid>label:first-child{grid-column:1 / -1}
 #case-studio .studio-generator{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;margin:18px 0}#case-studio .studio-generator>label:first-child{grid-column:1 / -1}#case-studio .studio-generator label{display:grid;gap:8px;font-size:14px;color:#ead8b7}#case-studio .studio-generator textarea{min-height:84px}#case-studio .studio-generate{align-self:end;min-height:46px;background:#c9a877;color:#2e2115;border-color:#ddbf8b;padding:10px 14px;font:inherit}#case-studio .studio-generate:disabled{opacity:.55;cursor:wait}#case-studio .studio-generator-note{grid-column:1 / -1;margin:0;color:#c7b18b;font-size:12px;line-height:1.8}#case-studio .studio-editor,#case-studio .studio-extras{border-top:1px solid #a88a5b66;padding-top:12px}#case-studio .studio-editor>summary,#case-studio .studio-extras>summary{cursor:pointer;min-height:44px;padding:10px 0;color:#ebd8b2;font-size:14px}#case-studio .studio-extras label{display:grid;gap:8px;margin:12px 0}#case-studio .studio-save[hidden]{display:none}@media(max-width:480px){#case-studio .studio-generator{grid-template-columns:minmax(0,1fr)}#case-studio .studio-generate{width:100%}}
+</style><style id="navigation-motion">/* Short transitions without blocking navigation or hiding the document. */
+dialog[open]:not(.case-solved-dialog){animation:yetang-dialog-in .28s cubic-bezier(.22,1,.36,1) both}
+dialog[open]:not(.case-solved-dialog)::backdrop{animation:yetang-backdrop-in .22s ease-out both}
+.start-game,.enter-game,.submit-theory,.studio-generate,.archive-report-button{transition:background .18s ease,border-color .18s ease,box-shadow .18s ease}
+@media(hover:hover){.start-game:hover,.enter-game:hover,.submit-theory:hover,.studio-generate:hover{box-shadow:0 5px 18px #c9a46730}}
+.studio-generator[aria-busy="true"] .studio-generate{animation:yetang-wait 1.6s ease-in-out infinite}
+#ask-form[aria-busy="true"] .send{animation:yetang-wait 1.6s ease-in-out infinite}
+@keyframes yetang-dialog-in{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes yetang-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes yetang-wait{0%,100%{box-shadow:0 0 0 0 #c9a46700}50%{box-shadow:0 0 0 3px #c9a46740}}
+@media(prefers-reduced-motion:reduce){dialog[open]:not(.case-solved-dialog),dialog[open]:not(.case-solved-dialog)::backdrop,.studio-generator[aria-busy="true"] .studio-generate,#ask-form[aria-busy="true"] .send{animation:none}.start-game,.enter-game,.submit-theory,.studio-generate,.archive-report-button{transition:none}}
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>夜汤</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">夜汤侦探事务所 · 案卷阅览室</span><div class="header-actions"><a class="quiet language-switch nav-key" href="ko/index.html" lang="ko" aria-label="切换到韩文版">한국어</a><a class="back-home quiet nav-key" href="#home" hidden>返回主界面</a><button class="quiet" id="rules">怎么玩</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>夜汤</h1><div class="title-subtitle">侦 探 事 务 所</div><p class="title-premise">这是一个侦探游戏，请还原故事的全貌</p><nav class="title-menu" aria-label="游戏主菜单"><a class="enter-game" href="#cases">开始游戏</a><button id="title-rules">游戏说明</button><a id="resume-game" href="#game/0" hidden>继续调查</a></nav><p class="title-mode">AI 海龟汤 · 单人推理 · 演示模式</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>夜深了。<br>还有一桩悬案。</h1><p>一段不寻常的故事，一场只凭提问的调查。<br>翻开案卷，找出藏在日常背后的真相。</p><div class="home-rules"><span>阅读汤面</span><i>—</i><span>提问推理</span><i>—</i><span>还原真相</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">今晚，调查哪一桩？</h2></div><span class="archive-total">20 份案卷 · 悬疑故事</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">开始调查</button></div><p class="home-demo">演示模式 · 预设问答，尚未接入实时 AI</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 调查室</span><span>阅读案卷后，向主持人提问。</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 档案索引</div><div class="section-heading"><h1>待解密案卷</h1><span>20</span></div><p class="muted intro">选择一份案卷，开始调查。</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>别急着相信眼前的故事。<br><span class="muted">好的问题，比答案更重要。</span></p></div></aside>
@@ -1601,6 +1612,37 @@ requestAnimationFrame(tick);
  const originalHome=renderHome;renderHome=function(){originalHome();cards();};
  const small=notebook.querySelector('small');small.textContent=t('提交推理后由 AI 核对。手记、线索和问答自动保存在当前浏览器。','제출한 추리는 AI가 확인해요. 메모, 단서, 문답은 현재 브라우저에 자동 저장됩니다.');
  renderMarks();cards();
+})();
+
+</script><script>
+/* Route state changes remain immediate; animations only decorate the new view. */
+(()=>{
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let frame=0,running=[];
+ function clear(){cancelAnimationFrame(frame);frame=0;running.forEach(a=>a.cancel());running=[];}
+ function play(node,frames,options){if(!node?.animate||reduced.matches)return;const a=node.animate(frames,options);running.push(a);a.finished.then(()=>{running=running.filter(x=>x!==a);},()=>{});}
+ function enter(){
+  clear();if(reduced.matches||document.hidden)return;
+  frame=requestAnimationFrame(()=>{
+   frame=0;const screen=['title-screen','home-screen','game-screen'].map(id=>document.getElementById(id)).find(e=>e&&!e.hidden);if(!screen)return;
+   play(screen,[{opacity:.35},{opacity:1}],{duration:260,easing:'ease-out'});
+   const selectors=screen.id==='title-screen'?['.title-kicker','.title-content h1','.title-subtitle','.title-premise','.title-menu']:screen.id==='home-screen'?['.home-intro','.home-archive-heading','.home-cases','.home-start-row','.case-studio-entry']:['.detective-hud','.scene-desk','.story','.evidence-board','.host-below'];
+   selectors.forEach((s,i)=>{const node=screen.querySelector(s);if(!node)return;const rect=node.getBoundingClientRect();if(rect.top>innerHeight+100||rect.bottom<0)return;play(node,[{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,delay:Math.min(i*45,180),easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});});
+  });
+ }
+ window.addEventListener('hashchange',enter);
+ window.addEventListener('pagehide',clear);
+ reduced.addEventListener('change',()=>{if(reduced.matches)clear();});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();});
+ const chat=document.getElementById('chat');
+ if(chat){const observer=new MutationObserver(records=>{
+  if(reduced.matches||document.getElementById('game-screen').hidden)return;
+  const added=records.flatMap(r=>[...r.addedNodes]).filter(n=>n.nodeType===1&&n.classList.contains('message'));
+  // A restored transcript must appear immediately, not animate hundreds of messages.
+  if(added.length>2)return;
+  added.forEach(node=>play(node,[{opacity:0,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,easing:'ease-out'}));
+ });observer.observe(chat,{childList:true});}
+ enter();
 })();
 
 </script></body></html>

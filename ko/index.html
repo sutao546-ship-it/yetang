@@ -1725,8 +1725,7 @@ requestAnimationFrame(tick);
  const canvas=document.createElement('canvas');canvas.className='atmosphere-particles';canvas.setAttribute('aria-hidden','true');document.body.append(canvas);
  const ctx=canvas.getContext('2d');if(!ctx){canvas.remove();return;}
  const ko=document.documentElement.lang==='ko',t=(a,b)=>ko?b:a,reduce=matchMedia('(prefers-reduced-motion: reduce)');
- let enabled=true;try{enabled=localStorage.getItem('yetang.effects.v1')!=='off';}catch{}
- const toggle=document.createElement('button');toggle.type='button';toggle.className='quiet effects-toggle';document.querySelector('.header-actions')?.append(toggle);
+ let enabled=true;
  let w=0,h=0,dpr=1,raf=0,last=0,dust=[],sparks=[];
  const rnd=(a,b)=>a+Math.random()*(b-a),active=()=>enabled&&!reduce.matches&&!document.hidden;
  function resize(){w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);dust=Array.from({length:w<760?12:26},()=>({x:rnd(0,w),y:rnd(0,h),r:rnd(.5,1.4),vx:rnd(-3,3),vy:rnd(-8,-3),phase:rnd(0,Math.PI*2)}));}
@@ -1737,10 +1736,9 @@ requestAnimationFrame(tick);
   sparks=sparks.filter(p=>p.life>0);for(const p of sparks){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.gravity*dt;ctx.globalAlpha=Math.max(0,p.life/p.total)*.75;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r*Math.max(.2,p.life/p.total),0,Math.PI*2);ctx.fill();}
   ctx.globalAlpha=1;
  }
- function sync(){cancelAnimationFrame(raf);raf=0;last=0;sparks=[];canvas.hidden=!active();document.body.classList.toggle('extra-motion',enabled&&!reduce.matches);toggle.textContent=reduce.matches?t('特效：已减弱','효과: 동작 줄이기'):enabled?t('特效：开','효과: 켜짐'):t('特效：关','효과: 꺼짐');toggle.setAttribute('aria-pressed',String(enabled&&!reduce.matches));toggle.disabled=reduce.matches;if(active())raf=requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+ function sync(){cancelAnimationFrame(raf);raf=0;last=0;sparks=[];canvas.hidden=!active();document.body.classList.toggle('extra-motion',enabled&&!reduce.matches);if(active())raf=requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);}
  function burst(x,y,count=12,celebrate=false){if(!active()||!Number.isFinite(x)||!Number.isFinite(y))return;const n=Math.min(w<760?Math.ceil(count*.6):count,100-sparks.length);for(let i=0;i<n;i++){const angle=rnd(0,Math.PI*2),speed=rnd(22,celebrate?140:65),life=rnd(.35,celebrate?1.3:.7);sparks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-(celebrate?35:0),r:rnd(1,celebrate?3:2),life,total:life,gravity:celebrate?65:15,color:i%3===0?'#f0ddae':'#c79a57'});}}
- toggle.addEventListener('click',()=>{enabled=!enabled;try{localStorage.setItem('yetang.effects.v1',enabled?'on':'off');}catch{}sync();});
- document.addEventListener('click',e=>{const button=e.target.closest?.('button,a');if(!button||button===toggle||button.disabled||!active())return;const r=button.getBoundingClientRect();const x=e.detail&&e.clientX?e.clientX:r.left+r.width/2,y=e.detail&&e.clientY?e.clientY:r.top+r.height/2;burst(x,y,button.classList.contains('record-card')?22:9);});
+ document.addEventListener('click',e=>{const button=e.target.closest?.('button,a');if(!button||button.disabled||!active())return;const r=button.getBoundingClientRect();const x=e.detail&&e.clientX?e.clientX:r.left+r.width/2,y=e.detail&&e.clientY?e.clientY:r.top+r.height/2;burst(x,y,button.classList.contains('record-card')?22:9);});
  const solved=document.querySelector('.case-solved-dialog');if(solved){const layer=document.createElement('div');layer.className='solved-particle-layer';layer.setAttribute('aria-hidden','true');solved.append(layer);new MutationObserver(()=>{layer.replaceChildren();if(solved.open&&active())for(let i=0;i<(w<760?14:24);i++){const dot=document.createElement('i');dot.style.setProperty('--spark-x',rnd(-160,160)+'px');dot.style.setProperty('--spark-y',rnd(-70,200)+'px');dot.style.animationDelay=rnd(0,.18)+'s';layer.append(dot);}}).observe(solved,{attributes:true,attributeFilter:['open']});}
  window.addEventListener('hashchange',()=>{sparks=[];if(active())burst(w/2,Math.min(130,h*.18),18);});
  window.addEventListener('resize',resize);document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);

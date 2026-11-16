@@ -547,11 +547,15 @@ html[lang="ko"] .case-solved-dialog .case-solved-seal{letter-spacing:.08em}
 #game-screen .host-below #input{min-height:60px;max-height:100px;font-size:16px;line-height:1.6}
 #game-screen .host-below .input-bottom{gap:8px}
 @media(max-width:760px){#game-screen .host-below .chat-panel{display:flex;flex-direction:column}#game-screen .host-below .chat-scroll{height:200px;flex:none;padding:12px 14px}#game-screen .host-below .composer{border-left:0;border-top:1px solid #80644466;padding:12px 14px}#game-screen .host-below .chat-heading{padding:12px 14px}}
+</style><style id="ten-question-examples">
+#game-screen .host-below .suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-height:170px;overflow-y:auto;overscroll-behavior:contain;gap:8px;padding:3px 5px 6px 3px;scrollbar-width:thin}
+#game-screen .host-below .suggestions button{min-width:0;min-height:44px;text-align:left;white-space:normal;overflow-wrap:anywhere;font-size:13px;line-height:1.6;padding:8px 10px}
+@media(max-width:420px){#game-screen .host-below .suggestions{grid-template-columns:minmax(0,1fr);max-height:170px}}
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>야탕</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">야탕 탐정 사무소 · 사건 열람실</span><div class="header-actions"><a class="quiet language-switch nav-key" href="../index.html" lang="zh-CN" aria-label="중국어 버전으로 전환">中文</a><a class="back-home quiet nav-key" href="#home" hidden>메인으로</a><button class="quiet" id="rules">게임 방법</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>야탕</h1><div class="title-subtitle">탐정 사무소</div><p class="title-premise">탐정이 되어 사건의 전말을 밝혀 보세요.</p><nav class="title-menu" aria-label="게임 메인 메뉴"><a class="enter-game" href="#cases">게임 시작</a><button id="title-rules">게임 방법</button><a id="resume-game" href="#game/0" hidden>조사 이어하기</a></nav><p class="title-mode">AI 바다거북 수프 · 1인 추리 · 데모 모드</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>밤이 깊었습니다.<br>아직 풀리지 않은 사건이 있습니다.</h1><p>기묘한 이야기 하나, 질문으로 풀어 가는 미스터리.<br>사건을 살펴보고 일상에 숨겨진 진실을 밝혀 보세요.</p><div class="home-rules"><span>이야기 읽기</span><i>—</i><span>질문하기</span><i>—</i><span>진실 밝히기</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">오늘 밤, 어떤 사건을 조사할까요?</h2></div><span class="archive-total">사건 20건 · 범죄 미스터리</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">조사 시작</button></div><p class="home-demo">데모 모드 · 미리 준비된 질문과 답변으로 진행돼요. 실시간 AI는 연결되어 있지 않아요.</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 조사실</span><span>사건을 읽고 진행자에게 질문하세요.</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 사건 목록</div><div class="section-heading"><h1>미해결 사건</h1><span>20</span></div><p class="muted intro">사건을 선택하고 조사를 시작하세요.</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>눈앞의 이야기를 그대로 믿지 마세요.<br><span class="muted">좋은 질문이 진실을 밝혀 줍니다.</span></p></div></aside>
 <section class="case-workspace"><div class="case-top"><span class="eyebrow">조사 중 / <span id="case-num">001</span></span><span class="tag" id="level">입문</span></div><article class="story"><div class="case-watermark" aria-hidden="true" id="watermark">01</div><span class="confidential-stamp" aria-hidden="true">미해결<br><small>OPEN CASE</small></span><div class="file-label">CONFIDENTIAL / 조사 기록 <span id="file-number">NO. 001</span></div><h2 id="title"></h2><div class="story-tags"><span id="genre"></span><span>·</span><span id="duration"></span><span>·</span><span>추리 사건</span></div><div class="divider"><span>사건 개요</span></div><div id="story-text"></div><p class="question" id="question"></p><div class="story-foot"><span>모순처럼 보이는 부분이 바로 단서입니다.</span><span>✳</span></div></article><div class="tools-row"><button id="hint"><span>✧</span> 힌트 보기 <small id="hint-count">0 / 3</small></button><button id="reveal" class="quiet">정답 보기</button></div><div class="hint-box" id="hint-box" hidden></div><div class="investigation"><div><span class="eyebrow">INVESTIGATION LOG</span><h3>단서를 따라 진실을 밝혀 보세요.</h3></div><div class="stats"><strong id="count">00</strong><span>질문 횟수</span></div></div><div class="rule-line"><span>01 이야기 읽기</span><i></i><span class="active">02 질문하기</span><i></i><span>03 진실 밝히기</span></div></section>
-<section class="chat-panel"><div class="chat-heading"><div class="host-symbol">✳</div><div><h2>AI 조사 도우미</h2><span class="muted">질문과 답변 기록</span></div><span class="demo-badge">데모 모드</span></div><div class="chat-scroll" id="chat" aria-live="polite"></div><div class="composer"><p class="suggest-label">이런 질문으로 시작해 보세요</p><div class="suggestions" id="suggestions"></div><form id="ask-form"><label class="sr-only" for="input">진행자에게 질문하기</label><textarea id="input" rows="2" maxlength="300" placeholder="‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 입력하세요…"></textarea><div class="input-bottom"><span>Enter 전송 · Shift + Enter 줄바꿈</span><button class="send" aria-label="질문 전송" type="submit">전송</button></div></form><p class="demo-note">미리 준비된 답변을 제공하는 데모예요. 실시간 AI는 연결되어 있지 않아요.</p></div></section></main></div><footer><span>야탕 탐정 사무소 / 모든 사건은 진실을 기다립니다.</span><span>OBSERVE · QUESTION · RECONSTRUCT</span></footer>
+<section class="chat-panel"><div class="chat-heading"><div class="host-symbol">✳</div><div><h2>AI 조사 도우미</h2><span class="muted">질문과 답변 기록</span></div><span class="demo-badge">데모 모드</span></div><div class="chat-scroll" id="chat" aria-live="polite"></div><div class="composer"><p class="suggest-label">질문이 막힐 때 · 예시 질문 10개</p><p class="example-help">한 번에 한 가지 사실만 질문해 보세요. 예시를 누르면 바로 전송됩니다. 아래로 스크롤하면 모두 볼 수 있어요.</p><div class="suggestions" id="suggestions"></div><form id="ask-form"><label class="sr-only" for="input">진행자에게 질문하기</label><textarea id="input" rows="2" maxlength="300" placeholder="‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 입력하세요…"></textarea><div class="input-bottom"><span>Enter 전송 · Shift + Enter 줄바꿈</span><button class="send" aria-label="질문 전송" type="submit">전송</button></div></form><p class="demo-note">미리 준비된 답변을 제공하는 데모예요. 실시간 AI는 연결되어 있지 않아요.</p></div></section></main></div><footer><span>야탕 탐정 사무소 / 모든 사건은 진실을 기다립니다.</span><span>OBSERVE · QUESTION · RECONSTRUCT</span></footer>
 <dialog id="dialog"><button class="close quiet" aria-label="닫기">×</button><span class="eyebrow" id="dialog-label"></span><h2 id="dialog-title"></h2><div id="dialog-body"></div><button class="primary" id="dialog-action">확인</button></dialog><script>
 /* Versioned, per-case local saves. Never insert stored player text as HTML. */
 (()=>{
@@ -595,10 +599,7 @@ const cases=[
       "번호를 적는 방식에 동료만의 습관이 드러나 있어요."
     ],
     "truth": "쪽지에 적힌 숫자는 주소도, 전화번호도 아니었다. 동료가 피해자들에게 살해된 순서대로 붙인 번호였다. 이 사건에는 공식적으로 정해진 피해자 번호가 없었고, 경찰이 그런 번호를 공개한 적도 없었다. 현장을 맡은 법의학자와 동료만 따로 기록을 남기고 있었다.\n\n동료는 현장에 나가거나 시신 운반을 돕는 틈을 타 범행을 저질렀다. 그러고는 자신이 저지른 사건을 다른 사건들 사이에 섞어 흔적을 감춰 왔다. 이번에는 피해자의 순번을 적은 쪽지를 새 피해자에게 실수로 남긴 것이다. 법의학자는 숫자를 기록하는 동료 특유의 방식을 알아봤다. 오랫동안 함께 사건을 쫓던 사람이 바로 자신들이 찾던 연쇄 살인범이었다.",
-    "qs": [
-      "쪽지의 숫자는 피해자들이 살해된 순서를 뜻하나요?",
-      "숫자는 전화번호인가요?"
-    ],
+    "qs": ["쪽지의 숫자는 사건 기록과 함께 봐야 의미를 알 수 있나요?","동료의 직무가 사건과 관련이 있나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","쪽지의 숫자는 피해자들이 살해된 순서를 뜻하나요?","숫자는 전화번호인가요?"],
     "answers": [
       [
         "^쪽지의 숫자는 피해자들이 살해된 순서를 뜻하나요\\?$",
@@ -630,10 +631,7 @@ const cases=[
       "가족이 퇴원한 뒤, 나는 혼자 옆 병실에 들어갔어요."
     ],
     "truth": "옆 병실의 환자는 이미 살해된 뒤였다. 그곳에 남아 있던 사람은 환자의 가족이 아니라 범인이었다. 범인은 보호자 행세를 하며 병실에 머물렀고, 낮에는 조용히 간병하는 척하다가 밤이 되면 시신을 처리했다. 밤마다 들리던 소리는 그 과정에서 난 것이었다.\n\n나는 의료기구에서 나는 소리겠거니 하고 대수롭지 않게 넘겼다. 범인은 내가 그 소리를 듣는다는 사실을 알고 있었지만, 어디까지 눈치챘는지는 알 수 없었다. 가족이 입원해 있는 동안 나를 해쳤다가는 의심을 살 수 있었다. 가족이 퇴원하고 내가 혼자 병실로 들어오자, 범인은 비밀이 드러날까 봐 나를 살해했다.",
-    "qs": [
-      "옆 병실에 남아 있던 사람이 범인인가요?",
-      "그 소리는 정상적인 치료 과정에서 난 건가요?"
-    ],
+    "qs": ["소리의 원인은 옆 병실에 있던 사람과 관련이 있나요?","나는 옆 병실에서 보지 말아야 할 것을 봤나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","옆 병실에 남아 있던 사람이 범인인가요?","그 소리는 정상적인 치료 과정에서 난 건가요?"],
     "answers": [
       [
         "^옆 병실에 남아 있던 사람이 범인인가요\\?$",
@@ -665,10 +663,7 @@ const cases=[
       "내가 사진에서 알아본 사람은 이미 집 안에 들어와 있어요."
     ],
     "truth": "사진은 오래전 친구들과 함께 찍은 단체 사진이었다. 지난 몇 년 사이 사진 속 사람들은 나를 제외하고 차례로 실종되거나 숨진 채 발견됐다. 경찰은 사진 속 인물 가운데 범인이 있다고 보고 있었다.\n\n나는 사진을 자세히 들여다보다가 마침내 누가 범인인지 알아챘다. 바로 그때 집 안에서 희미한 소리가 들렸다. 범인은 이미 내 집에 들어와 어딘가에 숨어 있었던 것이다. 나는 불을 끄고 구석에 몸을 숨긴 채, 위치를 들키지 않으려고 숨소리조차 내지 못했다.",
-    "qs": [
-      "나는 범인이 이미 집 안에 들어와 있다고 생각했나요?",
-      "사진 속 유령이 무서웠던 건가요?"
-    ],
+    "qs": ["사진 속에 내가 아는 사람이 있나요?","문을 잠그고 불을 끈 것은 누군가에게 들키지 않기 위해서인가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","나는 범인이 이미 집 안에 들어와 있다고 생각했나요?","사진 속 유령이 무서웠던 건가요?"],
     "answers": [
       [
         "^나는 범인이 이미 집 안에 들어와 있다고 생각했나요\\?$",
@@ -700,10 +695,7 @@ const cases=[
       "나는 죽으려던 것이 아니라 살아서 빠져나가려던 거예요."
     ],
     "truth": "매일 밤 들리던 소리는 단순한 발소리가 아니었다. 범인이 무거운 시신을 계단 위로 끌고 와 내 집 문 앞에 내려놓는 소리였다. 그의 목표는 나였다. 같은 일을 반복하면서 내가 문을 여는지, 이상한 낌새를 알아차리는지 살펴보고 있었던 것이다.\n\n그날은 상황이 달랐다. 범인은 소리를 내기 전에 이미 문을 따고 집 안으로 들어와 있었다. 익숙한 소리는 내 주의를 다른 곳으로 돌리기 위해 일부러 낸 것이었다. 나는 앞뒤로 도망칠 길이 막혔다고 생각했고, 살아서 빠져나가려면 발코니에서 뛰어내리는 수밖에 없다고 판단했다.",
-    "qs": [
-      "나는 살아서 도망치려고 발코니에서 뛰어내렸나요?",
-      "그 사람은 평범하게 이웃집을 방문하던 건가요?"
-    ],
+    "qs": ["이번에는 평소와 다른 시간에 발소리가 들렸나요?","발소리의 주인은 일부러 우리 집 문 앞에서 멈췄나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","나는 살아서 도망치려고 발코니에서 뛰어내렸나요?","그 사람은 평범하게 이웃집을 방문하던 건가요?"],
     "answers": [
       [
         "^나는 살아서 도망치려고 발코니에서 뛰어내렸나요\\?$",
@@ -735,10 +727,7 @@ const cases=[
       "작가는 원고에 쓴 비밀 때문에 자신도 표적이 됐다고 생각했어요."
     ],
     "truth": "작가가 쓰던 소설은 오래전 해결되지 않은 살인 사건을 다루고 있었다. 그는 주변 사람 가운데 범인이 있는지 알아보려고, 외부에 공개된 적 없는 현장의 세부 정보를 원고에 넣었다. 오랫동안 원고를 주고받은 편집자는 그동안 별다른 기색을 보이지 않았다.\n\n그런데 이번에 돌아온 원고의 서명은 달랐다. 편집자의 필체가 당시 범인이 현장에 남긴 글씨와 똑같았던 것이다. 작가는 편집자가 바로 붙잡히지 않은 진범임을 깨달았다. 편집자는 이미 원고를 읽었으니, 작가가 진실에 다가가고 있다는 사실도 알 터였다. 작가는 자신도 결국 살해당할 것이라는 두려움과 절망에 휩싸여 스스로 목숨을 끊었다.",
-    "qs": [
-      "편집자의 필체가 범인이 현장에 남긴 글씨와 같았나요?",
-      "단순히 원고가 반려돼서 절망한 건가요?"
-    ],
+    "qs": ["작가는 서명에서 어떤 특징을 알아봤나요?","소설에 나온 사건은 작가 본인과 관련이 있나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","편집자의 필체가 범인이 현장에 남긴 글씨와 같았나요?","단순히 원고가 반려돼서 절망한 건가요?"],
     "answers": [
       [
         "^편집자의 필체가 범인이 현장에 남긴 글씨와 같았나요\\?$",
@@ -770,10 +759,7 @@ const cases=[
       "노인이 늘 몽롱한 상태라면, 자신이 겪은 일을 알릴 수 있었을까요?"
     ],
     "truth": "간호사가 먹인 약은 의사가 처방한 치료약이 아니었다. 간호사가 몰래 구입한 진정제였다. 노인을 늘 몽롱하고 무기력한 상태로 만들어, 움직이거나 도움을 청하거나 자신이 겪은 일을 가족에게 말하지 못하게 하려는 것이었다.\n\n간호사는 노인이 제대로 의사 표현을 하지 못하는 틈을 타 반복해서 학대했다. 가족이 보는 앞에서는 다정하게 약을 먹이고 행동도 조심했기 때문에 가족들은 눈치채지 못했다. 하지만 가족이 없을 때 벌어진 학대 장면이 오래된 CCTV 영상에 고스란히 남아 있었다. 가족들은 그 영상을 보고 경찰에 신고했다.",
-    "qs": [
-      "간호사는 노인을 계속 몽롱한 상태로 만들려고 했나요?",
-      "의사의 처방에 따라 먹인 치료약인가요?"
-    ],
+    "qs": ["옛 영상에는 가족들이 평소 보던 것과 다른 모습이 담겨 있나요?","약을 먹은 뒤 노인의 상태가 중요한 단서인가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","간호사는 노인을 계속 몽롱한 상태로 만들려고 했나요?","의사의 처방에 따라 먹인 치료약인가요?"],
     "answers": [
       [
         "^간호사는 노인을 계속 몽롱한 상태로 만들려고 했나요\\?$",
@@ -805,10 +791,7 @@ const cases=[
       "운전사는 그곳에 갔다가 자신도 해를 입을 거라고 생각했어요."
     ],
     "truth": "승객은 경찰이 수배 중인 살인범이었다. 경찰이 공개한 사건 내용에는 시신을 숨긴 장소가 나와 있었는데, 그곳이 바로 승객이 말한 목적지였다.\n\n운전사는 관련 뉴스를 본 적이 있었다. 처음에는 얼굴을 보고도 알아채지 못했지만, 목적지를 듣는 순간 눈앞의 승객이 수배범이라는 사실을 떠올렸다. 운전사는 그곳까지 데려다주면 자신도 해를 입을 수 있다고 생각했다. 칼을 꺼낸 것은 상대가 자신을 공격하기 전에 먼저 덤비려는 행동이었다.",
-    "qs": [
-      "운전사는 그 주소가 나온 수배 관련 뉴스를 본 적이 있나요?",
-      "운전사는 차를 고치려고 칼을 꺼냈나요?"
-    ],
+    "qs": ["목적지는 운전사에게 특별한 의미가 있나요?","운전사가 칼을 꺼낸 것은 승객이 말한 주소 때문인가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","운전사는 그 주소가 나온 수배 관련 뉴스를 본 적이 있나요?","운전사는 차를 고치려고 칼을 꺼냈나요?"],
     "answers": [
       [
         "^운전사는 그 주소가 나온 수배 관련 뉴스를 본 적이 있나요\\?$",
@@ -840,10 +823,7 @@ const cases=[
       "여기서 ‘자수’라고 표현한 행동이 실제로는 무엇이었는지 생각해 보세요."
     ],
     "truth": "화가가 앉은 자리에서는 호숫가의 외진 곳이 잘 보였다. 그림을 그리던 그는 다른 남자가 시신을 처리해 버리는 장면을 우연히 목격했다. 화가는 자신도 모르게 그 광경을 그림으로 옮겼다.\n\n이후 화가는 범인이 그림을 발견하면 누군가 범행을 봤다는 사실을 알아챌 것이고, 결국 자신까지 찾아올 것이라고 두려워했다. 그래서 그림을 남겨 둔 채 경찰서로 가 목격한 일을 알리고 신변 보호를 요청했다. 여기서 ‘자수했다’는 말은 자신의 범행을 인정했다는 뜻이 아니다. 목격자가 스스로 경찰서를 찾아가 진술한 일을 이 이야기에서는 그렇게 표현한 것이다.",
-    "qs": [
-      "화가는 다른 사람이 시신을 버리는 장면을 목격했나요?",
-      "화가가 그 사람을 죽였나요?"
-    ],
+    "qs": ["그림에 사건과 관련된 단서가 담겨 있나요?","화가는 전에 이 호숫가에 온 적이 있나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","화가는 다른 사람이 시신을 버리는 장면을 목격했나요?","화가가 그 사람을 죽였나요?"],
     "answers": [
       [
         "^화가는 다른 사람이 시신을 버리는 장면을 목격했나요\\?$",
@@ -875,10 +855,7 @@ const cases=[
       "한쪽은 이번 만남에서 또다시 상대의 죄를 뒤집어쓸 수 있다고 생각했어요."
     ],
     "truth": "오래전 동생이 중대한 범죄를 저지르자, 형제는 추적을 피하려고 서로 신분을 바꾸기로 했다. 형은 동생의 신분으로 고향에 남아 위험을 감수했고, 동생은 형의 신분으로 타지에 숨어 지냈다. 겉으로 알려진 두 사람의 행적과 실제 신분은 서로 달랐다.\n\n이번에 얼굴을 마주했을 때 형은 동생의 표정과 손에 새로 생긴 흔적을 살폈다. 그리고 동생이 도피 중에도 자신의 신분으로 또 다른 살인을 저질렀다고 판단했다. 사건이 드러나면 그 죄까지 자신이 뒤집어쓰고 사형을 당할 것이라고 생각한 형은, 더 이상 동생 대신 책임지지 않으려고 동생을 죽였다.",
-    "qs": [
-      "형제는 서로 신분을 바꾼 적이 있나요?",
-      "두 사람은 줄곧 각자 본래의 신분으로 살았나요?"
-    ],
+    "qs": ["형제의 외모가 똑같다는 점이 중요한가요?","형은 동생에게서 이상한 점을 발견했나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","형제는 서로 신분을 바꾼 적이 있나요?","두 사람은 줄곧 각자 본래의 신분으로 살았나요?"],
     "answers": [
       [
         "^형제는 서로 신분을 바꾼 적이 있나요\\?$",
@@ -910,10 +887,7 @@ const cases=[
       "나는 범인이 거울로 내 움직임을 살피고 있다고 생각했어요."
     ],
     "truth": "상자 안에는 잘린 사람의 귀와 협박 쪽지가 들어 있었다. 쪽지에는 범인이 내 일거수일투족을 지켜보고 있으며 다음 차례는 나라는 내용이 적혀 있었다.\n\n나는 범인이 이미 집 안에 숨어 있다고 생각했다. 직접 모습을 드러내지 않고도 거울에 비친 내 모습을 보며 움직임과 위치를 살피고 있을 것 같았다. 거울을 없애면 그런 방식으로 나를 감시할 수는 없을 것이라고 여긴 나는, 어떻게든 위험에서 벗어나려고 집 안의 거울을 모두 깨뜨렸다.",
-    "qs": [
-      "나는 범인이 거울에 비친 내 모습을 지켜본다고 생각했나요?",
-      "거울에 초자연적인 힘이 있었나요?"
-    ],
+    "qs": ["택배 안의 물건은 집 안의 거울과 관련이 있나요?","거울을 깬 것은 어떤 일이 계속되는 것을 막기 위해서인가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","나는 범인이 거울에 비친 내 모습을 지켜본다고 생각했나요?","거울에 초자연적인 힘이 있었나요?"],
     "answers": [
       [
         "^나는 범인이 거울에 비친 내 모습을 지켜본다고 생각했나요\\?$",
@@ -945,10 +919,7 @@ const cases=[
       "형사는 그가 시신이 있다는 것을 미리 알고 있었다고 판단했어요."
     ],
     "truth": "녹음기에는 사건 전후의 소리가 녹음돼 있었다. 형사는 우연히 시신을 발견한 사람이라면 놀라서 소리를 지르거나 호흡이 흐트러졌을 것이라고 생각했다. 그런데 녹음 속 신고자는 시신 옆에서도 숨소리를 죽이고 일정한 호흡을 유지하며, 작은 소리조차 내지 않으려고 조심하고 있었다.\n\n형사는 이를 시신이 그곳에 있다는 사실과 현장 상황을 미리 알고 있었다는 단서로 받아들였다. 범인은 시신을 처음 발견한 사람처럼 신고해 의심을 피하려 했다. 하지만 이 이야기에서는 현장을 이미 알고 있는 듯한 행동이 녹음에 남으면서 정체가 드러난다.",
-    "qs": [
-      "형사는 신고자가 시신이 있는 곳을 미리 알고 있었다고 생각했나요?",
-      "녹음에 신고자가 놀라서 외치는 소리가 있었나요?"
-    ],
+    "qs": ["녹음된 내용의 시간 순서가 중요한 단서인가요?","신고자의 행동은 보통 사람이 시신을 발견했을 때와 달랐나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","형사는 신고자가 시신이 있는 곳을 미리 알고 있었다고 생각했나요?","녹음에 신고자가 놀라서 외치는 소리가 있었나요?"],
     "answers": [
       [
         "^형사는 신고자가 시신이 있는 곳을 미리 알고 있었다고 생각했나요\\?$",
@@ -980,10 +951,7 @@ const cases=[
       "매장 안에서의 관찰과 퇴근 후의 미행은 이어지는 행동이었어요."
     ],
     "truth": "우비는 단순히 비를 피하려고 입은 것이 아니었다. 얼굴을 가려 CCTV에 신원이 드러나지 않게 하려는 변장이었다. 범인은 물건을 사려던 것이 아니라, 범행에 앞서 매장과 직원을 살펴보려고 편의점에 들어왔다.\n\n그는 직원의 얼굴과 특징을 확인하고 퇴근 시간을 파악했다. 함께 일하는 사람이 있는지, 매장 보안은 어떤지도 살폈다. 폭우 속에서 우비까지 쓰고 있었으니 CCTV에는 얼굴이 선명하게 찍히기 어려웠다. 필요한 정보를 확인한 범인은 퇴근하는 직원을 집까지 따라가 그날 밤 살해했다.",
-    "qs": [
-      "우비를 입은 사람은 범행 전에 현장을 살피러 온 건가요?",
-      "그 사람은 단순히 물건을 사러 온 건가요?"
-    ],
+    "qs": ["우비를 입은 사람은 누군가의 신원을 확인하러 왔나요?","직원의 죽음은 편의점에서의 만남과 관련이 있나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","우비를 입은 사람은 범행 전에 현장을 살피러 온 건가요?","그 사람은 단순히 물건을 사러 온 건가요?"],
     "answers": [
       [
         "^우비를 입은 사람은 범행 전에 현장을 살피러 온 건가요\\?$",
@@ -1015,10 +983,7 @@ const cases=[
       "선물을 보낸 사람과 사진 속 피해자는 직접적인 관련이 있어요."
     ],
     "truth": "퍼즐의 원본은 살해된 피해자의 사진이었다. 선물을 보낸 사람은 그 피해자를 죽인 범인이었다. 그는 사진을 퍼즐로 만든 뒤, 눈 부분에 해당하는 조각 하나를 일부러 빼놓았다.\n\n소녀가 조각을 맞출수록 피해자의 얼굴이 서서히 드러났다. 마지막 한 칸을 남겨 두었을 때, 소녀는 자신이 지금까지 맞춘 그림이 무엇인지 알아봤다. 끝내 채울 수 없는 빈칸은 피해자의 눈 자리였다. 그 사실을 깨달은 소녀는 충격에 비명을 질렀다.",
-    "qs": [
-      "선물을 보낸 사람이 일부러 퍼즐 조각을 뺐나요?",
-      "퍼즐의 그림은 평범한 풍경화였나요?"
-    ],
+    "qs": ["퍼즐의 그림은 소녀 본인과 관련이 있나요?","마지막으로 남은 빈칸에 중요한 정보가 있었나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","선물을 보낸 사람이 일부러 퍼즐 조각을 뺐나요?","퍼즐의 그림은 평범한 풍경화였나요?"],
     "answers": [
       [
         "^선물을 보낸 사람이 일부러 퍼즐 조각을 뺐나요\\?$",
@@ -1050,10 +1015,7 @@ const cases=[
       "누군가 다른 사람의 대출증을 쓰고 있었을 수도 있어요."
     ],
     "truth": "카드의 마지막 대출자는 오래전 실종된 사람이었다. 경찰은 그가 이미 살해됐을 것으로 추정하고 있었다. 그런데 대출 기록에 적힌 날짜는 그가 실종되고도 한참 지난 뒤였다.\n\n사서는 죽은 사람이 다시 와서 책을 빌릴 수는 없다고 생각했다. 실제로는 범인이 피해자의 대출증을 가져간 뒤, 피해자가 죽고 나서도 가끔 그 사람 행세를 하며 책을 빌리고 있었다. 마지막 대출 기록은 피해자가 살아 있다는 증거가 아니라, 다른 누군가가 그의 대출증을 사용했다는 흔적이었다.",
-    "qs": [
-      "누군가 실종자의 대출증을 대신 사용했나요?",
-      "마지막 대출 기록은 그 사람이 실종되기 전에 남긴 건가요?"
-    ],
+    "qs": ["이름과 날짜를 함께 봐야 이상한 점을 알 수 있나요?","사서는 카드에 적힌 사람의 사정을 알고 있었나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","누군가 실종자의 대출증을 대신 사용했나요?","마지막 대출 기록은 그 사람이 실종되기 전에 남긴 건가요?"],
     "answers": [
       [
         "^누군가 실종자의 대출증을 대신 사용했나요\\?$",
@@ -1085,10 +1047,7 @@ const cases=[
       "그 사람은 남을 지켜본 것이 아니라 직접 행동했어요."
     ],
     "truth": "범인은 사람들이 불꽃놀이에 정신을 빼앗길 순간을 기다리고 있었다. 불꽃이 터지는 굉음은 밀치거나 다투는 소리를 덮었고, 하늘을 가득 채운 빛은 모두의 시선을 위로 끌어올렸다.\n\n범인은 바로 그 틈을 타 남자를 옥상 아래로 밀었다. 다른 사람들은 불꽃을 보느라 곁에서 벌어진 일을 보지 못했다. 그래서 모두가 실족 사고라고 생각했다. 살인이라는 사실을 알고 있던 한 사람은 별도의 목격자가 아니라, 남자를 직접 밀어 버린 범인 자신이었다.",
-    "qs": [
-      "살인이라는 사실을 알고 있던 사람은 범인 자신인가요?",
-      "남자는 실제로 발을 헛디뎌 떨어진 건가요?"
-    ],
+    "qs": ["불꽃놀이 소리가 주변 사람들의 판단에 영향을 줬나요?","남자가 떨어진 정확한 시점이 중요한가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","살인이라는 사실을 알고 있던 사람은 범인 자신인가요?","남자는 실제로 발을 헛디뎌 떨어진 건가요?"],
     "answers": [
       [
         "^살인이라는 사실을 알고 있던 사람은 범인 자신인가요\\?$",
@@ -1120,10 +1079,7 @@ const cases=[
       "노인은 소리를 듣고 이웃의 비밀을 알아챘어요. 그 뒤 무슨 일이 생겼을까요?"
     ],
     "truth": "보청기가 고장 나 있는 동안 노인은 옆방에서 나는 소리를 제대로 듣지 못했다. 옆집 사람은 범인이었고, 그동안 자기 방에서 시신을 처리하고 있었다. 노인이 소리를 듣고 신고할 걱정은 하지 않았다.\n\n하지만 수리한 보청기를 다시 착용하자 노인은 옆방의 수상한 소리를 또렷하게 들을 수 있었다. 범인은 노인이 자신의 비밀을 알아챘다는 사실을 곧 눈치챘다. 결국 그날 밤 노인의 방에 몰래 들어가, 비밀이 드러나는 것을 막으려고 노인을 살해했다.",
-    "qs": [
-      "노인은 이웃의 비밀을 알아챈 탓에 살해됐나요?",
-      "보청기 자체의 고장 때문에 죽은 건가요?"
-    ],
+    "qs": ["보청기를 고친 덕분에 노인은 몰랐던 사실을 알게 됐나요?","노인이 들은 소리는 방 밖에서 났나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","노인은 이웃의 비밀을 알아챈 탓에 살해됐나요?","보청기 자체의 고장 때문에 죽은 건가요?"],
     "answers": [
       [
         "^노인은 이웃의 비밀을 알아챈 탓에 살해됐나요\\?$",
@@ -1155,10 +1111,7 @@ const cases=[
       "범인은 그 종이를 훨씬 전부터 준비해 두었어요."
     ],
     "truth": "경찰관이 주목한 것은 글씨가 아니라 종이가 접힌 부분이었다. 접힌 자국은 오래되어 누렇게 변해 있었다. 여러 번 접어 보관한 흔적이었고, 사망 당일에 생긴 것으로 보기에는 너무 오래돼 있었다. 경찰관은 죽은 사람이 최근의 일을 두고 오래전부터 유서를 써서 접어 두었을 이유는 없다고 생각했다.\n\n실제로는 범인이 오래전에 피해자를 협박해 그 글을 쓰게 했다. 범인은 종이를 접어 보관해 두었다가, 피해자를 살해한 뒤 현장에 놓아 자살처럼 꾸몄다. 글씨가 피해자 본인의 것이라는 사실과 그 글을 남긴 경위는 별개의 문제였던 것이다.",
-    "qs": [
-      "범인이 미리 피해자를 협박해 유서를 쓰게 했나요?",
-      "종이의 접힌 자국은 사건 당일에 생긴 건가요?"
-    ],
+    "qs": ["유서를 쓴 시점과 사망 시점이 다른가요?","접힌 자국은 종이가 한동안 보관됐다는 뜻인가요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","범인이 미리 피해자를 협박해 유서를 쓰게 했나요?","종이의 접힌 자국은 사건 당일에 생긴 건가요?"],
     "answers": [
       [
         "^범인이 미리 피해자를 협박해 유서를 쓰게 했나요\\?$",
@@ -1190,10 +1143,7 @@ const cases=[
       "멀리서 아이가 노는 것처럼 보이도록 누군가 꾸며 놓은 장면이에요."
     ],
     "truth": "그네에 앉아 있던 것은 살아 있는 아이가 아니라 아이의 시신이었다. 범인이 아이를 살해한 뒤 그네에 앉혀 놓은 것이었다. 범인은 멀지 않은 곳에 숨어 틈틈이 줄을 당겨 그네가 계속 흔들리게 했다.\n\n멀리서 보면 아이가 혼자 그네를 타고 노는 것처럼 보였다. 범인은 그렇게 꾸며 놓은 모습으로 지나가는 사람들을 가까이 유인하려 했다. 엄마는 다가가서야 그네 위에 무엇이 있는지 알아봤다. 놀란 엄마는 그 자리에서 도망치며 경찰에 신고했다.",
-    "qs": [
-      "근처에 숨은 사람이 그네의 줄을 당기고 있었나요?",
-      "그네에 앉아 있던 아이는 살아 있었나요?"
-    ],
+    "qs": ["멀리서 보였던 모습과 가까이에서 확인한 모습이 달랐나요?","그네가 움직이는 바람에 엄마가 상황을 잘못 판단했나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","근처에 숨은 사람이 그네의 줄을 당기고 있었나요?","그네에 앉아 있던 아이는 살아 있었나요?"],
     "answers": [
       [
         "^근처에 숨은 사람이 그네의 줄을 당기고 있었나요\\?$",
@@ -1225,10 +1175,7 @@ const cases=[
       "이 시계는 개조된 뒤 무언가를 숨기는 데 쓰였어요."
     ],
     "truth": "세입자는 알람시계를 분해해 내부를 개조해 놓았다. 케이스 안에는 원래의 시계 장치 대신 사람의 신체 조직 일부가 숨겨져 있었다. 세입자는 그 조직을 숨긴 범인이었다.\n\n째깍거리는 소리도 톱니바퀴가 움직이는 소리가 아니었다. 안에 있던 작은 뼛조각들이 진동에 따라 서로 부딪치면서 나는 소리였다. 집주인은 시계를 자세히 살펴보다가 케이스 틈새에서 수상한 흔적을 발견했다. 평범한 시계가 아니라는 사실을 알아챈 집주인은 경찰에 신고했다.",
-    "qs": [
-      "세입자가 알람시계 내부를 개조했나요?",
-      "그 소리는 정상적인 시계 장치에서 난 건가요?"
-    ],
+    "qs": ["시계의 겉모습과 들리는 소리 사이에 모순이 있나요?","집주인은 방에 있어서는 안 될 무언가를 발견했나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","세입자가 알람시계 내부를 개조했나요?","그 소리는 정상적인 시계 장치에서 난 건가요?"],
     "answers": [
       [
         "^세입자가 알람시계 내부를 개조했나요\\?$",
@@ -1260,10 +1207,7 @@ const cases=[
       "미리 여러 번 연습했다면 망설임 없이 말할 수 있겠죠."
     ],
     "truth": "사건이 벌어진 곳은 밤이라 어두웠고, 주변도 제대로 보이지 않았다. 판사는 우연히 현장을 본 사람이라면 그 상황에서 모든 장면을 빠짐없이 기억하기는 어려웠을 것이라고 생각했다. 그런데 증인의 말에는 기억이 흐릿한 부분도, 망설임도 없었다.\n\n증인이 그렇게 자세히 알고 있었던 것은 직접 범행했기 때문이었다. 그는 목격자인 척 재판을 엉뚱한 방향으로 끌고 가려고 증언을 미리 여러 번 연습했다. 이 이야기에서 판사는 어두운 현장에 비해 지나치게 정확하고 빈틈없는 진술을 수상하게 여겼고, 그것이 진범을 알아채는 계기가 됐다.",
-    "qs": [
-      "증인은 미리 증언을 여러 번 연습했나요?",
-      "사건 현장은 환하게 밝혀져 있었나요?"
-    ],
+    "qs": ["증인은 자신이 있던 위치에서 볼 수 없는 세부 사항을 말했나요?","증언 내용은 현장 상황과 모순되나요?","이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","증인은 미리 증언을 여러 번 연습했나요?","사건 현장은 환하게 밝혀져 있었나요?"],
     "answers": [
       [
         "^증인은 미리 증언을 여러 번 연습했나요\\?$",
@@ -1296,7 +1240,7 @@ cases.push(...readCustomCases().map(customCaseToGame));
 for(const c of cases)c.answers=c.answers.map(([p,a,t])=>[new RegExp(p),a,t]);
 const $=id=>document.getElementById(id);let current=0,asked=0,hints=0,revealed=false;const dialog=$('dialog');
 function addMessage(text,user=false){const el=document.createElement('div');el.className='message'+(user?' user':'');const label=document.createElement('div');label.className='message-label';label.textContent=user?'나 · 탐정':'✳ 야탕 진행자';const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;el.append(label,bubble);$('chat').append(el);$('chat').scrollTop=$('chat').scrollHeight;return bubble}
-function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage(c.customId?'직접 만든 사건이에요. 힌트와 정답 보기를 이용해 주세요. 자동 문답은 지원하지 않아요.':'현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';const saved=window.YetangArchive.get(c,index);asked=saved.asked;hints=saved.hints;revealed=saved.revealed;$('count').textContent=String(asked).padStart(2,'0');$('hint-count').textContent=hints+' / 3';if(hints){$('hint-box').hidden=false;$('hint-box').textContent=(true?'힌트 ':'提示 ')+hints+' / 3 · '+c.hints[hints-1];}if(saved.chat.length){$('chat').replaceChildren();saved.chat.forEach(m=>addMessage(m.text,m.user));}window.YetangArchive.patch(c,index,{started:saved.started||!$('game-screen').hidden});window.dispatchEvent(new Event('case-update'));return {case: c.title}}
+function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('유효하지 않은 사건입니다.');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'조사 중 ':'사건 열기 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">오늘 밤의 추리가 시작됩니다</div>';const bubble=addMessage('야탕에 오신 걸 환영해요. 함께 사건을 풀어 볼까요? 이야기를 읽고 ‘예’ 또는 ‘아니요’로 답할 수 있는 질문을 해 보세요.');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>예</span><span>아니요</span><span>관련 없음</span>';bubble.append(chips);addMessage(c.customId?'직접 만든 사건이에요. 힌트와 정답 보기를 이용해 주세요. 자동 문답은 지원하지 않아요.':'현재는 미리 준비된 질문에만 답할 수 있어요. 아래 추천 질문부터 눌러 보세요.');$('suggestions').innerHTML='';(c.qs.length===10?c.qs:["이야기 속 인물들은 원래 아는 사이인가요?","사건이 일어난 순서가 중요한가요?","사건이 일어난 장소에 특별한 의미가 있나요?","누군가 중요한 사실을 일부러 숨겼나요?","어떤 물건이나 기록이 조작됐나요?","겉으로 보이는 이유와 실제 이유가 다른가요?","인물의 신분이 사건과 관련이 있나요?","누군가 다른 사람의 행동을 오해했나요?","이전에 일어난 일이 이번 사건의 원인인가요?","겉으로 드러나지 않은 목적이 있나요?"]).forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';const saved=window.YetangArchive.get(c,index);asked=saved.asked;hints=saved.hints;revealed=saved.revealed;$('count').textContent=String(asked).padStart(2,'0');$('hint-count').textContent=hints+' / 3';if(hints){$('hint-box').hidden=false;$('hint-box').textContent=(true?'힌트 ':'提示 ')+hints+' / 3 · '+c.hints[hints-1];}if(saved.chat.length){$('chat').replaceChildren();saved.chat.forEach(m=>addMessage(m.text,m.user));}window.YetangArchive.patch(c,index,{started:saved.started||!$('game-screen').hidden});window.dispatchEvent(new Event('case-update'));return {case: c.title}}
 function ask(q){if($('game-screen').hidden)throw Error('먼저 메인 화면에서 조사를 시작하세요.');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('질문은 1~300자로 입력하세요.');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}. ${a[2]}`:'아직 이 질문에 대한 답변은 준비되어 있지 않아요. 아래 추천 질문을 선택하거나 힌트를 확인해 보세요.';addMessage(answer);window.dispatchEvent(new Event('case-progress'));window.YetangArchive.saveChat?.();return {question:q,answer,questions:asked}}
 $('ask-form').onsubmit=e=>{e.preventDefault();const q=$('input').value.trim();if(!q)return;ask(q);$('input').value='';$('input').focus()};$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('ask-form').requestSubmit()}};
 $('hint').onclick=()=>{if(hints<3)hints++;$('hint-box').hidden=false;$('hint-box').textContent=`힌트 ${hints} / 3 · ${cases[current].hints[hints-1]}`;$('hint-count').textContent=`${hints} / 3`};

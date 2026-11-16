@@ -488,11 +488,15 @@ html[lang="ko"] :is(.story #story-text,.bubble,#dialog-body){line-height:1.95;wo
 #game-screen .host-below #input{min-height:60px;max-height:100px;font-size:16px;line-height:1.6}
 #game-screen .host-below .input-bottom{gap:8px}
 @media(max-width:760px){#game-screen .host-below .chat-panel{display:flex;flex-direction:column}#game-screen .host-below .chat-scroll{height:200px;flex:none;padding:12px 14px}#game-screen .host-below .composer{border-left:0;border-top:1px solid #80644466;padding:12px 14px}#game-screen .host-below .chat-heading{padding:12px 14px}}
+</style><style id="ten-question-examples">
+#game-screen .host-below .suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-height:170px;overflow-y:auto;overscroll-behavior:contain;gap:8px;padding:3px 5px 6px 3px;scrollbar-width:thin}
+#game-screen .host-below .suggestions button{min-width:0;min-height:44px;text-align:left;white-space:normal;overflow-wrap:anywhere;font-size:13px;line-height:1.6;padding:8px 10px}
+@media(max-width:420px){#game-screen .host-below .suggestions{grid-template-columns:minmax(0,1fr);max-height:170px}}
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>夜汤</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">夜汤侦探事务所 · 案卷阅览室</span><div class="header-actions"><a class="quiet language-switch nav-key" href="ko/index.html" lang="ko" aria-label="切换到韩文版">한국어</a><a class="back-home quiet nav-key" href="#home" hidden>返回主界面</a><button class="quiet" id="rules">怎么玩</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>夜汤</h1><div class="title-subtitle">侦 探 事 务 所</div><p class="title-premise">这是一个侦探游戏，请还原故事的全貌</p><nav class="title-menu" aria-label="游戏主菜单"><a class="enter-game" href="#cases">开始游戏</a><button id="title-rules">游戏说明</button><a id="resume-game" href="#game/0" hidden>继续调查</a></nav><p class="title-mode">AI 海龟汤 · 单人推理 · 演示模式</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>夜深了。<br>还有一桩悬案。</h1><p>一段不寻常的故事，一场只凭提问的调查。<br>翻开案卷，找出藏在日常背后的真相。</p><div class="home-rules"><span>阅读汤面</span><i>—</i><span>提问推理</span><i>—</i><span>还原真相</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">今晚，调查哪一桩？</h2></div><span class="archive-total">20 份案卷 · 悬疑故事</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">开始调查</button></div><p class="home-demo">演示模式 · 预设问答，尚未接入实时 AI</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 调查室</span><span>阅读案卷后，向主持人提问。</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 档案索引</div><div class="section-heading"><h1>待解密案卷</h1><span>20</span></div><p class="muted intro">选择一份案卷，开始调查。</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>别急着相信眼前的故事。<br><span class="muted">好的问题，比答案更重要。</span></p></div></aside>
 <section class="case-workspace"><div class="case-top"><span class="eyebrow">正在调查 / <span id="case-num">001</span></span><span class="tag" id="level">入门</span></div><article class="story"><div class="case-watermark" aria-hidden="true" id="watermark">01</div><span class="confidential-stamp" aria-hidden="true">未结案<br><small>OPEN CASE</small></span><div class="file-label">CONFIDENTIAL / 调查档案 <span id="file-number">NO. 001</span></div><h2 id="title"></h2><div class="story-tags"><span id="genre"></span><span>·</span><span id="duration"></span><span>·</span><span>悬疑汤题</span></div><div class="divider"><span>汤 面</span></div><div id="story-text"></div><p class="question" id="question"></p><div class="story-foot"><span>看似矛盾的地方，就是线索。</span><span>✳</span></div></article><div class="tools-row"><button id="hint"><span>✧</span> 给我一点提示 <small id="hint-count">0 / 3</small></button><button id="reveal" class="quiet">揭晓汤底</button></div><div class="hint-box" id="hint-box" hidden></div><div class="investigation"><div><span class="eyebrow">INVESTIGATION LOG</span><h3>循着线索，还原真相。</h3></div><div class="stats"><strong id="count">00</strong><span>已提问</span></div></div><div class="rule-line"><span>01 阅读汤面</span><i></i><span class="active">02 提问推理</span><i></i><span>03 还原真相</span></div></section>
-<section class="chat-panel"><div class="chat-heading"><div class="host-symbol">✳</div><div><h2>AI 调查助手</h2><span class="muted">调查笔录 · 逐问记录</span></div><span class="demo-badge">演示模式</span></div><div class="chat-scroll" id="chat" aria-live="polite"></div><div class="composer"><p class="suggest-label">试着从这里开始</p><div class="suggestions" id="suggestions"></div><form id="ask-form"><label class="sr-only" for="input">向主持人提问</label><textarea id="input" rows="2" maxlength="300" placeholder="问一个可以用「是 / 否」回答的问题…"></textarea><div class="input-bottom"><span>Enter 发送 · Shift + Enter 换行</span><button class="send" aria-label="发送问题" type="submit">发送</button></div></form><p class="demo-note">当前为预设问答演示，尚未接入实时 AI。</p></div></section></main></div><footer><span>夜汤侦探事务所 / 每一份案卷，都等待一个答案。</span><span>OBSERVE · QUESTION · RECONSTRUCT</span></footer>
+<section class="chat-panel"><div class="chat-heading"><div class="host-symbol">✳</div><div><h2>AI 调查助手</h2><span class="muted">调查笔录 · 逐问记录</span></div><span class="demo-badge">演示模式</span></div><div class="chat-scroll" id="chat" aria-live="polite"></div><div class="composer"><p class="suggest-label">不知道怎么问？试试这 10 个问题</p><p class="example-help">每次问一个事实。点击例题直接发送，向下滚动查看全部 10 个。</p><div class="suggestions" id="suggestions"></div><form id="ask-form"><label class="sr-only" for="input">向主持人提问</label><textarea id="input" rows="2" maxlength="300" placeholder="问一个可以用「是 / 否」回答的问题…"></textarea><div class="input-bottom"><span>Enter 发送 · Shift + Enter 换行</span><button class="send" aria-label="发送问题" type="submit">发送</button></div></form><p class="demo-note">当前为预设问答演示，尚未接入实时 AI。</p></div></section></main></div><footer><span>夜汤侦探事务所 / 每一份案卷，都等待一个答案。</span><span>OBSERVE · QUESTION · RECONSTRUCT</span></footer>
 <dialog id="dialog"><button class="close quiet" aria-label="关闭">×</button><span class="eyebrow" id="dialog-label"></span><h2 id="dialog-title"></h2><div id="dialog-body"></div><button class="primary" id="dialog-action">知道了</button></dialog><script>
 /* Versioned, per-case local saves. Never insert stored player text as HTML. */
 (()=>{
@@ -536,10 +540,7 @@ const cases=[
       "纸条上的编号方式暴露了熟人的习惯。"
     ],
     "truth": "这起连环案一直没有明确的受害者编号，警方对外也没有公开过给受害者排序这件事，只有负责现场的法医和他搭档私下会记录。数字不是地址、不是电话，是搭档自己私下给每一个受害者标的遇害序号。之前所有案子，搭档都借着出外勤、帮忙搬运尸体的机会作案，再混在正常案件里掩盖。这一次他失手，记录序号的纸条不小心落在了新受害者身上。法医一眼认出这个编号的记录方式，就是搭档独有的习惯，他瞬间反应过来，一直和自己并肩查案的人，就是隐藏的连环凶手。",
-    "qs": [
-      "数字与受害者的遇害顺序有关吗？",
-      "数字是电话号码吗？"
-    ],
+    "qs": ["纸条上的数字需要结合卷宗才能理解吗？","同事的工作身份与案件有关吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","数字与受害者的遇害顺序有关吗？","数字是电话号码吗？"],
     "answers": [
       [
         "^数字与受害者的遇害顺序有关吗？$",
@@ -571,10 +572,7 @@ const cases=[
       "亲人出院后，我失去了身边的见证人。"
     ],
     "truth": "隔壁病房原本的病人早就已经遇害了，隔壁留下来的那个人并不是家属，而是凶手。凶手以陪护的名义留在病房，白天伪装成安静陪护的样子，等到深夜就悄悄处理尸体，所以才会有持续的切割声。我之前听到声音，以为只是医疗器械或者别的动静，没有多想。凶手一直清楚我每天晚上都能听见这个声音，只是不确定我有没有起疑心。之前因为我亲人还在，贸然杀我容易引起注意。等到亲人出院，没有别的目击者，我单独走进隔壁房间的这一刻，凶手直接动手灭口，杜绝隐患。",
-    "qs": [
-      "隔壁留下的人是凶手吗？",
-      "声音来自正常治疗吗？"
-    ],
+    "qs": ["声音的来源与病房里的人员有关吗？","我进入隔壁病房后看到了不该看到的东西吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","隔壁留下的人是凶手吗？","声音来自正常治疗吗？"],
     "answers": [
       [
         "^隔壁留下的人是凶手吗？$",
@@ -606,10 +604,7 @@ const cases=[
       "我认出的那个人，已经进入屋内。"
     ],
     "truth": "这张合照是很多年前和一群朋友一起拍的。在过去几年里，照片上除了我之外的其他人，已经接连失踪、陆续被发现遇害，警方一直认定凶手就是合影当中的其中一人。刚刚我仔细辨认照片，终于确定了凶手是谁。而就在我看照片的这一刻，我听见了细微的动静，意识到这个凶手早就潜入了我的房子里，正藏在屋内的某处，所以我不敢开灯、不敢出声。",
-    "qs": [
-      "我认为凶手已经进入家中吗？",
-      "我害怕的是照片里的鬼魂吗？"
-    ],
+    "qs": ["照片里有我认识的人吗？","锁门和关灯是为了避免被人发现吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","我认为凶手已经进入家中吗？","我害怕的是照片里的鬼魂吗？"],
     "answers": [
       [
         "^我认为凶手已经进入家中吗？$",
@@ -641,10 +636,7 @@ const cases=[
       "我跳下去是为了逃离眼前的危险。"
     ],
     "truth": "脚步声并不是有人正常上楼，是凶手拖着一具沉重的尸体沿着楼梯往上走，拖到我家门口停下。凶手的目标本来就是我，他之前每晚拖尸体到门口，是在不断试探我的反应，观察我会不会开门、会不会察觉异常。而这一天，在脚步声响起之前，凶手已经想办法撬开门锁进到了我的屋子里面。脚步声是他刻意制造的声响吸引我的注意力，我意识到自己前后都被堵住，没有别的逃生路线，只能选择从阳台跳下求生。",
-    "qs": [
-      "我跳下阳台是为了逃生吗？",
-      "门外的人一直在正常拜访邻居吗？"
-    ],
+    "qs": ["这次脚步声出现的时间与往常不同吗？","脚步声停在我家门口是有意为之吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","我跳下阳台是为了逃生吗？","门外的人一直在正常拜访邻居吗？"],
     "answers": [
       [
         "^我跳下阳台是为了逃生吗？$",
@@ -676,10 +668,7 @@ const cases=[
       "原稿里的未公开细节，让作家觉得自己已被盯上。"
     ],
     "truth": "作家这本书写的是一桩多年前悬而未破的凶杀案。为了让故事真实，他在文稿里悄悄写下了一个只有凶手才会知道、从来没有对外公开过的现场细节，用来筛选身边可疑的人。之前和他对接稿件的编辑，一直表现得很正常。可这次退回的稿子上，编辑的签名笔迹，和当年案发现场遗留下来的凶手字迹完全吻合。作家瞬间明白，这个对接自己很久的编辑，就是当年逃脱抓捕的真凶。对方早就看完了文稿里的秘密细节，清楚作家已经快要查到真相，自己迟早会被灭口，巨大的恐惧和绝望压垮了他，选择自行了断。",
-    "qs": [
-      "编辑的笔迹与案发现场留下的字迹吻合吗？",
-      "作家只是因为稿件被退回而绝望吗？"
-    ],
+    "qs": ["作家认出了签名中的某个特征吗？","小说涉及的案件与作家本人有关吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","编辑的笔迹与案发现场留下的字迹吻合吗？","作家只是因为稿件被退回而绝望吗？"],
     "answers": [
       [
         "^编辑的笔迹与案发现场留下的字迹吻合吗？$",
@@ -711,10 +700,7 @@ const cases=[
       "长期昏沉让老人难以表达遭遇。"
     ],
     "truth": "护士给老人吃的并不是医嘱开出的治病药物，是镇静类药剂。她私下采购药品，每天按时喂给老人，目的是让老人长期昏沉无力，丧失行动、呼救和表达的能力。趁着老人意识模糊、没法向家属告状的时候，她反复虐待老人。日常当面喂药的时候她会伪装温柔，家属在场的时候也格外收敛。监控里记录下了家属不在时，她虐待老人的全部画面，证据确凿。",
-    "qs": [
-      "护士给的药是为了让老人长期昏沉吗？",
-      "这些药是按医嘱用于正常治疗的吗？"
-    ],
+    "qs": ["旧录像与家属平时看到的情况不同吗？","老人服药后的状态是关键吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","护士给的药是为了让老人长期昏沉吗？","这些药是按医嘱用于正常治疗的吗？"],
     "answers": [
       [
         "^护士给的药是为了让老人长期昏沉吗？$",
@@ -746,10 +732,7 @@ const cases=[
       "司机认为自己将成为下一名受害者。"
     ],
     "truth": "这个男人是警方正在通缉的杀人犯，之前警方公开的案情通报里，写明了凶手藏尸的地点，正是男人刚刚随口说出的地址。司机看过这条通缉新闻，一开始没认出乘客的长相，但是这句目的地直接让司机反应过来，坐上自己车的就是逃犯。司机担心对方会在到达藏尸地之后伤害自己，决定抢先动手。",
-    "qs": [
-      "司机看过与该地址有关的通缉新闻吗？",
-      "司机只是想用刀修理汽车吗？"
-    ],
+    "qs": ["目的地对司机有特殊意义吗？","司机拿刀与乘客说出地址有关吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","司机看过与该地址有关的通缉新闻吗？","司机只是想用刀修理汽车吗？"],
     "answers": [
       [
         "^司机看过与该地址有关的通缉新闻吗？$",
@@ -781,10 +764,7 @@ const cases=[
       "这里的“自首”并不等于承认自己杀了人。"
     ],
     "truth": "画家选的写生位置，刚好可以清楚看到湖边偏僻角落。他画画的时候，无意间亲眼目睹了另一个男人正在抛尸、处理尸体的全过程，他下意识拿起画笔，把眼前看到的场景完整画在了画布上。画家知道凶手很快就会发现有人目击了犯罪过程，并且会找到这幅画，顺着线索找到自己。他害怕被凶手追杀，于是主动到警局说明情况，把自己作为目击证人交给警方保护，相当于自首作证。",
-    "qs": [
-      "画家目击了别人抛尸吗？",
-      "画家是那起杀人案的凶手吗？"
-    ],
+    "qs": ["画中出现了与案件有关的细节吗？","画家曾经来过这个湖边吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","画家目击了别人抛尸吗？","画家是那起杀人案的凶手吗？"],
     "answers": [
       [
         "^画家目击了别人抛尸吗？$",
@@ -816,10 +796,7 @@ const cases=[
       "这次见面让一方意识到，替罪的风险又增加了。"
     ],
     "truth": "很早之前弟弟犯下了重罪，为了躲避追查，兄弟二人商量互换身份，由哥哥顶着弟弟的身份留在老家，弟弟拿着哥哥的身份外出躲藏。长久以来一直是哥哥在替弟弟承担风险。这次哥哥回家碰面，在对视的时候，他从弟弟的神态、手上新增的痕迹判断出来：弟弟在外面躲藏期间，又冒用哥哥的身份犯下了新的命案。一旦新案子曝光，所有罪责都会算在哥哥头上，哥哥会被判死刑。为了不再替弟弟背负死罪，也为了断掉这个隐患，哥哥选择杀掉弟弟。",
-    "qs": [
-      "兄弟曾经互换身份吗？",
-      "兄弟双方一直各自使用真实身份吗？"
-    ],
+    "qs": ["兄弟外貌相同这一点对真相很重要吗？","哥哥从弟弟身上发现了异常吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","兄弟曾经互换身份吗？","兄弟双方一直各自使用真实身份吗？"],
     "answers": [
       [
         "^兄弟曾经互换身份吗？$",
@@ -851,10 +828,7 @@ const cases=[
       "砸镜子来自我对凶手监视方式的猜测。"
     ],
     "truth": "箱子里面装着一截人的耳朵，里面附带一张纸条，上面写着恐吓的话语，凶手告诉我，他一直在暗处盯着我的一举一动，下一个目标就是我。我第一反应是，凶手此刻正藏在我房子里某个反光死角，依靠镜子的反射观察我的动作、锁定我的位置。只要镜子全部被打碎，凶手就没办法借助反光偷偷监视我，我才能稍微规避危险。",
-    "qs": [
-      "我认为凶手在利用镜面反射监视我吗？",
-      "镜子具有超自然力量吗？"
-    ],
+    "qs": ["包裹里的物品与家里的镜子有关吗？","砸镜子是为了阻止某件事继续发生吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","我认为凶手在利用镜面反射监视我吗？","镜子具有超自然力量吗？"],
     "answers": [
       [
         "^我认为凶手在利用镜面反射监视我吗？$",
@@ -886,10 +860,7 @@ const cases=[
       "侦探认为他早已知道现场是什么样。"
     ],
     "truth": "录音完整记录下了案发前后的声音。如果报案人只是偶然路过、意外发现尸体，正常情况下看见尸体的瞬间会慌乱、惊呼、呼吸急促。但是录音里，报案人在尸体旁边的时候，呼吸刻意放得极轻、节奏稳定，全程小心翼翼控制自己发出的声响，没有一丝受惊的慌乱。只有提前知道尸体在这里、清楚现场情况的凶手，才会刻意压抑动静，他假装成第一目击者报案，试图摆脱嫌疑，却被录音笔暴露了。",
-    "qs": [
-      "侦探怀疑报案人事先知道尸体在那里吗？",
-      "录音中的报案人有明显惊呼吗？"
-    ],
+    "qs": ["录音的时间顺序是关键线索吗？","报案人的行为与普通发现者不同吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","侦探怀疑报案人事先知道尸体在那里吗？","录音中的报案人有明显惊呼吗？"],
     "answers": [
       [
         "^侦探怀疑报案人事先知道尸体在那里吗？$",
@@ -921,10 +892,7 @@ const cases=[
       "店内观察与下班后的跟踪是连续的行动。"
     ],
     "truth": "雨衣是凶手用来遮挡面部、躲避监控的伪装。他这次来便利店不是买东西，是提前踩点。他需要确认收银员的长相、确认收银员下班的时间规律，同时悄悄记住收银员身上的特征，还留意收银员有没有同伴、店里安保情况。暴雨加上雨衣，监控很难拍到他清晰的脸。踩点确认信息之后，他跟踪收银员回到住处，当晚实施了行凶。",
-    "qs": [
-      "雨衣人是在提前踩点吗？",
-      "雨衣人只是来购物的吗？"
-    ],
+    "qs": ["雨衣人进店是为了确认某个人的身份吗？","收银员遇害与店里的见面有关吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","雨衣人是在提前踩点吗？","雨衣人只是来购物的吗？"],
     "answers": [
       [
         "^雨衣人是在提前踩点吗？$",
@@ -956,10 +924,7 @@ const cases=[
       "送礼者与照片中的受害者有直接关系。"
     ],
     "truth": "整套拼图的原图，是一张受害者的照片。送拼图的人就是杀害这名受害者的凶手，他把受害者的照片做成拼图，故意少放了一块拼图碎片。女孩一点点拼合画面，随着碎片越来越多，受害者完整的脸慢慢浮现，而空缺的那一块，刚好是受害者眼睛的位置。女孩拼到这里，终于看懂整张图是什么，瞬间崩溃尖叫。",
-    "qs": [
-      "缺失的拼图是送礼者故意拿掉的吗？",
-      "拼图原图是普通风景画吗？"
-    ],
+    "qs": ["拼图的画面与女孩本人有关吗？","最后缺少的位置包含重要信息吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","缺失的拼图是送礼者故意拿掉的吗？","拼图原图是普通风景画吗？"],
     "answers": [
       [
         "^缺失的拼图是送礼者故意拿掉的吗？$",
@@ -991,10 +956,7 @@ const cases=[
       "有人可能仍在使用不属于自己的借书证。"
     ],
     "truth": "登记卡最后登记的借阅人，是多年前就已经失踪、警方推定早已遇害的人。而这条借阅记录的填写日期，是在这个人被认定失踪之后很久。管理员清楚，这个人不可能在遇害之后再来图书馆借书。只有杀害他的凶手，拿走了死者遗留的借书证，在他死后，还偶尔冒充死者来图书馆借书，留下了这条异常记录。",
-    "qs": [
-      "有人冒用失踪者的借书证吗？",
-      "这条借阅记录是在失踪之前填写的吗？"
-    ],
+    "qs": ["名字和日期必须结合起来看才会发现异常吗？","管理员知道卡片上那个人的情况吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","有人冒用失踪者的借书证吗？","这条借阅记录是在失踪之前填写的吗？"],
     "answers": [
       [
         "^有人冒用失踪者的借书证吗？$",
@@ -1026,10 +988,7 @@ const cases=[
       "那个人知道，是因为他亲手做了。"
     ],
     "truth": "凶手早就计划好了作案时机。烟花升空爆炸的时候，巨大的爆炸声会掩盖推搡、争执的声响，漫天绚烂的火光会吸引所有人的目光，大家都会抬头看向天空，不会留意身边发生的事。凶手就趁着所有人视线被烟花吸引、噪音盖住动静的时候，把男人推下楼。其余目击者注意力都在烟花上，没有看见行凶动作，只有凶手自己清楚刚刚发生了什么。",
-    "qs": [
-      "清楚真相的人就是凶手吗？",
-      "男人是自己意外失足的吗？"
-    ],
+    "qs": ["烟花的声音影响了旁人的判断吗？","坠落发生的具体时机是关键吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","清楚真相的人就是凶手吗？","男人是自己意外失足的吗？"],
     "answers": [
       [
         "^清楚真相的人就是凶手吗？$",
@@ -1061,10 +1020,7 @@ const cases=[
       "声音揭露秘密，随后才发生杀害。"
     ],
     "truth": "在助听器坏掉的这段时间里，老人听不清隔壁房间的动静。隔壁的邻居正是凶手，那段时间他一直在自己房间处理尸体，不用担心老人听见声音告发自己。助听器修好之后，老人听力恢复，清晰听见了隔壁传来的、处理尸体的怪异声响。凶手很快发现老人听见了秘密，趁着夜色潜入老人的房间，将老人灭口。",
-    "qs": [
-      "老人因听见邻居的秘密而被灭口吗？",
-      "助听器本身发生故障导致老人死亡吗？"
-    ],
+    "qs": ["修好助听器让老人获得了之前不知道的信息吗？","老人听见的声音来自房间外面吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","老人因听见邻居的秘密而被灭口吗？","助听器本身发生故障导致老人死亡吗？"],
     "answers": [
       [
         "^老人因听见邻居的秘密而被灭口吗？$",
@@ -1096,10 +1052,7 @@ const cases=[
       "这张纸可能早就被别人准备好了。"
     ],
     "truth": "遗书虽然字迹模仿得或者本身就是死者写的，但是纸上的折痕有明显老化泛黄的痕迹。这些折痕是长时间反复折叠、存放才会形成的，老化时间远远早于死者死亡的这一天。死者近期没有理由提前很久写下遗书，还反复折叠收好。真实情况是：凶手很早之前胁迫死者写下这张纸，一直折叠保存，等到行凶之后，再把遗书放到现场，伪装成自杀。",
-    "qs": [
-      "凶手提前胁迫死者写下了这张纸吗？",
-      "折痕是在案发当天刚形成的吗？"
-    ],
+    "qs": ["写下遗书的时间与死亡时间不同吗？","折痕说明这张纸被保存过一段时间吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","凶手提前胁迫死者写下了这张纸吗？","折痕是在案发当天刚形成的吗？"],
     "answers": [
       [
         "^凶手提前胁迫死者写下了这张纸吗？$",
@@ -1131,10 +1084,7 @@ const cases=[
       "远处的日常景象，是被刻意制造的假象。"
     ],
     "truth": "秋千上面坐着的并不是活着的小孩，是凶手杀害孩童之后，把尸体摆在了秋千座椅上。凶手就躲在不远处，时不时悄悄拉动秋千的绳子，让秋千持续晃动，远远看上去，就像有孩子坐在上面玩耍。凶手想用这个方式吸引路人靠近，妈妈走近才看清座椅上的真相，惊恐逃跑报警。",
-    "qs": [
-      "秋千是由躲在附近的人拉动的吗？",
-      "秋千上的孩子还活着吗？"
-    ],
+    "qs": ["远处看到的情况与走近后看到的不同吗？","秋千会动这一点让妈妈产生了误判吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","秋千是由躲在附近的人拉动的吗？","秋千上的孩子还活着吗？"],
     "answers": [
       [
         "^秋千是由躲在附近的人拉动的吗？$",
@@ -1166,10 +1116,7 @@ const cases=[
       "这个闹钟被改造后成了藏东西的容器。"
     ],
     "truth": "这个闹钟早就被租客拆开改造过，外壳里面并不是普通钟表机芯。租客是凶手，他把一小块人体组织藏在了闹钟壳子里。滴答声不是齿轮走动的声音，而是里面松动的细小骨头碎片随着震动互相碰撞发出的声响。房东仔细观察闹钟外壳缝隙，发现了不对劲的痕迹，察觉到这只闹钟有问题，选择报警。",
-    "qs": [
-      "闹钟内部被租客改造过吗？",
-      "滴答声来自正常钟表机芯吗？"
-    ],
+    "qs": ["闹钟的外观和声音之间有矛盾吗？","房东发现了房间里不该出现的东西吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","闹钟内部被租客改造过吗？","滴答声来自正常钟表机芯吗？"],
     "answers": [
       [
         "^闹钟内部被租客改造过吗？$",
@@ -1201,10 +1148,7 @@ const cases=[
       "事先反复准备，也能制造毫不犹豫的讲述。"
     ],
     "truth": "案发的时候环境昏暗，夜里光线很差。普通人在黑暗环境下偶然目击事件，很难记住那么多精准、连贯、毫无遗漏的细节，回忆的时候一定会有模糊、不确定的地方。只有亲手实施行凶的凶手，清楚每一个动作、每一处现场细节，他提前反复演练证词，想要伪装成目击证人误导审判。证词过于流畅完美，没有普通人记忆里正常的模糊和迟疑，反而暴露了他。",
-    "qs": [
-      "证人提前反复演练过证词吗？",
-      "案发现场的照明很好吗？"
-    ],
+    "qs": ["证人描述了从其所在位置无法看见的细节吗？","证词的内容与现场条件矛盾吗？","故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","证人提前反复演练过证词吗？","案发现场的照明很好吗？"],
     "answers": [
       [
         "^证人提前反复演练过证词吗？$",
@@ -1237,7 +1181,7 @@ cases.push(...readCustomCases().map(customCaseToGame));
 for(const c of cases)c.answers=c.answers.map(([p,a,t])=>[new RegExp(p),a,t]);
 const $=id=>document.getElementById(id);let current=0,asked=0,hints=0,revealed=false;const dialog=$('dialog');
 function addMessage(text,user=false){const el=document.createElement('div');el.className='message'+(user?' user':'');const label=document.createElement('div');label.className='message-label';label.textContent=user?'你 · 调查者':'✳ 夜汤主持人';const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;el.append(label,bubble);$('chat').append(el);$('chat').scrollTop=$('chat').scrollHeight;return bubble}
-function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('无效的汤题');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'调查中 ':'打开档案 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">今晚的推理，从这里开始</div>';const bubble=addMessage('欢迎来到夜汤。我会陪你拆解这个故事。读完汤面后，试着问一个可以用「是」或「否」回答的问题吧。');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>是</span><span>否</span><span>无关</span>';bubble.append(chips);addMessage(c.customId?'这是自制案件，可查看作者的提示与汤底，暂不支持自动问答。':'这是界面演示，可尝试下方推荐问题。未覆盖的问题会提示你换一个角度。');$('suggestions').innerHTML='';c.qs.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';const saved=window.YetangArchive.get(c,index);asked=saved.asked;hints=saved.hints;revealed=saved.revealed;$('count').textContent=String(asked).padStart(2,'0');$('hint-count').textContent=hints+' / 3';if(hints){$('hint-box').hidden=false;$('hint-box').textContent=(false?'힌트 ':'提示 ')+hints+' / 3 · '+c.hints[hints-1];}if(saved.chat.length){$('chat').replaceChildren();saved.chat.forEach(m=>addMessage(m.text,m.user));}window.YetangArchive.patch(c,index,{started:saved.started||!$('game-screen').hidden});window.dispatchEvent(new Event('case-update'));return {case: c.title}}
+function selectCase(index){if(!Number.isInteger(index)||!cases[index])throw Error('无效的汤题');current=index;asked=0;hints=0;revealed=false;const c=cases[index];$('cases').innerHTML='';cases.forEach((v,i)=>{const b=document.createElement('button');b.className='case-card'+(i===index?' selected':'');b.setAttribute('aria-pressed',String(i===index));b.innerHTML=`<div class="card-meta"><span>FILE / ${String(i+1).padStart(3,'0')}</span><span>${escapeCaseText(v.level)}</span></div><strong>${escapeCaseText(v.title)}</strong><p>${escapeCaseText(v.short)}</p><span class="category">${escapeCaseText(v.genre)} <span style="float:right">${i===index?'调查中 ':'打开档案 '}</span></span>`;b.onclick=()=>{location.hash="game/"+i};$('cases').append(b)});$('title').textContent=c.title;$('case-num').textContent=String(index+1).padStart(3,'0');$('file-number').textContent='NO. '+String(index+1).padStart(3,'0');$('watermark').textContent=String(index+1).padStart(2,'0');$('level').textContent=c.level;$('genre').textContent=c.genre;$('duration').textContent=c.time;$('story-text').replaceChildren(...c.body.map(t=>{const p=document.createElement('p');p.textContent=t;return p}));$('question').textContent=c.question;$('hint-box').hidden=true;$('hint-count').textContent='0 / 3';$('count').textContent='00';$('chat').innerHTML='<div class="date">今晚的推理，从这里开始</div>';const bubble=addMessage('欢迎来到夜汤。我会陪你拆解这个故事。读完汤面后，试着问一个可以用「是」或「否」回答的问题吧。');const chips=document.createElement('div');chips.className='answer-types';chips.innerHTML='<span>是</span><span>否</span><span>无关</span>';bubble.append(chips);addMessage(c.customId?'这是自制案件，可查看作者的提示与汤底，暂不支持自动问答。':'这是界面演示，可尝试下方推荐问题。未覆盖的问题会提示你换一个角度。');$('suggestions').innerHTML='';(c.qs.length===10?c.qs:["故事中人物之间原本就认识吗？","事件发生的先后顺序是关键吗？","发生地点具有特殊意义吗？","有人刻意隐瞒了重要事实吗？","某件物品或记录被人动过手脚吗？","表面上的解释与真实原因不同吗？","人物的身份与事件有关吗？","有人误解了另一个人的行为吗？","之前发生的事是这次事件的原因吗？","有人抱有表面上看不出的目的吗？"]).forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>ask(q);$('suggestions').append(b)});$('input').value='';const saved=window.YetangArchive.get(c,index);asked=saved.asked;hints=saved.hints;revealed=saved.revealed;$('count').textContent=String(asked).padStart(2,'0');$('hint-count').textContent=hints+' / 3';if(hints){$('hint-box').hidden=false;$('hint-box').textContent=(false?'힌트 ':'提示 ')+hints+' / 3 · '+c.hints[hints-1];}if(saved.chat.length){$('chat').replaceChildren();saved.chat.forEach(m=>addMessage(m.text,m.user));}window.YetangArchive.patch(c,index,{started:saved.started||!$('game-screen').hidden});window.dispatchEvent(new Event('case-update'));return {case: c.title}}
 function ask(q){if($('game-screen').hidden)throw Error('请先从主界面开始调查');if(typeof q!=='string'||!q.trim()||q.length>300)throw Error('问题需为 1–300 字');q=q.trim();addMessage(q,true);asked++;$('count').textContent=String(asked).padStart(2,'0');const a=cases[current].answers.find(([r])=>r.test(q));const answer=a?`${a[1]}。${a[2]}`:'这个问题暂未包含在演示问答中。试试下方推荐问题，或用「给我一点提示」继续推理。';addMessage(answer);window.dispatchEvent(new Event('case-progress'));window.YetangArchive.saveChat?.();return {question:q,answer,questions:asked}}
 $('ask-form').onsubmit=e=>{e.preventDefault();const q=$('input').value.trim();if(!q)return;ask(q);$('input').value='';$('input').focus()};$('input').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('ask-form').requestSubmit()}};
 $('hint').onclick=()=>{if(hints<3)hints++;$('hint-box').hidden=false;$('hint-box').textContent=`提示 ${hints} / 3 · ${cases[current].hints[hints-1]}`;$('hint-count').textContent=`${hints} / 3`};

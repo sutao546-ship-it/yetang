@@ -506,6 +506,21 @@ dialog[open]:not(.case-solved-dialog)::backdrop{animation:yetang-backdrop-in .22
 @keyframes yetang-backdrop-in{from{opacity:0}to{opacity:1}}
 @keyframes yetang-wait{0%,100%{box-shadow:0 0 0 0 #c9a46700}50%{box-shadow:0 0 0 3px #c9a46740}}
 @media(prefers-reduced-motion:reduce){dialog[open]:not(.case-solved-dialog),dialog[open]:not(.case-solved-dialog)::backdrop,.studio-generator[aria-busy="true"] .studio-generate,#ask-form[aria-busy="true"] .send{animation:none}.start-game,.enter-game,.submit-theory,.studio-generate,.archive-report-button{transition:none}}
+</style><style id="atmosphere-particles-style">.atmosphere-particles{position:fixed;inset:0;width:100%;height:100%;z-index:40;pointer-events:none;contain:strict}
+.atmosphere-particles[hidden]{display:none}
+.effects-toggle{font:inherit;font-size:12px;white-space:nowrap;min-height:40px;color:#d6bf97;border:1px solid #9b7a4e66}
+.extra-motion.title-view .title-content h1{animation:office-title-glow 6s ease-in-out infinite}
+.extra-motion .evidence-pin{animation:evidence-land .38s cubic-bezier(.22,1,.36,1) both}
+.extra-motion .record-card.collected{animation:record-confirm .55s ease-out}
+.extra-motion .archive-case-state{animation:archive-label-in .3s ease-out}
+@keyframes office-title-glow{0%,100%{text-shadow:0 3px 1px #57341f,0 8px 30px #000}50%{text-shadow:0 3px 1px #57341f,0 0 24px #bd955330,0 8px 36px #000}}
+@keyframes evidence-land{from{opacity:0;transform:translateY(-9px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes record-confirm{0%{box-shadow:0 0 0 0 #dfbb7370}100%{box-shadow:0 0 0 10px #dfbb7300}}
+@keyframes archive-label-in{from{opacity:0}to{opacity:1}}
+@media(max-width:760px){.effects-toggle{padding:8px 10px;font-size:12px}.extra-motion.title-view .title-content h1{animation:none}}
+@media(prefers-reduced-motion:reduce){.atmosphere-particles{display:none}.extra-motion .evidence-pin,.extra-motion .record-card.collected,.extra-motion .archive-case-state,.extra-motion.title-view .title-content h1{animation:none}}
+</style><style>
+.solved-particle-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}.solved-particle-layer i{position:absolute;left:50%;top:85px;width:4px;height:4px;border-radius:50%;background:#e4b876;opacity:0;animation:solved-spark-flight 1.2s ease-out both}body:not(.extra-motion) .solved-particle-layer{display:none}@keyframes solved-spark-flight{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:.9}100%{opacity:0;transform:translate(var(--spark-x),var(--spark-y)) scale(.3)}}@media(prefers-reduced-motion:reduce){.solved-particle-layer{display:none}}
 </style></head><body class="home-view title-view"><div class="ambient-background" aria-hidden="true"><div class="ambient-office"></div><div class="ambient-archive"></div><div class="ambient-shade"></div></div>
 <header><a class="brand" href="#home"><span class="brand-icon">◒</span><strong>夜汤</strong><span class="brand-en">PRIVATE INVESTIGATIONS</span></a><span class="header-note">夜汤侦探事务所 · 案卷阅览室</span><div class="header-actions"><a class="quiet language-switch nav-key" href="ko/index.html" lang="ko" aria-label="切换到韩文版">한국어</a><a class="back-home quiet nav-key" href="#home" hidden>返回主界面</a><button class="quiet" id="rules">怎么玩</button></div></header>
 <main id="title-screen" class="title-screen"><div class="title-content"><span class="title-kicker">MIDNIGHT SOUP</span><h1>夜汤</h1><div class="title-subtitle">侦 探 事 务 所</div><p class="title-premise">这是一个侦探游戏，请还原故事的全貌</p><nav class="title-menu" aria-label="游戏主菜单"><a class="enter-game" href="#cases">开始游戏</a><button id="title-rules">游戏说明</button><a id="resume-game" href="#game/0" hidden>继续调查</a></nav><p class="title-mode">AI 海龟汤 · 单人推理 · 演示模式</p></div><span class="title-corner">CASE FILES<br><strong>THE TRUTH AWAITS.</strong></span></main><main id="home-screen" class="home-screen" hidden><section class="home-intro"><span class="eyebrow">MIDNIGHT SOUP / PRIVATE INVESTIGATIONS</span><h1>夜深了。<br>还有一桩悬案。</h1><p>一段不寻常的故事，一场只凭提问的调查。<br>翻开案卷，找出藏在日常背后的真相。</p><div class="home-rules"><span>阅读汤面</span><i>—</i><span>提问推理</span><i>—</i><span>还原真相</span></div></section><section class="home-archive" aria-labelledby="archive-title"><div class="home-archive-heading"><div><span class="eyebrow">CHOOSE YOUR CASE</span><h2 id="archive-title">今晚，调查哪一桩？</h2></div><span class="archive-total">20 份案卷 · 悬疑故事</span></div><div id="home-cases" class="home-cases"></div><div class="home-start-row"><p id="selected-case-label" aria-live="polite"></p><button id="start-game" class="start-game">开始调查</button></div><p class="home-demo">演示模式 · 预设问答，尚未接入实时 AI</p></section></main><div id="game-screen" hidden><div class="game-toolbar"><span class="eyebrow">INVESTIGATION ROOM / 调查室</span><span>阅读案卷后，向主持人提问。</span></div><main><aside class="library"><div class="eyebrow">CASE ARCHIVE / 档案索引</div><div class="section-heading"><h1>待解密案卷</h1><span>20</span></div><p class="muted intro">选择一份案卷，开始调查。</p><div id="cases"></div><div class="sidebar-bottom"><span class="mini-symbol">?</span><p>别急着相信眼前的故事。<br><span class="muted">好的问题，比答案更重要。</span></p></div></aside>
@@ -1643,6 +1658,35 @@ requestAnimationFrame(tick);
   added.forEach(node=>play(node,[{opacity:0,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,easing:'ease-out'}));
  });observer.observe(chat,{childList:true});}
  enter();
+})();
+
+</script><script>
+/* Subtle dust and short interaction bursts. No hit targets and no layout reads per frame. */
+(()=>{
+ const canvas=document.createElement('canvas');canvas.className='atmosphere-particles';canvas.setAttribute('aria-hidden','true');document.body.append(canvas);
+ const ctx=canvas.getContext('2d');if(!ctx){canvas.remove();return;}
+ const ko=document.documentElement.lang==='ko',t=(a,b)=>ko?b:a,reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ let enabled=true;try{enabled=localStorage.getItem('yetang.effects.v1')!=='off';}catch{}
+ const toggle=document.createElement('button');toggle.type='button';toggle.className='quiet effects-toggle';document.querySelector('.header-actions')?.append(toggle);
+ let w=0,h=0,dpr=1,raf=0,last=0,dust=[],sparks=[];
+ const rnd=(a,b)=>a+Math.random()*(b-a),active=()=>enabled&&!reduce.matches&&!document.hidden;
+ function resize(){w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);dust=Array.from({length:w<760?12:26},()=>({x:rnd(0,w),y:rnd(0,h),r:rnd(.5,1.4),vx:rnd(-3,3),vy:rnd(-8,-3),phase:rnd(0,Math.PI*2)}));}
+ function draw(time){raf=0;if(!active())return;raf=requestAnimationFrame(draw);if(last&&time-last<32)return;const dt=last?Math.min((time-last)/1000,.05):.016;last=time;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  const home=document.body.classList.contains('home-view');
+  for(const p of dust){p.x+=p.vx*dt;p.y+=p.vy*dt;if(p.y<-5)p.y=h+5;if(p.x<0)p.x=w;if(p.x>w)p.x=0;ctx.globalAlpha=(home?.15:.065)+.055*(1+Math.sin(time/2200+p.phase))/2;ctx.fillStyle='#e5bd7d';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+  sparks=sparks.filter(p=>p.life>0);for(const p of sparks){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.gravity*dt;ctx.globalAlpha=Math.max(0,p.life/p.total)*.75;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r*Math.max(.2,p.life/p.total),0,Math.PI*2);ctx.fill();}
+  ctx.globalAlpha=1;
+ }
+ function sync(){cancelAnimationFrame(raf);raf=0;last=0;sparks=[];canvas.hidden=!active();document.body.classList.toggle('extra-motion',enabled&&!reduce.matches);toggle.textContent=reduce.matches?t('特效：已减弱','효과: 동작 줄이기'):enabled?t('特效：开','효과: 켜짐'):t('特效：关','효과: 꺼짐');toggle.setAttribute('aria-pressed',String(enabled&&!reduce.matches));toggle.disabled=reduce.matches;if(active())raf=requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+ function burst(x,y,count=12,celebrate=false){if(!active()||!Number.isFinite(x)||!Number.isFinite(y))return;const n=Math.min(w<760?Math.ceil(count*.6):count,100-sparks.length);for(let i=0;i<n;i++){const angle=rnd(0,Math.PI*2),speed=rnd(22,celebrate?140:65),life=rnd(.35,celebrate?1.3:.7);sparks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-(celebrate?35:0),r:rnd(1,celebrate?3:2),life,total:life,gravity:celebrate?65:15,color:i%3===0?'#f0ddae':'#c79a57'});}}
+ toggle.addEventListener('click',()=>{enabled=!enabled;try{localStorage.setItem('yetang.effects.v1',enabled?'on':'off');}catch{}sync();});
+ document.addEventListener('click',e=>{const button=e.target.closest?.('button,a');if(!button||button===toggle||button.disabled||!active())return;const r=button.getBoundingClientRect();const x=e.detail&&e.clientX?e.clientX:r.left+r.width/2,y=e.detail&&e.clientY?e.clientY:r.top+r.height/2;burst(x,y,button.classList.contains('record-card')?22:9);});
+ const solved=document.querySelector('.case-solved-dialog');if(solved){const layer=document.createElement('div');layer.className='solved-particle-layer';layer.setAttribute('aria-hidden','true');solved.append(layer);new MutationObserver(()=>{layer.replaceChildren();if(solved.open&&active())for(let i=0;i<(w<760?14:24);i++){const dot=document.createElement('i');dot.style.setProperty('--spark-x',rnd(-160,160)+'px');dot.style.setProperty('--spark-y',rnd(-70,200)+'px');dot.style.animationDelay=rnd(0,.18)+'s';layer.append(dot);}}).observe(solved,{attributes:true,attributeFilter:['open']});}
+ window.addEventListener('hashchange',()=>{sparks=[];if(active())burst(w/2,Math.min(130,h*.18),18);});
+ window.addEventListener('resize',resize);document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);
+ window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);raf=0;sparks=[];});window.addEventListener('pageshow',sync);
+ resize();sync();
 })();
 
 </script></body></html>

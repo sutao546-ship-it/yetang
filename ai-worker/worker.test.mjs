@@ -1,10 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker, {validateInput,buildMessages} from './worker.mjs';
+import worker, {validateInput,buildMessages,validateGeneratedCase} from './worker.mjs';
 const origin='https://sutao546-ship-it.github.io';
 const payload={language:'zh-CN',question:'是他做的吗？',case:{title:'测试',body:['记录一','记录二','记录三'],truth:'完整真相'},history:[]};
 const env={ARK_API_KEY:'test-secret',ARK_MODEL:'test-model',HOST_LIMITER:{limit:async()=>({success:true})}};
 const request=(p=payload,o=origin)=>new Request('https://host.example/api/host',{method:'POST',headers:{Origin:o,'Content-Type':'application/json'},body:JSON.stringify(p)});
+test('generation input and structured drafts are bounded',()=>{
+ const p={mode:'generate',language:'ko',topic:'도서관',level:'easy'};
+ assert(validateInput(p));assert(!validateInput({...p,topic:' '}));assert(!validateInput({...p,topic:'a'.repeat(301)}));assert(!validateInput({...p,level:'other'}));
+ const draft={title:'A',short:'B',story:'C',truth:'D',hints:['1','2','3']};
+ assert(validateGeneratedCase(draft));assert(!validateGeneratedCase({...draft,hints:['1']}));assert(!validateGeneratedCase({...draft,title:'a'.repeat(61)}));
+ assert.equal(JSON.parse(buildMessages(p)[1].content).topic,p.topic);
+});
+test('generation has separate token budget, validates output and strips extra fields',async()=>{
+ const original=globalThis.fetch;let sent;
+ const draft={title:'A',short:'B',story:'C',truth:'D',hints:['1','2','3']};
+ try{
+  globalThis.fetch=async(url,options)=>{sent=JSON.parse(options.body);return Response.json({choices:[{message:{content:JSON.stringify({...draft,secret:'not forwarded'})}}]});};
+  const r=await worker.fetch(request({mode:'generate',language:'zh-CN',topic:'library',level:'easy'}),env);
+  assert.deepEqual(await r.json(),{case:{...draft,level:'easy'}});assert.equal(sent.max_tokens,3500);
+  globalThis.fetch=async()=>Response.json({choices:[{message:{content:'{"title":"incomplete"}'}}]});
+  assert.equal((await worker.fetch(request({mode:'generate',language:'ko',topic:'도서관',level:'easy'}),env)).status,502);
+ }finally{globalThis.fetch=original;}
+});
 test('input limits, history validation and message roles',()=>{
  assert(validateInput(payload));
  assert(!validateInput({...payload,question:'a'.repeat(301)}));
